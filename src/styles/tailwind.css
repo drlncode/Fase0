@@ -1,0 +1,291 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+@font-face {
+    font-family: 'Satoshi';
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+    src: url('/fonts/Satoshi-Light.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Satoshi';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('/fonts/Satoshi-Regular.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Satoshi';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('/fonts/Satoshi-Medium.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Satoshi';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('/fonts/Satoshi-Bold.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Satoshi';
+    font-style: normal;
+    font-weight: 800;
+    font-display: swap;
+    src: url('/fonts/Satoshi-Black.woff2') format('woff2');
+}
+
+@theme {
+    /* === Shimmer === */
+    --color-shimmer: rgba(255, 255, 255, 0.06);
+
+    /* === Backgrounds === */
+    --color-bg-base:        #0e0e0e;
+    --color-bg-surface:     #131313;
+    --color-bg-elevated:    #1a1a1a;
+    --color-bg-overlay:     #212020;
+    --color-bg-subtle:      #2a2a2a;
+    --color-bg-badge:       #3d3d3d;
+
+    /* === Background aliases (short names) === */
+    --color-base:       var(--color-bg-base);
+    --color-surface:    var(--color-bg-surface);
+    --color-elevated:   var(--color-bg-elevated);
+    --color-overlay:    var(--color-bg-overlay);
+    --color-subtle:     var(--color-bg-subtle);
+    --color-badge:      var(--color-bg-badge);
+
+    /* === Borders === */
+    --color-border-subtle:  #2a2a2a;
+    --color-border-default: #3a3a3a;
+    --color-border-strong:  #505050;
+
+    /* === Text === */
+    --color-text-primary:   #f5f5f5;
+    --color-text-secondary: #a3a3a3;
+    --color-text-muted:     #6b6b6b;
+    --color-text-disabled:  #404040;
+    --color-text-inverse:   #0e0e0e;
+
+    /* === Text aliases (short names) === */
+    --color-primary:    var(--color-text-primary);
+    --color-secondary:  var(--color-text-secondary);
+    --color-muted:      var(--color-text-muted);
+    --color-disabled:   var(--color-text-disabled);
+    --color-inverse:    var(--color-text-inverse);
+
+    /* === Ring/Outline aliases === */
+    --color-strong:     var(--color-border-strong);
+    --color-default:    var(--color-border-default);
+
+    /* === Brand / Accent === */
+    --color-accent:         #7c6af7;
+    --color-accent-hover:   #9585f9;
+    --color-accent-muted:   #7c6af720;
+
+    /* === Semantic === */
+    --color-success:        #4ade80;
+    --color-success-muted:  #4ade8015;
+    --color-warning:        #fbbf24;
+    --color-warning-muted:  #fbbf2415;
+    --color-danger:         #f87171;
+    --color-danger-muted:   #f8717115;
+    --color-info:           #38bdf8;
+    --color-info-muted:     #38bdf815;
+
+    --sb-size:        8px;
+    --sb-radius:      999px;
+    --sb-track:       var(--color-bg-overlay);
+    --sb-thumb:       rgb(255 255 255 / 0.20);
+    --sb-thumb-hover: rgb(255 255 255 / 0.45);
+
+    /* === Shadows === */
+    --shadow-dropdown: 0 8px 32px rgba(0, 0, 0, 0.6);
+}
+
+@layer base {
+    /* Firefox */
+    * {
+        scrollbar-width: thin;
+        scrollbar-color: var(--sb-thumb) var(--sb-track);
+    }
+
+    /* Webkit — track */
+    *::-webkit-scrollbar {
+        width:  var(--sb-size);
+        height: var(--sb-size);
+    }
+
+    *::-webkit-scrollbar-track {
+        background:    var(--sb-track);
+        border-radius: var(--sb-radius);
+    }
+
+    /* Webkit — thumb */
+    *::-webkit-scrollbar-thumb {
+        background:      var(--sb-thumb);
+        border-radius:   var(--sb-radius);
+        border:          2px solid var(--sb-track);
+        background-clip: padding-box;
+    }
+
+    *::-webkit-scrollbar-thumb:hover {
+        background:      var(--sb-thumb-hover);
+        border:          2px solid var(--sb-track);
+        background-clip: padding-box;
+    }
+
+    *::-webkit-scrollbar-corner {
+        background: var(--sb-track);
+    }
+
+    .messages-scroll::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    .messages-scroll {
+        scrollbar-color: var(--sb-thumb) transparent;
+    }
+}
+
+@layer utilities {
+    .shimmer {
+        background: linear-gradient(
+            90deg,
+            transparent 0%,
+            var(--color-shimmer) 50%,
+            transparent 100%
+        );
+        background-size: 200% 100%;
+        animation: shimmer 1.6s infinite;
+    }
+
+    .gutter-stable {
+        scrollbar-gutter: stable;
+    }
+
+    .animate-dropdown-enter {
+        animation: dropdown-enter 150ms ease-out forwards;
+    }
+
+    .animate-page-enter {
+        animation: page-enter 200ms ease-out forwards;
+    }
+
+    @keyframes dropdown-enter {
+        from {
+            opacity: 0;
+            transform: scale(0.96) translateY(-2px);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+    }
+
+    @keyframes page-enter {
+        from {
+            opacity: 0;
+            transform: translateY(4px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .animate-modal-enter {
+        animation: modal-enter 150ms ease-out forwards;
+    }
+
+    @keyframes modal-enter {
+        from {
+            opacity: 0;
+            transform: scale(0.96);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    .animate-sheet-enter {
+        animation: sheet-enter 200ms ease-out forwards;
+    }
+
+    @keyframes sheet-enter {
+        from {
+            transform: translateY(100%);
+        }
+        to {
+            transform: translateY(0);
+        }
+    }
+
+    .animate-toast-enter {
+        animation: toast-enter 300ms ease-out forwards;
+    }
+
+    @keyframes toast-enter {
+        from {
+            opacity: 0;
+            transform: translateX(100%);
+        }
+        to {
+            opacity: 0.95;
+            transform: translateX(0);
+        }
+    }
+
+    .animate-toast-exit {
+        animation: toast-exit 300ms ease-in forwards;
+    }
+
+    @keyframes toast-exit {
+        from {
+            opacity: 0.95;
+            transform: translateX(0);
+        }
+        to {
+            opacity: 0;
+            transform: translateX(100%);
+        }
+    }
+
+    @keyframes shimmer {
+        0%   { background-position: -200% 0; }
+        100% { background-position:  200% 0; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+            scroll-behavior: auto !important;
+        }
+
+        .shimmer {
+            animation: none;
+            background: var(--color-shimmer);
+        }
+    }
+}
+
+body {
+    color: var(--color-bg-surface);
+}
+
+input:-webkit-autofill {
+    transition: background-color 9999s ease-in-out 0s;
+    -webkit-text-fill-color: #a3a3a3;
+}

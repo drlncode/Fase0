@@ -1,0 +1,40 @@
+{
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+    "paths": {
+      "@/*": ["./src/*"],
+      "@config/*": ["./src/config/*"],
+      "@features/*": ["./src/features/*"],
+      "@auth/*": ["./src/features/auth/*"],
+      "@users/*": ["./src/features/users/*"],
+      "@chats/*": ["./src/features/chats/*"],
+      "@friends/*": ["./src/features/friends/*"],
+      "@messages/*": ["./src/features/messages/*"],
+      "@media/*": ["./src/features/media/*"],
+      "@shared/*": ["./src/shared/*"],
+      "@app/*": ["./src/features/app/*"],
+      "@styles/*": ["./src/styles/*"] 
+    },
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "isolatedModules": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+    "jsx": "react-jsx",
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedSideEffectImports": true
+  },
+  "include": ["src"]
+}

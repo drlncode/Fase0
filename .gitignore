@@ -1,0 +1,33 @@
+# Environment
+.env
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+TODO.md
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode
+.zed
+.agents/
+!.vscode/extensions.json
+skills-lock.json
+entities.json
+mempalace.yaml
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
