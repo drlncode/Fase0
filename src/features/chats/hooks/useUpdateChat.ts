@@ -39,12 +39,9 @@ export function useUpdateChat() {
 
     function getSuccessMessage(toUpdate: UpdatableChatData): string {
         if (toUpdate.chatDeleted) return 'Chat eliminado correctamente.';
-        if (toUpdate.chatBlocked === true) return 'Usuario bloqueado correctamente.';
-        if (toUpdate.chatBlocked === false) return 'Usuario desbloqueado correctamente.';
-        if (toUpdate.favorite === true) return 'Chat agregado a favoritos.';
-        if (toUpdate.favorite === false) return 'Chat removido de favoritos.';
-        if (toUpdate.pinned === true) return 'Chat fijado correctamente.';
-        if (toUpdate.pinned === false) return 'Chat desfijado correctamente.';
+        if (toUpdate.chatBlocked !== undefined) return `Usuario ${toUpdate.chatBlocked ? 'bloqueado' : 'desbloqueado'} correctamente.`;
+        if (toUpdate.favorite !== undefined) return `Chat ${toUpdate.favorite ? 'agregado a' : 'removido de'} favoritos.`;
+        if (toUpdate.pinned !== undefined) return `Chat ${toUpdate.pinned ? 'fijado' : 'desfijado'} correctamente.`;
         return 'Chat actualizado correctamente.';
     }
 
