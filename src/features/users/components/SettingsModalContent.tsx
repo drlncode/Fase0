@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { AccountContent } from '@users/components/AccountContent';
 import { PreferencesContent } from '@users/components/PreferencesContent';
-import { UserCircleIcon, SettingsIcon } from '@/shared/components/ui/Icons';
+import { UserCircleIcon, AdjustmentsHorizontalIcon } from '@/shared/components/ui/Icons';
 import { cn } from '@shared/utils/cn';
 
 type SettingsTab = 'account' | 'preferences';
@@ -14,7 +14,7 @@ interface TabConfig {
 
 const TABS: TabConfig[] = [
     { id: 'account', label: 'Cuenta', icon: <UserCircleIcon size={20} /> },
-    { id: 'preferences', label: 'Preferencias', icon: <SettingsIcon size={20} /> },
+    { id: 'preferences', label: 'Preferencias', icon: <AdjustmentsHorizontalIcon size={20} /> },
 ];
 
 export function SettingsModalContent() {
