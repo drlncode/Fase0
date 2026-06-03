@@ -90,7 +90,7 @@ export default function RegisterForm() {
         <FormContainer
             title='Regístrate'
             label='Ingrese sus datos para crear su cuenta.'
-            className='pb-[20vh]'
+            className='pt-[6vh] pb-[10vh]'
             backButton={{
                 label: email,
                 handleBack: () => goToStep('email-input')
