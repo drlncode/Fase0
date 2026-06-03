@@ -11,8 +11,7 @@ const ChatLayout = lazy(() => import('@chats/layout/chat.layout'));
 const AppPage = lazy(() => import('@app/pages/app.page'));
 const ChatPage = lazy(() => import('@chats/pages/chats.page'));
 const FriendsPage = lazy(() => import('@friends/pages/friends.page'));
-const NotFoundPage = lazy(() => import('@shared/pages/not-found.page'));
-    
+
 export const appRouter: RouteObject = {
     path: '/',
     element: (
@@ -34,6 +33,6 @@ export const appRouter: RouteObject = {
                 { path: 'friends', element: <FriendsPage /> },
             ]
         },
-        { path: '*', element: <NotFoundPage /> }
+        { path: '*', loader: () => { throw new Response(null, { status: 404 }); } }
     ]
 };

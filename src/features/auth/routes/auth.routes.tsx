@@ -7,7 +7,6 @@ const AuthLayout = lazy(() => import('@auth/layouts/auth.layout'));
 
 // Pages
 const AuthPage = lazy(() => import('@/features/auth/pages/auth.page'));
-const NotFoundPage = lazy(() => import('@shared/pages/not-found.page'));
 
 export const authRouter: RouteObject = {
     path: '/auth',
@@ -19,6 +18,6 @@ export const authRouter: RouteObject = {
     children: [
         { index: true, element: <AuthPage /> },
         { path: 'confirm', element: <AuthPage /> },
-        { path: '*', element: <NotFoundPage /> }
+        { path: '*', loader: () => { throw new Response(null, { status: 404 }); } }
     ]
 };
