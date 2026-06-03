@@ -20,7 +20,7 @@ export default function PasswordResetSuccess() {
     });
 
     return (
-        <div className='flex w-screen flex-col items-center'>
+        <div className='flex w-full flex-col items-center overflow-x-hidden'>
             <div className='flex w-full max-w-sm flex-col items-center gap-6 text-center'>
                 <img src="/fase0-logo-white.svg" alt="Fase0 logo" width="100" />
 

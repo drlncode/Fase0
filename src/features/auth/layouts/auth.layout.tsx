@@ -10,7 +10,7 @@ export default function AuthLayout() {
 
     return (
         <AuthFlowContextProvider>
-            <div className='flex min-h-screen w-screen flex-col items-center justify-center p-2 pr-3 pb-3 select-none dark:bg-surface dark:text-secondary'>
+            <div className='flex min-h-screen w-full flex-col items-center justify-center overflow-x-hidden p-2 pr-3 pb-3 select-none dark:bg-surface dark:text-secondary'>
                 <title>Autenticación | Fase0</title>
                 <Outlet />
             </div>
