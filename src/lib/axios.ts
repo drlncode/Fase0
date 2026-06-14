@@ -6,11 +6,16 @@ const api = axios.create({
     timeout: import.meta.env.VITE_API_TIMEOUT
 });
 
-api.interceptors.request.use((config) => {
-    const session = localStorage.getItem(SESSION_KEY);
+api.interceptors.request.use(async (config) => {
+    if (config.headers.Authorization) return config;
 
-    if (session) {
-        config.headers.Authorization = `Bearer ${session}`;
+    try {
+        const session = localStorage.getItem(SESSION_KEY);
+        if (session) {
+            config.headers.Authorization = `Bearer ${session}`;
+        }
+    } catch {
+        // localStorage not available
     }
 
     return config;
