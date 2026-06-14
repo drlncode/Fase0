@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useValidAuth } from '@auth/hooks/useValidAuth';
 import { useChatStore } from '@/features/chats/store/useChatStore';
 import { useFriendsStore } from '@friends/store/useFriendsStore';
@@ -24,6 +25,7 @@ import {
 import { cn } from '@/shared/utils/cn';
 
 export function Aside() {
+    const { t } = useTranslation('app');
     const [ onLogout, setOnLogout ] = useState(false);
     const numberOfFriends = useFriendsStore(state => state.friends.length);
     const numberOfPendingRequests = useFriendsStore(state => state.friendsRequests.length);
@@ -39,17 +41,17 @@ export function Aside() {
         if (onLogout) return;
         setOnLogout(true);
         await signout({ session });
-        success('Sesión cerrada correctamente.');
+        success(t('signOut.success'));
     };
 
     const handleCollapse = () => setPreference('sidebarCollapsed', !collapsed);
 
     return (
-        <aside aria-label="Navegación principal" className={cn(
+        <aside aria-label={t('nav.main')} className={cn(
             'h-full min-h-0 min-w-14 shrink-0 overflow-hidden bg-overlay pt-1.25 transition-[width] duration-300 ease-out',
             collapsed ? 'w-14' : 'w-61'
         )}>
-            <nav aria-label="Menú de navegación" className='flex h-full flex-col justify-between'>
+            <nav aria-label={t('nav.menu')} className='flex h-full flex-col justify-between'>
                 <div className='flex flex-col gap-1'>
                     { collapsed && (
                         <div className='w-5/6'>
@@ -73,7 +75,7 @@ export function Aside() {
                                 }
                             )}
                             onClick={handleCollapse}
-                            aria-label={collapsed ? 'Expandir barra lateral' : 'Colapsar barra lateral'}
+                            aria-label={collapsed ? t('nav.expandSidebar') : t('nav.collapseSidebar')}
                             aria-expanded={!collapsed}
                         >
                             <span className={cn(
@@ -87,7 +89,7 @@ export function Aside() {
                     </div>
                     <div className='flex flex-col gap-1 pr-2'>
                         <AsideLink
-                            label='Chats'
+                            label={t('nav.chats')}
                             icon={<MessageIcon size={20} />}
                             collapsed={collapsed}
                             notification={unreadChats}
@@ -97,7 +99,7 @@ export function Aside() {
                         />
                         <Divisor className='my-3 w-5/6' />
                         <AsideLink
-                            label='Amigos'
+                            label={t('nav.friends')}
                             icon={<UsersIcon size={20} />}
                             collapsed={collapsed}
                             to='app/friends?section=active-friends'
@@ -105,7 +107,7 @@ export function Aside() {
                             end
                         />
                         <AsideLink
-                            label='Solicitudes'
+                            label={t('nav.requests')}
                             icon={<UserClockIcon size={20} />}
                             collapsed={collapsed}
                             to='app/friends?section=pending-requests'
@@ -113,7 +115,7 @@ export function Aside() {
                             end
                         />
                         <AsideLink
-                            label='Solicitudes enviadas'
+                            label={t('nav.sentRequests')}
                             icon={<UserShareIcon size={20} />}
                             collapsed={collapsed}
                             to='app/friends?section=sent-requests'
@@ -121,7 +123,7 @@ export function Aside() {
                             end
                         />
                         <AsideLink
-                            label='Agregar amigo'
+                            label={t('nav.addFriend')}
                             icon={<UserPlusIcon size={20} />}
                             collapsed={collapsed}
                             to='app/friends?section=add-friend'
@@ -138,23 +140,23 @@ export function Aside() {
                         className='w-56'
                     >
                         <DropdownItem
-                            label='Ajustes'
+                            label={t('nav.settings')}
                             icon={<SettingsIcon size={16} />}
                             onClick={() => openInfo({
-                                title: 'Ajustes',
+                                title: t('nav.settings'),
                                 content: <SettingsModalContent />,
                                 fullWidth: true
                             })}
                         />
                         <DropdownDivider />
                         <DropdownItem
-                            label='Cerrar sesión'
+                            label={t('nav.signOut')}
                             icon={<LogoutIcon size={16} />}
                             danger
                             onClick={() => openConfirm({
-                                title: '¿Cerrar sesión?',
-                                message: '¿Estás seguro de que quieres cerrar sesión?',
-                                confirmText: 'Cerrar sesión',
+                                title: t('signOut.title'),
+                                message: t('signOut.message'),
+                                confirmText: t('signOut.confirm'),
                                 onConfirm: handleSignOut,
                                 awaitedAction: true,
                                 danger: true

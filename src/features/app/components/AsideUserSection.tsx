@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { useValidAuth } from '@auth/hooks/useValidAuth';
 import { useAvatarUrl } from '@shared/hooks/useAvatarUrl';
 import { cn } from '@shared/utils/cn';
@@ -5,6 +6,7 @@ import { Avatar } from '@shared/components/Avatar';
 import { SelectorIcon } from '@/shared/components/ui/Icons';
 
 export function AsideUserSection({ collapsed }: { collapsed: boolean }) {
+    const { t } = useTranslation('app');
     const { user: { _id, name, username, avatar } } = useValidAuth();
     const { url } = useAvatarUrl(avatar, _id);
 
@@ -25,7 +27,7 @@ export function AsideUserSection({ collapsed }: { collapsed: boolean }) {
                 <Avatar
                     url={url}
                     userUrlStatus={avatar}
-                    alt={`${name}'s avatar`}
+                    alt={t('avatarAlt', { name })}
                     name={name}
                     className="h-full w-full rounded-full"
                 />
