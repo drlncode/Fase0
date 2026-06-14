@@ -7,7 +7,6 @@ import {
     UserClockIcon,
     UserPlusIcon,
 } from '@/shared/components/ui/Icons';
-import { FullScreenLoader } from '@/shared/components/FullScreenLoader';
 
 export default function AppPage() {
     const { t } = useTranslation('app');
@@ -19,7 +18,6 @@ export default function AppPage() {
     return (
         <>
             <title>{title}</title>
-            <FullScreenLoader />
             <section className='animate-page-enter flex h-full w-full flex-col items-center justify-center gap-6 px-4'>
                 <div className='flex flex-col items-center gap-2 text-center'>
                     <Fase0Logo color='white' className='w-30' />
