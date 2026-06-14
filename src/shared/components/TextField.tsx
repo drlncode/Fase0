@@ -1,4 +1,5 @@
 import { useId, useState, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import { cn } from '@/shared/utils/cn';
 import { UseFormRegisterReturn } from "react-hook-form";
 import { InfoIcon, EyeIcon, EyeOffIcon, CheckIcon, CrossIcon, LoaderIcon } from '@/shared/components/ui/Icons';
@@ -25,6 +26,7 @@ export function TextField({
     type,
     ...props
 }: TextFieldProps) {
+    const { t } = useTranslation();
     const id = useId();
     const errorId = useId();
     const infoId = useId();
@@ -82,11 +84,11 @@ export function TextField({
                     type='button' 
                     onClick={handleSwitch} 
                     className='w-fit self-end hover:cursor-pointer'
-                    aria-label={currentType === 'password' ? 'Mostrar contraseña' : 'Ocultar contraseña'}
+                    aria-label={currentType === 'password' ? t('actions.showPassword') : t('actions.hidePassword')}
                 >
                     <span className='flex items-center justify-center gap-0.5 border-b border-transparent text-xs transition-all duration-150 *:transition-all *:duration-150 hover:border-b-primary/65 active:scale-[0.98]'>
                         { currentType === 'password' ? <EyeIcon size={18} /> : <EyeOffIcon size={18} /> }
-                        { currentType === 'password' ? 'Mostrar' : 'Ocultar' }
+                        { currentType === 'password' ? t('actions.show') : t('actions.hide') }
                     </span>
                 </button>
             }

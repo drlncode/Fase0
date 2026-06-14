@@ -1,14 +1,16 @@
+import { useTranslation } from 'react-i18next';
 import { isRouteErrorResponse, useNavigate, useRouteError } from 'react-router';
 import { Fase0Logo } from '@shared/components/ui/Fase0Logo';
 import { AlertTriangleIcon, ArrowLeftIcon } from '@/shared/components/ui/Icons';
 
 export default function Error() {
+    const { t } = useTranslation();
     const error = useRouteError();
     const navigate = useNavigate();
 
     let status = 500;
-    let title = 'Error inesperado';
-    let message = 'Algo salió mal al procesar tu solicitud. Por favor, inténtalo de nuevo.';
+    let title = t('errors.unexpected');
+    let message = t('errors.generic');
 
     if (isRouteErrorResponse(error)) {
         status = error.status;
@@ -61,7 +63,7 @@ export default function Error() {
                         className='mt-2 flex w-full items-center justify-center gap-2 rounded-md border border-default bg-overlay p-2.5 text-sm text-primary transition-all duration-200 ease-out hover:cursor-pointer hover:border-strong/75 hover:bg-elevated active:scale-[0.98]'
                     >
                         <ArrowLeftIcon size={16} />
-                        <span>Volver al inicio</span>
+                        <span>{t('actions.backToHome')}</span>
                     </button>
                 </section>
             </main>

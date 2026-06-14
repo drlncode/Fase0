@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useModalStore } from '@shared/store/useModalStore';
 import { CrossIcon } from '@/shared/components/ui/Icons';
 import { cn } from '@shared/utils/cn';
@@ -15,11 +16,14 @@ export function ConfirmModal({
     title,
     message,
     danger = false,
-    confirmText = 'Confirmar',
-    cancelText = 'Cancelar',
+    confirmText: confirmTextProp,
+    cancelText: cancelTextProp,
     awaitedAction = false,
     fullWidth = false
 }: ConfirmModalComponentProps) {
+    const { t } = useTranslation();
+    const confirmText = confirmTextProp ?? t('actions.confirm');
+    const cancelText = cancelTextProp ?? t('actions.cancel');
     const [ isWaiting, setIsWaiting ] = useState(false);
     const close = useModalStore(state => state.close);
     const modals = useModalStore(state => state.modals);
@@ -59,7 +63,7 @@ export function ConfirmModal({
                         'hover:bg-subtle',
                         'disabled:cursor-not-allowed disabled:opacity-50'
                     )}
-                    aria-label='Cerrar'
+                    aria-label={t('actions.close')}
                 >
                     <CrossIcon size={20} />
                 </button>

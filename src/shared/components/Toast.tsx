@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useToastStore } from '@shared/store/useToastStore';
 import { CheckIcon, CrossIcon, InfoIcon } from '@/shared/components/ui/Icons';
 import { cn } from '@shared/utils/cn';
@@ -18,6 +19,7 @@ interface ToastProps {
 }
 
 export function Toast({ toast }: ToastProps) {
+    const { t } = useTranslation();
     const removeToast = useToastStore((state) => state.removeToast);
     const { icon: Icon, iconColor } = toastConfig[toast.type];
 
@@ -85,7 +87,7 @@ export function Toast({ toast }: ToastProps) {
                         className='mt-0.5 self-start text-xs text-secondary hover:cursor-pointer'
                         onClick={() => isTruncated && setIsExpanded((prev) => !prev)}
                     >
-                        Click para ver más
+                        {t('actions.clickToSeeMore')}
                     </button>
                 )}
             </div>
@@ -94,7 +96,7 @@ export function Toast({ toast }: ToastProps) {
             <button
                 type='button'
                 onClick={handleDismiss}
-                aria-label='Cerrar notificación'
+                aria-label={t('actions.closeNotification')}
                 className={cn(
                     'mt-px ml-1.5 flex h-full shrink-0 items-center justify-center rounded text-secondary'
                 )}

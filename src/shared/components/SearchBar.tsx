@@ -1,4 +1,5 @@
 import { useEffect, useId, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { CrossIcon } from '@/shared/components/ui/Icons';
 import { cn } from '@shared/utils/cn';
 
@@ -11,6 +12,7 @@ interface SearchBarProps {
 }
 
 export function SearchBar({ label, icon, prefix, onSearch, focus }: SearchBarProps) {
+    const { t } = useTranslation();
     const id = useId();
     const inputRef = useRef<HTMLInputElement>(null);
     const [ query, setQuery ] = useState('');
@@ -73,7 +75,7 @@ export function SearchBar({ label, icon, prefix, onSearch, focus }: SearchBarPro
                         type='button'
                         onClick={handleClear}
                         className='absolute top-0 right-0 pt-2.5 pr-2 transition-colors hover:cursor-pointer hover:text-primary focus-visible:outline-none'
-                        aria-label='Limpiar busqueda'
+                        aria-label={t('actions.clear')}
                     >
                         <CrossIcon size={18} />
                     </button>

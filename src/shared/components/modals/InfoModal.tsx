@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { useModalStore } from '@shared/store/useModalStore';
 import { CrossIcon } from '@/shared/components/ui/Icons';
 import { cn } from '@shared/utils/cn';
@@ -13,6 +14,7 @@ export function InfoModal({
     content,
     fullWidth = false
 }: InfoModalComponentProps) {
+    const { t } = useTranslation();
     const close = useModalStore(state => state.close);
 
     return (
@@ -33,7 +35,7 @@ export function InfoModal({
                         'absolute top-3 right-3 cursor-pointer rounded-md p-1 text-secondary transition-colors select-none',
                         'hover:bg-subtle'
                     )}
-                    aria-label='Cerrar'
+                    aria-label={t('actions.close')}
                 >
                     <CrossIcon size={20} />
                 </button>

@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { useModalStore } from '@shared/store/useModalStore';
 import type { ModalData } from '@shared/types/global.types';
 import { CrossIcon } from '@/shared/components/ui/Icons';
@@ -10,6 +11,7 @@ interface BottomSheetProps {
 }
 
 export function BottomSheet({ id, title, children }: BottomSheetProps) {
+    const { t } = useTranslation();
     const close = useModalStore(state => state.close);
     const modals = useModalStore(state => state.modals);
     const modal = modals.find(m => m.id === id) as Extract<ModalData, { type: 'bottom-sheet' }>;
@@ -33,7 +35,7 @@ export function BottomSheet({ id, title, children }: BottomSheetProps) {
                         'absolute top-3 right-3 cursor-pointer rounded-md p-1 text-secondary transition-colors select-none',
                         'hover:bg-subtle'
                     )}
-                    aria-label='Cerrar'
+                    aria-label={t('actions.close')}
                 >
                     <CrossIcon size={18} />
                 </button>
