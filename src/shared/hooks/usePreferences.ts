@@ -7,12 +7,14 @@ interface Preferences {
     sidebarCollapsed: boolean;
     notificationSound: boolean;
     theme: 'dark' | 'light';
+    language: string;
 }
 
 const DEFAULT_PREFERENCES: Preferences = {
     sidebarCollapsed: false,
     notificationSound: true,
     theme: 'dark',
+    language: 'en',
 };
 
 function migrateOldKeys(getItem: (key: string) => string | null, removeItem: (key: string) => void): Partial<Preferences> {
