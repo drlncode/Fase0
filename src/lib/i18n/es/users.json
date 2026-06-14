@@ -1,0 +1,49 @@
+{
+    "tabs": {
+        "account": "Cuenta",
+        "preferences": "Preferencias"
+    },
+    "form": {
+        "nameLabel": "Nombre",
+        "namePlaceholder": "Tu nombre",
+        "nameMinLength": "El nombre debe tener al menos 3 caracteres.",
+        "nameMaxLength": "El nombre debe tener máximo 50 caracteres.",
+        "usernameLabel": "Nombre de usuario",
+        "usernamePlaceholder": "Tu nombre de usuario",
+        "usernameMinLength": "El usuario debe tener al menos 4 caracteres.",
+        "usernameMaxLength": "El usuario debe tener máximo 20 caracteres.",
+        "usernamePattern": "Solo se permiten a-z, 0-9, puntos, guiones y guiones bajos."
+    },
+    "username": {
+        "checking": "Verificando disponibilidad...",
+        "available": "Nombre de usuario disponible.",
+        "taken": "Nombre de usuario no disponible.",
+        "checkError": "No fue posible verificar la disponibilidad."
+    },
+    "avatar": {
+        "alt": "Avatar de {{name}}",
+        "changePhoto": "Cambiar foto",
+        "uploadPhoto": "Subir foto",
+        "deletePhoto": "Eliminar foto"
+    },
+    "actions": {
+        "saveChanges": "Guardar cambios"
+    },
+    "preferences": {
+        "notificationSound": "Sonido de notificación",
+        "notificationSoundDesc": "Reproduce un sonido al recibir un mensaje nuevo",
+        "language": "Idioma",
+        "languageDesc": "Selecciona el idioma de la aplicación"
+    },
+    "errors": {
+        "verifyAvailability": "No se pudo verificar la disponibilidad del nombre de usuario.",
+        "usernameTaken": "Ese nombre de usuario ya está en uso.",
+        "updateProfile": "No fue posible actualizar el perfil.",
+        "deleteAvatar": "No fue posible eliminar la imagen de perfil.",
+        "updateAvatar": "No fue posible actualizar la imagen de perfil."
+    },
+    "toast": {
+        "profileUpdated": "Perfil actualizado correctamente.",
+        "profileUpdateError": "No fue posible actualizar el perfil. Inténtalo de nuevo."
+    }
+}

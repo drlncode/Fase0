@@ -1,0 +1,49 @@
+{
+    "tabs": {
+        "account": "Account",
+        "preferences": "Preferences"
+    },
+    "form": {
+        "nameLabel": "Name",
+        "namePlaceholder": "Your name",
+        "nameMinLength": "Name must be at least 3 characters.",
+        "nameMaxLength": "Name must be at most 50 characters.",
+        "usernameLabel": "Username",
+        "usernamePlaceholder": "Your username",
+        "usernameMinLength": "Username must be at least 4 characters.",
+        "usernameMaxLength": "Username must be at most 20 characters.",
+        "usernamePattern": "Only a-z, 0-9, periods, hyphens and underscores allowed."
+    },
+    "username": {
+        "checking": "Checking availability...",
+        "available": "Username available.",
+        "taken": "Username not available.",
+        "checkError": "Could not verify availability."
+    },
+    "avatar": {
+        "alt": "{{name}}'s avatar",
+        "changePhoto": "Change photo",
+        "uploadPhoto": "Upload photo",
+        "deletePhoto": "Delete photo"
+    },
+    "actions": {
+        "saveChanges": "Save changes"
+    },
+    "preferences": {
+        "notificationSound": "Notification sound",
+        "notificationSoundDesc": "Play a sound when receiving a new message",
+        "language": "Language",
+        "languageDesc": "Select the application language"
+    },
+    "errors": {
+        "verifyAvailability": "Could not verify username availability.",
+        "usernameTaken": "That username is already in use.",
+        "updateProfile": "Could not update profile.",
+        "deleteAvatar": "Could not delete profile picture.",
+        "updateAvatar": "Could not update profile picture."
+    },
+    "toast": {
+        "profileUpdated": "Profile updated successfully.",
+        "profileUpdateError": "Could not update profile. Try again."
+    }
+}
