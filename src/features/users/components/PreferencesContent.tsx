@@ -10,29 +10,29 @@ const LANGUAGES = [
 
 export function PreferencesContent() {
     const { enabled, toggle } = useNotificationPreferences();
-    const { i18n } = useTranslation();
+    const { t, i18n } = useTranslation('users');
 
     return (
-        <div className='flex flex-col gap-6'>
-            <div className='flex items-center justify-between gap-4'>
-                <div className='flex flex-col gap-0.5'>
-                    <span className='text-sm font-medium text-primary'>Sonido de notificación</span>
+        <div className='flex w-full flex-col gap-6'>
+            <div className='flex w-full items-center justify-between gap-4'>
+                <div className='flex flex-1 flex-col gap-0.5'>
+                    <span className='text-sm font-medium text-primary'>{t('preferences.notificationSound')}</span>
                     <span className='text-xs text-secondary'>
-                        Reproduce un sonido al recibir un mensaje nuevo
+                        {t('preferences.notificationSoundDesc')}
                     </span>
                 </div>
                 <Switch
                     checked={enabled}
                     onChange={toggle}
-                    label='Sonido de notificación'
+                    label={t('preferences.notificationSound')}
                 />
             </div>
 
-            <div className='flex items-center justify-between gap-4'>
-                <div className='flex flex-col gap-0.5'>
-                    <span className='text-sm font-medium text-primary'>Idioma</span>
+            <div className='flex w-full items-center justify-between gap-4'>
+                <div className='flex flex-1 flex-col gap-0.5'>
+                    <span className='text-sm font-medium text-primary'>{t('preferences.language')}</span>
                     <span className='text-xs text-secondary'>
-                        Selecciona el idioma de la aplicación
+                        {t('preferences.languageDesc')}
                     </span>
                 </div>
                 <div className='flex overflow-hidden rounded-md border border-default'>
@@ -46,7 +46,7 @@ export function PreferencesContent() {
                                 onClick={() => i18n.changeLanguage(lang.code)}
                                 className={cn(
                                     'px-3 py-1.5 text-xs transition-all duration-200 ease-out',
-                                    'hover:cursor-pointer select-none',
+                                    'select-none hover:cursor-pointer',
                                     'active:scale-[0.98]',
                                     {
                                         'bg-surface text-primary': isActive,

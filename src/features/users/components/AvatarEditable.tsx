@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useAvatarUrl } from '@shared/hooks/useAvatarUrl';
 import { Dropdown, DropdownItem, DropdownDivider } from '@shared/components/Dropdown';
 import { PencilIcon, TrashIcon, PhotoXIcon, UserPlusIcon } from '@/shared/components/ui/Icons';
@@ -38,6 +39,7 @@ export function AvatarEditable({
     className,
     size = 'md'
 }: AvatarEditableProps) {
+    const { t } = useTranslation('users');
     const effectiveAvatar = pendingDeletion ? null : avatar;
     const { url, onError } = useAvatarUrl(effectiveAvatar, userId);
     const fileInputRef = useRef<HTMLInputElement>(null);
@@ -70,7 +72,7 @@ export function AvatarEditable({
                         {imageUrl && !hasImageError && (
                             <img
                                 src={imageUrl}
-                                alt={`Avatar de ${name}`}
+                                alt={t('avatar.alt', { name })}
                                 className='h-full w-full object-cover'
                                 draggable={false}
                             />
@@ -101,7 +103,7 @@ export function AvatarEditable({
                 className='z-[1100]'
             >
                 <DropdownItem
-                    label={hasAvatar ? 'Cambiar foto' : 'Subir foto'}
+                    label={hasAvatar ? t('avatar.changePhoto') : t('avatar.uploadPhoto')}
                     icon={hasAvatar ? <PencilIcon size={14} /> : <UserPlusIcon size={14} />}
                     onClick={openFilePicker}
                     disabled={isLoading}
@@ -110,7 +112,7 @@ export function AvatarEditable({
                     <>
                         <DropdownDivider />
                         <DropdownItem
-                            label='Eliminar foto'
+                            label={t('avatar.deletePhoto')}
                             icon={<TrashIcon size={14} />}
                             danger
                             onClick={onRemoveAvatar}

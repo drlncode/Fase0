@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { AccountContent } from '@users/components/AccountContent';
 import { PreferencesContent } from '@users/components/PreferencesContent';
 import { UserCircleIcon, AdjustmentsHorizontalIcon } from '@/shared/components/ui/Icons';
@@ -6,24 +7,19 @@ import { cn } from '@shared/utils/cn';
 
 type SettingsTab = 'account' | 'preferences';
 
-interface TabConfig {
-    id: SettingsTab;
-    label: string;
-    icon: React.ReactNode;
-}
-
-const TABS: TabConfig[] = [
-    { id: 'account', label: 'Cuenta', icon: <UserCircleIcon size={20} /> },
-    { id: 'preferences', label: 'Preferencias', icon: <AdjustmentsHorizontalIcon size={20} /> },
-];
-
 export function SettingsModalContent() {
+    const { t } = useTranslation('users');
     const [ activeTab, setActiveTab ] = useState<SettingsTab>('account');
+
+    const tabs = useMemo<{ id: SettingsTab; label: string; icon: React.ReactNode }[]>(() => [
+        { id: 'account', label: t('tabs.account'), icon: <UserCircleIcon size={20} /> },
+        { id: 'preferences', label: t('tabs.preferences'), icon: <AdjustmentsHorizontalIcon size={20} /> },
+    ], [t]);
 
     return (
         <div className='flex min-h-72 min-w-130 gap-6 pt-2'>
             <nav className='flex w-44 flex-col gap-1 border-r border-default pr-6'>
-                {TABS.map((tab) => {
+                {tabs.map((tab) => {
                     const isActive = activeTab === tab.id;
 
                     return (
@@ -58,7 +54,7 @@ export function SettingsModalContent() {
                 })}
             </nav>
 
-            <section className='-mr-6 min-w-82 shrink-0'>
+            <section className='-mr-6 min-w-82 flex-1'>
                 {activeTab === 'account' && <AccountContent />}
                 {activeTab === 'preferences' && <PreferencesContent />}
             </section>

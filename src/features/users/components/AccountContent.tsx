@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
 import { useValidAuth } from '@auth/hooks/useValidAuth';
 import { useUpdateUser } from '@users/hooks/useUpdateUser';
@@ -19,6 +20,7 @@ type AccountFormValues = {
 const USERNAME_ALLOWED_REGEX = /[^a-zA-Z0-9._-]/g;
 
 export function AccountContent() {
+    const { t } = useTranslation('users');
     const { user } = useValidAuth();
     const { status: updateStatus, update } = useUpdateUser();
     const { status: uploadStatus, upload } = useUploadAvatar();
@@ -140,10 +142,10 @@ export function AccountContent() {
 
     const usernameInfo = (() => {
         if (!hasUsernameChanged || usernameValue.length < 4 || usernameError) return undefined;
-        if (usernameStatus === 'checking') return 'Verificando disponibilidad...';
-        if (usernameStatus === 'available') return 'Nombre de usuario disponible.';
-        if (usernameStatus === 'taken') return 'Nombre de usuario no disponible.';
-        if (usernameStatus === 'error') return 'No fue posible verificar la disponibilidad.';
+        if (usernameStatus === 'checking') return t('username.checking');
+        if (usernameStatus === 'available') return t('username.available');
+        if (usernameStatus === 'taken') return t('username.taken');
+        if (usernameStatus === 'error') return t('username.checkError');
         return undefined;
     })();
 
@@ -161,12 +163,12 @@ export function AccountContent() {
             const result = await checkUsernameAvailability(data.username);
             if (!result) {
                 setUsernameStatus('error');
-                setError('No se pudo verificar la disponibilidad del nombre de usuario.');
+                setError(t('errors.verifyAvailability'));
                 return;
             }
             if (!result.isAvailable) {
                 setUsernameStatus('taken');
-                setError('Ese nombre de usuario ya está en uso.');
+                setError(t('errors.usernameTaken'));
                 return;
             }
             setUsernameStatus('available');
@@ -178,7 +180,7 @@ export function AccountContent() {
         if (Object.keys(body).length > 0) {
             const userUpdated = await update(body);
             if (!userUpdated) {
-                setError('No fue posible actualizar el perfil.');
+                setError(t('errors.updateProfile'));
                 return;
             }
 
@@ -188,7 +190,7 @@ export function AccountContent() {
         if (pendingAvatarDeletion) {
             const avatarDeleted = await remove();
             if (!avatarDeleted) {
-                setError('No fue posible eliminar la imagen de perfil.');
+                setError(t('errors.deleteAvatar'));
                 return;
             }
 
@@ -198,7 +200,7 @@ export function AccountContent() {
         if (pendingAvatarFile) {
             const avatarUploaded = await upload(pendingAvatarFile);
             if (!avatarUploaded) {
-                setError('No fue posible actualizar la imagen de perfil.');
+                setError(t('errors.updateAvatar'));
                 return;
             }
 
@@ -238,38 +240,38 @@ export function AccountContent() {
 
             <form onSubmit={handleSubmit(onSubmit)} className='flex w-full flex-col gap-4 border-t border-default pt-5'>
                 <TextField
-                    label='Nombre'
-                    placeholder='Tu nombre'
+                    label={t('form.nameLabel')}
+                    placeholder={t('form.namePlaceholder')}
                     type='text'
                     registration={register('name', {
                         minLength: {
                             value: 3,
-                            message: 'El nombre debe tener al menos 3 caracteres.'
+                            message: t('form.nameMinLength')
                         },
                         maxLength: {
                             value: 50,
-                            message: 'El nombre debe tener máximo 50 caracteres.'
+                            message: t('form.nameMaxLength')
                         }
                     })}
                     error={errors.name?.message}
                 />
 
                 <TextField
-                    label='Nombre de usuario'
-                    placeholder='Tu nombre de usuario'
+                    label={t('form.usernameLabel')}
+                    placeholder={t('form.usernamePlaceholder')}
                     type='text'
                     registration={register('username', {
                         minLength: {
                             value: 4,
-                            message: 'El usuario debe tener al menos 4 caracteres.'
+                            message: t('form.usernameMinLength')
                         },
                         maxLength: {
                             value: 20,
-                            message: 'El usuario debe tener máximo 20 caracteres.'
+                            message: t('form.usernameMaxLength')
                         },
                         pattern: {
                             value: /^[a-z0-9._-]+$/,
-                            message: 'Solo se permiten a-z, 0-9, puntos, guiones y guiones bajos.'
+                            message: t('form.usernamePattern')
                         },
                         onChange: handleUsernameChange
                     })}
@@ -286,7 +288,7 @@ export function AccountContent() {
                     disabled={isSubmitDisabled}
                     className='mt-1 border border-default bg-overlay font-medium text-primary hover:bg-subtle active:scale-[0.98]'
                 >
-                    {isLoading ? <SpinLoader size={18} /> : 'Guardar cambios'}
+                    {isLoading ? <SpinLoader size={18} /> : t('actions.saveChanges')}
                 </SubmitButton>
             </form>
         </div>
