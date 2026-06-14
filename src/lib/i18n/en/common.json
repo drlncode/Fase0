@@ -1,0 +1,47 @@
+{
+    "app": {
+        "name": "Fase0",
+        "tagline": "Chat without limits"
+    },
+    "actions": {
+        "save": "Save",
+        "cancel": "Cancel",
+        "delete": "Delete",
+        "edit": "Edit",
+        "create": "Create",
+        "confirm": "Confirm",
+        "close": "Close",
+        "back": "Back",
+        "backToHome": "Back to home",
+        "search": "Search",
+        "send": "Send",
+        "show": "Show",
+        "hide": "Hide",
+        "showPassword": "Show password",
+        "hidePassword": "Hide password",
+        "clear": "Clear",
+        "yes": "Yes",
+        "no": "No",
+        "loading": "Loading...",
+        "showMore": "Show more",
+        "showLess": "Show less",
+        "clickToSeeMore": "Click to see more",
+        "closeNotification": "Close notification"
+    },
+    "errors": {
+        "generic": "Something went wrong",
+        "network": "Network error. Check your connection.",
+        "unauthorized": "You need to log in",
+        "notFound": "Page not found",
+        "unexpected": "Unexpected error",
+        "pageNotExist": "This page does not exist"
+    },
+    "validation": {
+        "required": "Required",
+        "invalid": "Invalid value",
+        "fieldRequired": "This field is required",
+        "invalidEmail": "Invalid email",
+        "minLength": "Must be at least {{count}} characters",
+        "maxLength": "Must be at most {{count}} characters"
+    }
+}

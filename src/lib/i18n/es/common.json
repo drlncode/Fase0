@@ -1,0 +1,47 @@
+{
+    "app": {
+        "name": "Fase0",
+        "tagline": "Chatea sin límites"
+    },
+    "actions": {
+        "save": "Guardar",
+        "cancel": "Cancelar",
+        "delete": "Eliminar",
+        "edit": "Editar",
+        "create": "Crear",
+        "confirm": "Confirmar",
+        "close": "Cerrar",
+        "back": "Volver",
+        "backToHome": "Volver al inicio",
+        "search": "Buscar",
+        "send": "Enviar",
+        "show": "Mostrar",
+        "hide": "Ocultar",
+        "showPassword": "Mostrar contraseña",
+        "hidePassword": "Ocultar contraseña",
+        "clear": "Limpiar",
+        "yes": "Sí",
+        "no": "No",
+        "loading": "Cargando...",
+        "showMore": "Mostrar más",
+        "showLess": "Mostrar menos",
+        "clickToSeeMore": "Click para ver más",
+        "closeNotification": "Cerrar notificación"
+    },
+    "errors": {
+        "generic": "Algo salió mal",
+        "network": "Error de red. Verifica tu conexión.",
+        "unauthorized": "Debes iniciar sesión",
+        "notFound": "Página no encontrada",
+        "unexpected": "Error inesperado",
+        "pageNotExist": "Esta página no existe"
+    },
+    "validation": {
+        "required": "Obligatorio",
+        "invalid": "Valor inválido",
+        "fieldRequired": "Este campo es obligatorio",
+        "invalidEmail": "Correo inválido",
+        "minLength": "Debe tener al menos {{count}} caracteres",
+        "maxLength": "Debe tener como máximo {{count}} caracteres"
+    }
+}
