@@ -16,12 +16,11 @@ import type {
 } from '@messages/services/messages.service';
 
 export async function getMessages(
-    session: string,
     chatId: string,
     params: PaginatedParams
 ): Promise<ServiceResponse<GetMessagesResponse>> {
     try {
-        const data = await MessageService.getMessages({ session, chatId, params });
+        const data = await MessageService.getMessages({ chatId, params });
 
         return {
             success: true,
@@ -40,12 +39,11 @@ export async function getMessages(
 }
 
 export async function getMessageById(
-    session: string,
     chatId: string,
     messageId: string
 ): Promise<ServiceResponse<VisibleMessage>> {
     try {
-        const data = await MessageService.getMessageById({ session, chatId, messageId });
+        const data = await MessageService.getMessageById({ chatId, messageId });
 
         return {
             success: true,
@@ -64,11 +62,10 @@ export async function getMessageById(
 }
 
 export async function createMessage(
-    session: string,
     body: CreateMessageBody
 ): Promise<ServiceResponse<CreateMessageResponse>> {
     try {
-        const data = await MessageService.createMessage({ session, body });
+        const data = await MessageService.createMessage({ body });
 
         return {
             success: true,
@@ -87,12 +84,11 @@ export async function createMessage(
 }
 
 export async function updateMessage(
-    session: string,
     messageId: string,
     body: UpdateMessageBody
 ): Promise<ServiceResponse<UpdateMessageResponse>> {
     try {
-        const data = await MessageService.updateMessage({ session, messageId, body });
+        const data = await MessageService.updateMessage({ messageId, body });
 
         return {
             success: true,
@@ -111,11 +107,10 @@ export async function updateMessage(
 }
 
 export async function markBatchAsRead(
-    session: string,
     body: MarkBatchAsReadBody
 ): Promise<ServiceResponse<MarkBatchAsReadResponse>> {
     try {
-        const data = await MessageService.markBatchAsRead({ session, body });
+        const data = await MessageService.markBatchAsRead({ body });
 
         return {
             success: true,

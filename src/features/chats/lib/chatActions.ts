@@ -12,11 +12,10 @@ import type {
 import type { Chat, UpdatableChatData } from '@chats/types/chat.types';
 
 export async function getChatById(
-    session: string,
     chatId: string
 ): Promise<ServiceResponse<Chat>> {
     try {
-        const data = await ChatService.getChatById({ session, chatId });
+        const data = await ChatService.getChatById({ chatId });
 
         return {
             success: true,
@@ -35,11 +34,10 @@ export async function getChatById(
 };
 
 export async function getAllChats(
-    session: string,
     params: PaginatedParams
 ): Promise<ServiceResponse<GetAllChatsResponse>> {
     try {
-        const data = await ChatService.getAllChats({ session, params });
+        const data = await ChatService.getAllChats({ params });
 
         return {
             success: true,
@@ -58,12 +56,11 @@ export async function getAllChats(
 };
 
 export async function createChat(
-    session: string,
     guestId: string,
     message: string
 ): Promise<ServiceResponse<CreateChatResponse>> {
     try {
-        const data = await ChatService.createChat({ session, guestId, message });
+        const data = await ChatService.createChat({ guestId, message });
 
         return {
             success: true,
@@ -82,11 +79,10 @@ export async function createChat(
 };
 
 export async function markAllAsRead(
-    session: string,
     chatId: string
 ): Promise<ServiceResponse<MarkAllAsReadResponse>> {
     try {
-        const data = await ChatService.markAllAsRead({ session, chatId });
+        const data = await ChatService.markAllAsRead({ chatId });
 
         return {
             success: true,
@@ -105,11 +101,10 @@ export async function markAllAsRead(
 }
 
 export async function clearAllChatMessages(
-    session: string,
     chatId: string
 ): Promise<ServiceResponse<ClearAllChatMessagesResponse>> {
     try {
-        const data = await ChatService.clearAllChatMessages({ session, chatId });
+        const data = await ChatService.clearAllChatMessages({ chatId });
 
         return {
             success: true,
@@ -128,12 +123,11 @@ export async function clearAllChatMessages(
 }
 
 export async function updateChat(
-    session: string,
     chatId: string,
     toUpdate: UpdatableChatData
 ): Promise<ServiceResponse<UpdateChatResponse>> {
     try {
-        const data = await ChatService.updateChat({ session, chatId, toUpdate });
+        const data = await ChatService.updateChat({ chatId, toUpdate });
 
         return {
             success: true,

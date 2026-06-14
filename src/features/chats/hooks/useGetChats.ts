@@ -28,7 +28,7 @@ export function useGetChats() {
         setChatsFetchStatus(hasChats ? { status: 'fetching' } : { status: 'loading' });
 
         const currentPage = (nextPage && canFetchMore) ? nextPage : chatsFetch.pagination.page;
-        const result = await getAllChats(session, { page: currentPage, limit: chatsFetch.pagination.limit });
+        const result = await getAllChats({ page: currentPage, limit: chatsFetch.pagination.limit });
 
         if (result.success) {
             const { totalCount, data } = result.data;

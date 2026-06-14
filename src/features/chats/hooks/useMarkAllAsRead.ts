@@ -30,7 +30,7 @@ export function useMarkAllAsRead() {
         setChat(optimisticChat);
         setStatus({ status: 'loading' });
 
-        const result = await markAllAsRead(session, chatId);
+        const result = await markAllAsRead(chatId);
 
         if (result.success) {
             return setStatus({

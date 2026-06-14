@@ -17,7 +17,7 @@ export function useAcceptFriendRequest() {
 
     async function accept(requestId: string) {
         setStatus({ status: 'loading' });
-        const result = await acceptFriendRequest(session, requestId);
+        const result = await acceptFriendRequest(requestId);
 
         if (result.success) {
             success('Solicitud de amistad aceptada.');

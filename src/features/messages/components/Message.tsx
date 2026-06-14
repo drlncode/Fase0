@@ -32,7 +32,7 @@ interface MessageProps {
 }
 
 export function Message({ message, side, firstOfGroup }: MessageProps) {
-    const { user: { _id: currentUserId, session } } = useValidAuth();
+    const { user: { _id: currentUserId } } = useValidAuth();
     const isSender = currentUserId === message.senderId;
     const [ copied, setCopied ] = useState(false);
     const { status: { status: updateStatus }, update } = useUpdateMessage();
@@ -64,7 +64,7 @@ export function Message({ message, side, firstOfGroup }: MessageProps) {
                 if (entry.isIntersecting && !markAsReadAttempted.current) {
                     markAsReadAttempted.current = true;
                     observer.disconnect();
-                    readMarkerDebouncer.register(session, message._id);
+                    readMarkerDebouncer.register(message._id);
                 }
             },
             { threshold: 0.5 }
@@ -72,7 +72,7 @@ export function Message({ message, side, firstOfGroup }: MessageProps) {
 
         observer.observe(element);
         return () => observer.disconnect();
-    }, [side, message.status, message._id, message.chatId, session]);
+    }, [side, message.status, message._id, message.chatId]);
 
     const handleCopy = () => {
         if (isDeletedMessage(message) || isOptimisticMsg) return;

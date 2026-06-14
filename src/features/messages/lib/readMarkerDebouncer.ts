@@ -5,11 +5,10 @@ const MAX_RETRIES = 3;
 const RETRY_DELAY_MS = 5000;
 
 interface PendingEntry {
-    session: string;
     messageId: string;
 }
 
-let pendingEntries: PendingEntry[] = [];
+const pendingEntries: PendingEntry[] = [];
 let flushTimer: ReturnType<typeof setTimeout> | null = null;
 
 function clearFlushTimer() {
@@ -40,25 +39,24 @@ function flush() {
     if (entries.length === 0) return;
 
     if (entries.length === 1) {
-        const { session, messageId } = entries[0];
+        const { messageId } = entries[0];
         executeWithRetry(async () => {
-            const result = await updateMessage(session, messageId, { read: true });
+            const result = await updateMessage(messageId, { read: true });
             if (!result.success) throw new Error('Failed to mark message as read');
         });
     } else {
-        const session = entries[0].session;
         const messageIds = entries.map(e => e.messageId);
         executeWithRetry(async () => {
-            const result = await markBatchAsRead(session, { messageIds });
+            const result = await markBatchAsRead({ messageIds });
             if (!result.success) throw new Error('Failed to batch mark messages as read');
         });
     }
 }
 
 export const readMarkerDebouncer = {
-    register(session: string, messageId: string) {
+    register(messageId: string) {
         if (pendingEntries.some(e => e.messageId === messageId)) return;
-        pendingEntries.push({ session, messageId });
+        pendingEntries.push({ messageId });
         scheduleFlush();
     }
 };

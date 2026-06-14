@@ -6,13 +6,13 @@ import { getMessages } from '@messages/lib/messageActions';
 
 const MESSAGES_PER_PAGE = Number(import.meta.env.VITE_MESSAGES_PER_PAGE) || 30;
 
-async function fetchInitialMessages(session: string, chatId: string) {
+async function fetchInitialMessages(chatId: string) {
     const { registerChat, setMessages, setChatFetchState, setChatPagination } = useMessageStore.getState();
 
     registerChat(chatId);
     setChatFetchState(chatId, 'loading');
 
-    const result = await getMessages(session, chatId, { page: 1, limit: MESSAGES_PER_PAGE });
+    const result = await getMessages(chatId, { page: 1, limit: MESSAGES_PER_PAGE });
 
     if (result.success) {
         const { totalCount, data } = result.data;
@@ -45,7 +45,7 @@ export function useMessageSync() {
 
                 addedChatIds.forEach(chatId => {
                     if (!messageStore.messagesByChat.has(chatId)) {
-                        fetchInitialMessages(session, chatId);
+                        fetchInitialMessages(chatId);
                     }
                 });
 
@@ -77,7 +77,7 @@ export function useMessageSync() {
 
         addedChatIds.forEach(chatId => {
             if (!messageStore.messagesByChat.has(chatId)) {
-                fetchInitialMessages(session, chatId);
+                fetchInitialMessages(chatId);
             }
         });
 

@@ -25,7 +25,7 @@ export function useUpdateMessage() {
     async function update(chatId: string, messageId: string, body: UpdateMessageBody) {
         setStatus({ status: 'loading' });
 
-        const result = await updateMessage(session, messageId, body);
+        const result = await updateMessage(messageId, body);
 
         if (result.success) {
             if (!['deleted'].some(key => key in body)) {

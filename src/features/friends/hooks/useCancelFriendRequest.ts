@@ -17,7 +17,7 @@ export function useCancelFriendRequest() {
 
     async function cancel(requestId: string) {
         setStatus({ status: 'loading' });
-        const result = await cancelFriendRequest(session, requestId);
+        const result = await cancelFriendRequest(requestId);
 
         if (result.success) {
             success('Solicitud de amistad cancelada.');

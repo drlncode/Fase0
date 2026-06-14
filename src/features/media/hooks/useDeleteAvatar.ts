@@ -18,7 +18,7 @@ export function useDeleteAvatar() {
     async function remove(): Promise<boolean> {
         setStatus({ status: 'loading' });
 
-        const result = await deleteAvatar(session);
+        const result = await deleteAvatar();
 
         if (result.success) {
             useAvatarCacheStore.getState().removeAvatar(_id);

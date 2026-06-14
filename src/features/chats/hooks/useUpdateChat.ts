@@ -62,7 +62,7 @@ export function useUpdateChat() {
 
         setStatus({ status: 'loading' });
 
-        const result = await updateChat(session, chatId, toUpdate);
+        const result = await updateChat(chatId, toUpdate);
 
         if (result.success) {
             success(getSuccessMessage(toUpdate));

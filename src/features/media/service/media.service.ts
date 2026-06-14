@@ -2,12 +2,11 @@ import api from '@/lib/axios';
 
 import type {
     UploadAvatarParams,
-    UploadAvatarData,
-    DeleteAvatarParams
+    UploadAvatarData
 } from '@media/types/media.types';
 
 export class MediaService {
-    static async uploadAvatar({ session, file }: UploadAvatarParams): Promise<UploadAvatarData> {
+    static async uploadAvatar({ file }: UploadAvatarParams): Promise<UploadAvatarData> {
         const formData = new FormData();
         formData.append('avatar', file);
 
@@ -16,7 +15,6 @@ export class MediaService {
             formData,
             {
                 headers: {
-                    Authorization: `Bearer ${session}`,
                     'Content-Type': 'multipart/form-data'
                 }
             }
@@ -25,12 +23,8 @@ export class MediaService {
         return data;
     }
 
-    static async deleteAvatar({ session }: DeleteAvatarParams): Promise<void> {
-        await api.delete('/media/avatars', {
-            headers: {
-                Authorization: `Bearer ${session}`
-            }
-        });
+    static async deleteAvatar(): Promise<void> {
+        await api.delete('/media/avatars');
     }
 }
 

@@ -17,7 +17,7 @@ export function useSendFriendRequest() {
 
     async function send(userId: string) {
         setStatus({ status: 'loading' });
-        const result = await sendFriendRequest(session, userId);
+        const result = await sendFriendRequest(userId);
 
         if (result.success) {
             success('Solicitud de amistad enviada.');

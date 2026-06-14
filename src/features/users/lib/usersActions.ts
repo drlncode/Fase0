@@ -57,7 +57,6 @@ export async function getUsernameAvailabilityAction(username: string): Promise<
 
 export async function getUsersByUsernameAction(
     username: string,
-    sessionId: string,
     params?: { page?: number; limit?: number }
 ): Promise<
     ServiceResponse<AwaitedReturn<typeof usersApiService.getUsersByUsername>>
@@ -65,7 +64,6 @@ export async function getUsersByUsernameAction(
     try {
         const data = await usersApiService.getUsersByUsername({
             username,
-            sessionId,
             params
         });
 
@@ -88,13 +86,12 @@ export async function getUsersByUsernameAction(
 }
 
 export async function updateUserAction(
-    sessionId: string,
     body: UpdateUserBody
 ): Promise<
     ServiceResponse<AwaitedReturn<typeof usersApiService.updateUser>>
 > {
     try {
-        const data = await usersApiService.updateUser({ sessionId, body });
+        const data = await usersApiService.updateUser({ body });
 
         return {
             success: true,
@@ -114,11 +111,11 @@ export async function updateUserAction(
     }
 }
 
-export async function deleteUserAction(sessionId: string): Promise<
+export async function deleteUserAction(): Promise<
     ServiceResponse<void>
 > {
     try {
-        await usersApiService.deleteUser({ sessionId });
+        await usersApiService.deleteUser();
 
         return {
             success: true,

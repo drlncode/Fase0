@@ -6,7 +6,6 @@ import type {
     ActiveUser,
     GetUserByIdParams,
     GetUsersByUsernameParams,
-    DeleteUserParams,
     UpdateUserParams
 } from '@users/types/user.types';
 import type { PaginatedResponse } from '@shared/types/global.types';
@@ -28,15 +27,12 @@ class UsersApiService {
         return data;
     }
 
-    async getUsersByUsername({ username, sessionId, params }: GetUsersByUsernameParams): Promise<PaginatedResponse<{ users: SearchedUserPublicProfile[] }>> {
+    async getUsersByUsername({ username, params }: GetUsersByUsernameParams): Promise<PaginatedResponse<{ users: SearchedUserPublicProfile[] }>> {
         const { data } = await api.get<PaginatedResponse<{ users: SearchedUserPublicProfile[] }>>(
             `/users/search/`, {
                 params: {
                     search: username,
                     ...params
-                },
-                headers: {
-                    Authorization: `Bearer ${sessionId}`
                 }
             }
         );
@@ -44,26 +40,17 @@ class UsersApiService {
         return data;
     }
 
-    async updateUser({ sessionId, body }: UpdateUserParams): Promise<ActiveUser> {
+    async updateUser({ body }: UpdateUserParams): Promise<ActiveUser> {
         const { data: { data } } = await api.patch<{ data: { updatedUser: ActiveUser } }>(
             '/users',
-            body,
-            {
-                headers: {
-                    Authorization: `Bearer ${sessionId}`
-                }
-            }
+            body
         );
 
         return data.updatedUser;
     }
 
-    async deleteUser({ sessionId }: DeleteUserParams): Promise<void> {
-        await api.delete('/users', {
-            headers: {
-                Authorization: `Bearer ${sessionId}`
-            }
-        });
+    async deleteUser(): Promise<void> {
+        await api.delete('/users');
     }
 }
 

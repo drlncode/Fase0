@@ -15,7 +15,7 @@ export function useCreateChat() {
 
     async function create(guestId: string, message: string) {
         setStatus({ status: 'loading' });
-        const result = await createChat(session, guestId, message);
+        const result = await createChat(guestId, message);
 
         if (result.success) {
             return setStatus({

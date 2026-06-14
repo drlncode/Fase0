@@ -18,15 +18,9 @@ type SignInReturnData = {
 }
 
 class AuthApiService {
-    async authVerifySession({ session }: {
-        session: string
-    }): Promise<ServiceResponse<ActiveUser>> {
+    async authVerifySession(): Promise<ServiceResponse<ActiveUser>> {
         try {
-            const { data: { data } } = await api.post<{ data: { user: ActiveUser } }>('/auth/verify-session', null, {
-                headers: {
-                    Authorization: `Bearer ${session}`
-                }
-            });
+            const { data: { data } } = await api.post<{ data: { user: ActiveUser } }>('/auth/verify-session');
 
             return {
                 success: true,
@@ -134,15 +128,9 @@ class AuthApiService {
         }
     }
 
-    async authSignOut({ session }: {
-        session: string;
-    }): Promise<ServiceResponse<null>> {
+    async authSignOut(): Promise<ServiceResponse<null>> {
         try {
-            await api.post('/auth/signout', null, {
-                headers: {
-                    Authorization: `Bearer ${session}`
-                }
-            });
+            await api.post('/auth/signout');
 
             return {
                 success: true,
@@ -162,15 +150,10 @@ class AuthApiService {
         }
     }
 
-    async authConfirmSession({ code, session }: {
+    async authConfirmSession({ code }: {
         code: number;
-        session: string;
     }): Promise<'OK'> {
-        await api.post('/auth/refresh-session', { code }, {
-            headers: {
-                Authorization: `Bearer ${session}`
-            }
-        });
+        await api.post('/auth/refresh-session', { code });
 
         return 'OK';
     }

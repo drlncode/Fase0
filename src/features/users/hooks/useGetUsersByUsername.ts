@@ -41,7 +41,7 @@ export function useGetUsersByUsername() {
             && paginationRef.current.page <= Math.ceil(paginationRef.current.total / paginationRef.current.limit);
         const nextPage = canMore ? paginationRef.current.page : page;
 
-        const result = await getUsersByUsernameAction(username, session, { page: nextPage, limit });
+        const result = await getUsersByUsernameAction(username, { page: nextPage, limit });
 
         if (!result.success) {
             setStatus('error');

@@ -33,7 +33,7 @@ export function useGetFriendsSentRequests() {
         }
 
         const currentPage = (nextPage && canFetchMore) ? nextPage : friendsSentRequestsFetch.pagination.page;
-        const result = await getFriendsSentRequests(session, { page: currentPage, limit: friendsSentRequestsFetch.pagination.limit });
+        const result = await getFriendsSentRequests({ page: currentPage, limit: friendsSentRequestsFetch.pagination.limit });
 
         if (result.success) {
             const { totalCount, data } = result.data;

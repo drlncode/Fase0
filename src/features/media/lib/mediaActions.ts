@@ -8,11 +8,10 @@ import type {
 } from '@media/service/media.service';
 
 export async function uploadAvatar(
-    session: string,
     file: File
 ): Promise<ServiceResponse<UploadAvatarReturnType>> {
     try {
-        const data = await MediaService.uploadAvatar({ session, file });
+        const data = await MediaService.uploadAvatar({ file });
 
         return {
             success: true,
@@ -30,11 +29,9 @@ export async function uploadAvatar(
     }
 }
 
-export async function deleteAvatar(
-    session: string
-): Promise<ServiceResponse<DeleteAvatarReturnType>> {
+export async function deleteAvatar(): Promise<ServiceResponse<DeleteAvatarReturnType>> {
     try {
-        await MediaService.deleteAvatar({ session });
+        await MediaService.deleteAvatar();
 
         return {
             success: true,

@@ -16,7 +16,7 @@ export function useMarkMessagesAsRead() {
         if (messageIds.length === 0) return;
 
         setStatus({ status: 'loading' });
-        const result = await markBatchAsRead(session, { messageIds });
+        const result = await markBatchAsRead({ messageIds });
 
         if (result.success) {
             return setStatus({

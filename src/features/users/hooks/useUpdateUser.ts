@@ -20,7 +20,7 @@ export function useUpdateUser() {
     async function update(body: UpdateUserBody): Promise<ActiveUser | null> {
         setStatus({ status: 'loading' });
 
-        const result = await updateUserAction(session, body);
+        const result = await updateUserAction(body);
 
         if (result.success) {
             updateUser(result.data);

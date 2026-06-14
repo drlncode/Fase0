@@ -23,7 +23,7 @@ export function MessageReply({ replyToMessageId, chatId, side }: MessageReplyPro
         | 'searching'
     >('searching');
     const activeChat = useChatStore(state => state.activeChat);
-    const { status: authStatus, user: { _id: currentUserId, session } } = useValidAuth();
+    const { status: authStatus, user: { _id: currentUserId } } = useValidAuth();
     const fetchIdRef = useRef(0);
 
     useEffect(() => {
@@ -35,9 +35,9 @@ export function MessageReply({ replyToMessageId, chatId, side }: MessageReplyPro
         const chatMessages = useMessageStore.getState().getChatState(chatId);
 
         if (!chatMessages) {
-            if (authStatus === 'valid' && session) {
+            if (authStatus === 'valid') {
                 const fetchId = ++fetchIdRef.current;
-                getMessageById(session, chatId, replyToMessageId).then(result => {
+                getMessageById(chatId, replyToMessageId).then(result => {
                     if (fetchId !== fetchIdRef.current) return;
                     if (result.success) {
                         const senderUsername = result.data.senderId === currentUserId ? 'Tú' : `@${activeChat.participant.username}`;
@@ -53,9 +53,9 @@ export function MessageReply({ replyToMessageId, chatId, side }: MessageReplyPro
         const messageReplied = chatMessages.messages.find(m => m._id === replyToMessageId);
 
         if (!messageReplied) {
-            if (authStatus === 'valid' && session) {
+            if (authStatus === 'valid') {
                 const fetchId = ++fetchIdRef.current;
-                getMessageById(session, chatId, replyToMessageId).then(result => {
+                getMessageById(chatId, replyToMessageId).then(result => {
                     if (fetchId !== fetchIdRef.current) return;
                     if (result.success) {
                         const senderUsername = result.data.senderId === currentUserId ? 'Tú' : `@${activeChat.participant.username}`;
@@ -76,7 +76,7 @@ export function MessageReply({ replyToMessageId, chatId, side }: MessageReplyPro
         const senderUsername = messageReplied.senderId === currentUserId ? 'Tú' : `@${activeChat.participant.username}`;
         setMessageRepliedState({ message: messageReplied as VisibleMessage, senderUsername });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [activeChat, chatId, replyToMessageId, authStatus, session]);
+    }, [activeChat, chatId, replyToMessageId, authStatus]);
 
     if (messageRepliedState === 'searching') return <SpinLoader size={16} />;
     if (!messageRepliedState) return null;

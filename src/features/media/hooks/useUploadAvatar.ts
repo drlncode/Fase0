@@ -19,7 +19,7 @@ export function useUploadAvatar() {
     async function upload(file: File): Promise<UploadAvatarData | null> {
         setStatus({ status: 'loading' });
 
-        const result = await uploadAvatar(session, file);
+        const result = await uploadAvatar(file);
 
         if (result.success) {
             // Seed the avatar cache with the freshly selected file so the UI can

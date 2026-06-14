@@ -34,13 +34,8 @@ export type GetUserByIdParams = {
 }
 export type GetUsersByUsernameParams = {
     username: string;
-    sessionId: string;
     params?: PaginatedParams;
 }
-export type DeleteUserParams = {
-    sessionId: string;
-}
-
 export type UpdateUserBody = Partial<{
     name: string;
     username: string;
@@ -49,6 +44,5 @@ export type UpdateUserBody = Partial<{
 }>;
 
 export type UpdateUserParams = {
-    sessionId: string;
     body: UpdateUserBody;
 }

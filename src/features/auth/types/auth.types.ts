@@ -13,9 +13,8 @@ export type SignUpParams = SignInParams & {
     username: string;
 }
 
-export type SignOutParams = {
-    session: string;
-}
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+export type SignOutParams = Record<string, never>
 
 export type IsEmailAvailableParams = {
     email: string;
@@ -46,7 +45,7 @@ export type AuthValidUser = ActiveUser & {
 export type AuthValid = {
     status: 'valid';
     user: AuthValidUser;
-    signout: ({ session }: SignOutParams) => Promise<AuthHookMethodsReturn>;
+    signout: () => Promise<AuthHookMethodsReturn>;
     resetGlobalState: () => void;
     updateUser: (payload: Partial<ActiveUser>) => void;
 };

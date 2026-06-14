@@ -17,7 +17,7 @@ export function useDeleteFriend() {
 
     async function remove(friendshipId: string) {
         setStatus({ status: 'loading' });
-        const result = await deleteFriend(session, friendshipId);
+        const result = await deleteFriend(friendshipId);
 
         if (result.success) {
             success('Amigo eliminado correctamente.');

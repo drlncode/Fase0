@@ -15,7 +15,7 @@ export function useChatById() {
 
     async function get(chatId: string) {
         setStatus({ status: 'loading' });
-        const result = await getChatById(session, chatId);
+        const result = await getChatById(chatId);
 
         if (result.success) {
             return setStatus({

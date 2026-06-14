@@ -33,7 +33,7 @@ export function useGetMessages(chatId: string) {
 
         setChatFetchState(chatId, 'fetching');
 
-        const result = await getMessages(session, chatId, { page: pagination.page, limit: pagination.limit });
+        const result = await getMessages(chatId, { page: pagination.page, limit: pagination.limit });
 
         if (result.success) {
             const { totalCount, data } = result.data;

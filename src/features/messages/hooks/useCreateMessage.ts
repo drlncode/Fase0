@@ -32,7 +32,7 @@ export function useCreateMessage() {
 
         useMessageStore.getState().addOptimisticMessage(body.chatId, optimistic);
 
-        const result = await createMessage(user.session, { ...body, temp_id: optimistic._id });
+        const result = await createMessage({ ...body, temp_id: optimistic._id });
 
         if (result.success) {
             useMessageStore.getState().replaceOptimisticMessage(body.chatId, optimistic._id, result.data.message);

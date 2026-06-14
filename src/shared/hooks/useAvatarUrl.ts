@@ -25,10 +25,7 @@ export function useAvatarUrl(avatar: string | null, userId: string) {
         async function fetchImage() {
             try {
                 const { data } = await api.get<Blob>(`/media/avatars/${avatar}`, {
-                    responseType: 'blob',
-                    headers: {
-                        Authorization: `Bearer ${session}`
-                    }
+                    responseType: 'blob'
                 });
 
                 if (cancelled) return;

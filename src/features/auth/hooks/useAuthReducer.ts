@@ -9,7 +9,6 @@ import type {
     AuthContextType,
     SignInParams,
     SignUpParams,
-    SignOutParams,
     InitPwRecoveryParams,
     VerifyPwRecoveryCodeParams,
     RecoverPwParams,
@@ -37,7 +36,7 @@ export function useAuthReducer(): useAuthReducerReturnType {
         if (isVerifying) return;
         setIsVerifying(true);
 
-        const result = await authApiService.authVerifySession({ session });
+        const result = await authApiService.authVerifySession();
 
         if (!result.success) {
             if (!result.error || result.error.status === 401) {
@@ -63,7 +62,7 @@ export function useAuthReducer(): useAuthReducerReturnType {
     const actions = {
         signin: (p: SignInParams) => authActions.signin(p, dispatch, storage),
         signup: (p: SignUpParams) => authActions.signup(p, dispatch, storage),
-        signout: (p: SignOutParams) => authActions.signout(p, dispatch, storage),
+        signout: () => authActions.signout(dispatch, storage),
         isEmailAvailable: (p: IsEmailAvailableParams) => authActions.isEmailAvailable(p),
         initPwRecovery: (p: InitPwRecoveryParams) => authActions.initPwRecovery(p),
         verifyPwRecoveryCode: (p: VerifyPwRecoveryCodeParams) => authActions.verifyPwRecoveryCode(p),

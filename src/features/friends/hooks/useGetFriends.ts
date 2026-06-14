@@ -33,7 +33,7 @@ export function useGetFriends() {
         }
 
         const currentPage = (nextPage && canFetchMore) ? nextPage : friendsFetch.pagination.page;
-        const result = await getFriends(session, { page: currentPage, limit: friendsFetch.pagination.limit });
+        const result = await getFriends({ page: currentPage, limit: friendsFetch.pagination.limit });
 
         if (result.success) {
             const { totalCount, data } = result.data;

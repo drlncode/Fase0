@@ -14,11 +14,10 @@ import type {
 import { isAxiosError } from 'axios';
 
 export async function getFriends(
-        session: string,
         params?: PaginatedParams
 ): Promise<ServiceResponse<GetFriendsResponse>> {
     try {
-        const data = await FriendsService.getFriends({ session, params });
+        const data = await FriendsService.getFriends({ params });
 
         return {
             success: true,
@@ -37,11 +36,10 @@ export async function getFriends(
 }
 
 export async function getFriendsRequests(
-    session: string,
     params?: PaginatedParams
 ): Promise<ServiceResponse<GetFriendsRequestsResponse>> {
     try {
-        const data = await FriendsService.getFriendsRequests({ session, params });
+        const data = await FriendsService.getFriendsRequests({ params });
 
         return {
             success: true,
@@ -60,11 +58,10 @@ export async function getFriendsRequests(
 }
 
 export async function getFriendsSentRequests(
-    session: string,
     params?: PaginatedParams
 ): Promise<ServiceResponse<GetFriendsSentRequestsResponse>> {
     try {
-        const data = await FriendsService.getFriendsSentRequests({ session, params });
+        const data = await FriendsService.getFriendsSentRequests({ params });
 
         return {
             success: true,
@@ -83,11 +80,10 @@ export async function getFriendsSentRequests(
 }
 
 export async function sendFriendRequest(
-    session: string,
     userId: string
 ): Promise<ServiceResponse<SendFriendRequestResponse>> {
     try {
-        const data = await FriendsService.sendFriendRequest({ session, userId });
+        const data = await FriendsService.sendFriendRequest({ userId });
 
         return {
             success: true,
@@ -106,11 +102,10 @@ export async function sendFriendRequest(
 }
 
 export async function acceptFriendRequest(
-    session: string,
     requestId: string
 ): Promise<ServiceResponse<AcceptFriendRequestResponse>> {
     try {
-        const data = await FriendsService.acceptFriendRequest({ session, requestId });
+        const data = await FriendsService.acceptFriendRequest({ requestId });
 
         return {
             success: true,
@@ -129,11 +124,10 @@ export async function acceptFriendRequest(
 }
 
 export async function cancelFriendRequest(
-    session: string,
     requestId: string
 ): Promise<ServiceResponse<CancelFriendRequestResponse>> {
     try {
-        const data = await FriendsService.cancelFriendRequest({ session, requestId });
+        const data = await FriendsService.cancelFriendRequest({ requestId });
         
         return {
             success: true,
@@ -152,11 +146,10 @@ export async function cancelFriendRequest(
 }
 
 export async function rejectFriendRequest(
-    session: string,
     requestId: string
 ): Promise<ServiceResponse<RejectFriendRequestResponse>> {
     try {
-        const data = await FriendsService.rejectFriendRequest({ session, requestId });
+        const data = await FriendsService.rejectFriendRequest({ requestId });
 
         return {
             success: true,
@@ -175,11 +168,10 @@ export async function rejectFriendRequest(
 }
 
 export async function deleteFriend(
-    session: string,
     friendshipId: string
 ): Promise<ServiceResponse<DeleteFriendResponse>> {
     try {
-        const data = await FriendsService.deleteFriend({ session, friendshipId });
+        const data = await FriendsService.deleteFriend({ friendshipId });
 
         return {
             success: true,

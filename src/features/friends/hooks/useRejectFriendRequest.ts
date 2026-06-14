@@ -17,7 +17,7 @@ export function useRejectFriendRequest() {
 
     async function reject(requestId: string) {
         setStatus({ status: 'loading' });
-        const result = await rejectFriendRequest(session, requestId);
+        const result = await rejectFriendRequest(requestId);
 
         if (result.success) {
             success('Solicitud de amistad rechazada.');

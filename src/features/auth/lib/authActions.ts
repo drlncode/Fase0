@@ -90,11 +90,10 @@ export async function signup(
 };
 
 export async function signout(
-    { session }: { session: string },
     dispatch: DispatchType,
     storage: StorageType
 ): Promise<AuthHookMethodsReturn> {
-    const result = await authApiService.authSignOut({ session });
+    const result = await authApiService.authSignOut();
 
     if (!result.success) {
         const { error } = result;
@@ -117,12 +116,11 @@ export async function signout(
     }
 };
 
-export async function refreshUserSession({ session, code }: {
-    session: string;
+export async function refreshUserSession({ code }: {
     code: number;
 }): Promise<AuthHookMethodsReturn> {
     try {
-        await authApiService.authConfirmSession({ session, code });
+        await authApiService.authConfirmSession({ code });
 
         return {
             success: true

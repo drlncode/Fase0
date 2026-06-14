@@ -36,7 +36,7 @@ export function useClearAllChatMessages() {
         clearChatMessages(chatId);
         setStatus({ status: 'loading' });
 
-        const result = await clearAllChatMessages(session, chatId);
+        const result = await clearAllChatMessages(chatId);
 
         if (result.success) {
             success('Mensajes eliminados correctamente.');

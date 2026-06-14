@@ -22,7 +22,7 @@ export function useRefreshSession() {
             return;
         }
 
-        const result = await refreshUserSession({ session, code });
+        const result = await refreshUserSession({ code });
 
         if (result.success) {
             setState({ status: 'success' as const, data: 'OK' });
