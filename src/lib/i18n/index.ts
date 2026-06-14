@@ -3,8 +3,10 @@ import { initReactI18next } from 'react-i18next';
 import DetectetLanguage from 'i18next-browser-languagedetector';
 
 import enCommon from '@/lib/i18n/en/common.json';
+import enApp from '@/lib/i18n/en/app.json';
 
 import esCommon from '@/lib/i18n/es/common.json';
+import esApp from '@/lib/i18n/es/app.json';
 
 const DETECTOR_STORAGE_KEY = 'i18nextLng';
 
@@ -20,9 +22,11 @@ i18n
         resources: {
             es: {
                 common: esCommon,
+                app: esApp,
             },
             en: {
                 common: enCommon,
+                app: enApp,
             },
         },
         defaultNS: 'common',

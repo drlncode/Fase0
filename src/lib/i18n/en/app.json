@@ -1,0 +1,34 @@
+{
+    "page": {
+        "title": "Chats | Fase0"
+    },
+    "welcome": {
+        "title": "Welcome to Fase0",
+        "description": "Select a chat from the list or explore the following options to get started."
+    },
+    "nav": {
+        "main": "Main navigation",
+        "menu": "Navigation menu",
+        "expandSidebar": "Expand sidebar",
+        "collapseSidebar": "Collapse sidebar",
+        "chats": "Chats",
+        "friends": "Friends",
+        "requests": "Requests",
+        "sentRequests": "Sent requests",
+        "addFriend": "Add friend",
+        "settings": "Settings",
+        "signOut": "Sign out"
+    },
+    "signOut": {
+        "title": "Sign out?",
+        "message": "Are you sure you want to sign out?",
+        "confirm": "Sign out",
+        "success": "Logged out successfully."
+    },
+    "actions": {
+        "viewFriends": "View friends",
+        "pendingRequests": "Pending requests",
+        "addFriend": "Add friend"
+    },
+    "avatarAlt": "{{name}}'s avatar"
+}

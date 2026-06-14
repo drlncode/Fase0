@@ -1,0 +1,34 @@
+{
+    "page": {
+        "title": "Chats | Fase0"
+    },
+    "welcome": {
+        "title": "Bienvenido a Fase0",
+        "description": "Selecciona un chat de la lista o explora las siguientes opciones para comenzar."
+    },
+    "nav": {
+        "main": "Navegación principal",
+        "menu": "Menú de navegación",
+        "expandSidebar": "Expandir barra lateral",
+        "collapseSidebar": "Colapsar barra lateral",
+        "chats": "Chats",
+        "friends": "Amigos",
+        "requests": "Solicitudes",
+        "sentRequests": "Solicitudes enviadas",
+        "addFriend": "Agregar amigo",
+        "settings": "Ajustes",
+        "signOut": "Cerrar sesión"
+    },
+    "signOut": {
+        "title": "¿Cerrar sesión?",
+        "message": "¿Estás seguro de que quieres cerrar sesión?",
+        "confirm": "Cerrar sesión",
+        "success": "Sesión cerrada correctamente."
+    },
+    "actions": {
+        "viewFriends": "Ver amigos",
+        "pendingRequests": "Solicitudes pendientes",
+        "addFriend": "Agregar amigo"
+    },
+    "avatarAlt": "Avatar de {{name}}"
+}
