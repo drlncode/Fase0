@@ -1,8 +1,11 @@
 import '@github/relative-time-element';
 
+import { useTranslation } from 'react-i18next';
 import { cn } from '@/shared/utils/cn';
 
 export function ChatTime({ timestamp, className }: { timestamp: number; className?: string }) {
+    const { i18n } = useTranslation();
+    const lang = i18n.language;
     const date = new Date(timestamp);
     const datetime = date.toISOString();
     const now = new Date();
@@ -16,7 +19,7 @@ export function ChatTime({ timestamp, className }: { timestamp: number; classNam
 
     // Semana diferente a la actual -> 3/3/2026
     if (date < startOfWeek) {
-        const formatted = new Intl.DateTimeFormat('es', {
+        const formatted = new Intl.DateTimeFormat(lang, {
             day: 'numeric',
             month: 'numeric',
             year: 'numeric'
@@ -27,7 +30,7 @@ export function ChatTime({ timestamp, className }: { timestamp: number; classNam
 
     // Mismo día pero hace más de 1 hora -> solo la hora: "7:36 a. m. / p. m."
     if (isToday && diffHours > 1) {
-        const formatted = new Intl.DateTimeFormat('es', {
+        const formatted = new Intl.DateTimeFormat(lang, {
             hour: 'numeric',
             minute: 'numeric',
             hour12: true
@@ -38,6 +41,6 @@ export function ChatTime({ timestamp, className }: { timestamp: number; classNam
 
     // Menos de 1 hora o día distinto pero menos de 7 días-> relativo
     return (
-        <relative-time className={cn(className)} datetime={datetime} lang="es" prefix="" format="relative" />
+        <relative-time className={cn(className)} datetime={datetime} lang={lang} prefix="" format="relative" />
     );
 }
