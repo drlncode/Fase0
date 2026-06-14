@@ -40,16 +40,7 @@ pnpm install
 
 ### Environment
 
-Copy `.env.example` to `.env` and configure the variables:
-
-```env
-VITE_API_URL=https://your-api.com/v1/api
-VITE_WS_URL=wss://your-api.com
-VITE_API_TIMEOUT=30000
-VITE_CHATS_PER_PAGE=10
-VITE_FRIENDS_PER_PAGE=20
-VITE_MESSAGES_PER_PAGE=30
-```
+Copy `.env.example` to `.env` and configure the variables.
 
 ### Development
 
