@@ -30,5 +30,8 @@
         "pendingRequests": "Solicitudes pendientes",
         "addFriend": "Agregar amigo"
     },
-    "avatarAlt": "Avatar de {{name}}"
+    "avatarAlt": "Avatar de {{name}}",
+    "loader": {
+        "checkStatus": "Verificar estado del sitio"
+    }
 }

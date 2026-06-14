@@ -30,5 +30,8 @@
         "pendingRequests": "Pending requests",
         "addFriend": "Add friend"
     },
-    "avatarAlt": "{{name}}'s avatar"
+    "avatarAlt": "{{name}}'s avatar",
+    "loader": {
+        "checkStatus": "Check site status"
+    }
 }
