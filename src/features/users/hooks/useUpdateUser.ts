@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useValidAuth } from '@auth/hooks/useValidAuth';
 import { useToast } from '@shared/hooks/useToast';
 import { updateUserAction } from '@users/lib/usersActions';
@@ -7,6 +8,7 @@ import type { ActionHookState } from '@shared/types/global.types';
 import type { ActiveUser, UpdateUserBody } from '@users/types/user.types';
 
 export function useUpdateUser() {
+    const { t } = useTranslation('users');
     const { status: authStatus, user: { session }, updateUser } = useValidAuth();
     const { success, danger } = useToast();
 
@@ -22,7 +24,7 @@ export function useUpdateUser() {
 
         if (result.success) {
             updateUser(result.data);
-            success('Perfil actualizado correctamente.');
+            success(t('toast.profileUpdated'));
 
             setStatus({
                 status: 'success' as const,
@@ -32,10 +34,10 @@ export function useUpdateUser() {
             return result.data;
         }
 
-        danger('No fue posible actualizar el perfil. Inténtalo de nuevo.');
+        danger(t('toast.profileUpdateError'));
         setStatus({
             status: 'error' as const,
-            message: 'No fue posible actualizar el perfil.'
+            message: t('errors.updateProfile')
         });
 
         return null;

@@ -1,4 +1,5 @@
 import { useCallback, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { getUsernameAvailabilityAction } from '@users/lib/usersActions';
 
 import type { ActionHookState } from '@shared/types/global.types';
@@ -8,6 +9,7 @@ type UsernameAvailability = {
 };
 
 export function useGetUsernameAvailability() {
+    const { t } = useTranslation('users');
     const [ state, setState ] = useState<ActionHookState<UsernameAvailability>>({ status: 'idle' });
 
     const resetState = useCallback(() => {
@@ -24,7 +26,7 @@ export function useGetUsernameAvailability() {
         if (!result.success) {
             setState({
                 status: 'error',
-                message: 'Failed at checking username availability'
+                message: t('api.checkAvailabilityError')
             });
 
             return null;
@@ -38,7 +40,7 @@ export function useGetUsernameAvailability() {
         });
 
         return data;
-    }, []);
+    }, [t]);
 
     return {
         state,

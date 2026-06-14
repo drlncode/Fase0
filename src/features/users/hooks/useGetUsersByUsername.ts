@@ -1,4 +1,5 @@
 import { useCallback, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useValidAuth } from '@auth/hooks/useValidAuth';
 import { getUsersByUsernameAction } from '@users/lib/usersActions';
 
@@ -14,6 +15,7 @@ const INITIAL_PAGINATION: PaginationState = {
 type SearchStatus = 'idle' | 'loading' | 'fetching' | 'success' | 'error';
 
 export function useGetUsersByUsername() {
+    const { t } = useTranslation('users');
     const { user: { session } } = useValidAuth();
     const paginationRef = useRef<PaginationState>({ ...INITIAL_PAGINATION });
     const [status, setStatus] = useState<SearchStatus>('idle');
@@ -43,7 +45,7 @@ export function useGetUsersByUsername() {
 
         if (!result.success) {
             setStatus('error');
-            return { status: 'error' as const, message: 'Failed at fetching users by username...' };
+            return { status: 'error' as const, message: t('api.fetchUsersError') };
         }
 
         const { totalCount, data } = result.data;
@@ -62,7 +64,7 @@ export function useGetUsersByUsername() {
                 totalCount: result.data.totalCount
             }
         };
-    }, [session]);
+    }, [session, t]);
 
     const loadMore = useCallback(async (username: string) => {
         if (!username) return;
