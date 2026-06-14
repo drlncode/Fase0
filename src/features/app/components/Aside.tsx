@@ -34,13 +34,13 @@ export function Aside() {
     const { success } = useToast();
     const { openInfo, openConfirm } = useModal();
     const collapsed = preferences.sidebarCollapsed;
-    const { user: { session }, signout } = useValidAuth();
+    const { signout } = useValidAuth();
     const unreadChats = useChatStore(state => state.unreadChats);
 
     const handleSignOut = async () => {
         if (onLogout) return;
         setOnLogout(true);
-        await signout({ session });
+        await signout();
         success(t('signOut.success'));
     };
 
