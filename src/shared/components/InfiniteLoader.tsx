@@ -1,6 +1,8 @@
 import { useEffect, useRef, type ReactNode } from 'react';
 import { SpinLoader } from '@shared/components/ui/SpinLoader';
 
+const OBSERVER_START_DELAY = 1000;
+
 interface InfiniteLoaderProps {
     isFetching: boolean;
     canFetchMore: boolean;
@@ -15,15 +17,23 @@ export function InfiniteLoader({ isFetching, canFetchMore, onLoadMore, children 
         const element = observerRef.current;
         if (!element) return;
 
-        const observer = new IntersectionObserver(([entry]) => {
-            if (!entry.isIntersecting) return;
-            if (isFetching) return;
-            if (!canFetchMore) return;
-            onLoadMore();
-        }, { threshold: 0.1 });
+        let observer: IntersectionObserver | null = null;
 
-        observer.observe(element);
-        return () => observer.disconnect();
+        const timeoutId = setTimeout(() => {
+            observer = new IntersectionObserver(([entry]) => {
+                if (!entry.isIntersecting) return;
+                if (isFetching) return;
+                if (!canFetchMore) return;
+                onLoadMore();
+            }, { threshold: 0.1 });
+
+            observer.observe(element);
+        }, OBSERVER_START_DELAY);
+
+        return () => {
+            clearTimeout(timeoutId);
+            observer?.disconnect();
+        };
     }, [canFetchMore, onLoadMore, isFetching]);
 
     return (
