@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { useCancelFriendRequest } from '@friends/hooks/useCancelFriendRequest';
 import { useAvatarUrl } from '@shared/hooks/useAvatarUrl';
 import { CollapseableSectionItem } from '@friends/components/CollapseableSectionItem';
@@ -12,6 +13,7 @@ interface SentRequestItemProps {
 }
 
 export function PendingSentRequestItem({ request }: SentRequestItemProps) {
+    const { t } = useTranslation('friends');
     const { status: cancelFriendRequestStatus, cancel } = useCancelFriendRequest();
     const { url, onError } = useAvatarUrl(request.receiver.avatar, request.receiver._id);
 
@@ -45,7 +47,7 @@ export function PendingSentRequestItem({ request }: SentRequestItemProps) {
                     onClick={handleCancelRequest}
                     disabled={cancelFriendRequestStatus.status === 'loading'}
                 >
-                    Cancelar
+                    {t('sentRequests.cancel')}
                 </FriendsActionButton>
             </div>
         </CollapseableSectionItem>

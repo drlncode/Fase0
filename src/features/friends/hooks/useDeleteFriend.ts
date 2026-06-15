@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useValidAuth } from '@auth/hooks/useValidAuth';
 import { useToast } from '@shared/hooks/useToast';
 import { deleteFriend } from '@friends/lib/friendsActions';
+import i18n from '@/lib/i18n';
 
 import type { ActionHookState } from '@shared/types/global.types';
 import type { DeleteFriendResponse } from '@friends/services/friends.service';
@@ -20,17 +21,17 @@ export function useDeleteFriend() {
         const result = await deleteFriend(friendshipId);
 
         if (result.success) {
-            success('Amigo eliminado correctamente.');
+            success(i18n.t('friends:toast.friendDeleted'));
             return setStatus({
                 status: 'success' as const,
                 data: result.data
             });
         }
 
-        danger('No fue posible eliminar el amigo. Inténtalo de nuevo.');
+        danger(i18n.t('friends:toast.friendDeletedError'));
         setStatus({
             status: 'error' as const,
-            message: 'No fue posible eliminar el amigo.'
+            message: i18n.t('friends:toast.friendDeletedStatusError')
         });
     }
 

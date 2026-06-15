@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { useSendFriendRequest } from '@friends/hooks/useSendFriendRequest';
 import { useAvatarUrl } from '@shared/hooks/useAvatarUrl';
 import { Avatar } from '@/shared/components/Avatar';
@@ -8,18 +9,20 @@ import { SpinLoader } from '@shared/components/ui/SpinLoader';
 import type { SearchedUserPublicProfile } from '@features/users/types/user.types';
 
 function FriendRequestLabel({
-    relationship
+    relationship, t
 }: {
     relationship: SearchedUserPublicProfile['relationship'];
+    t: (key: string) => string;
 }) {
-    if (relationship.isFriend) return <>Amigo</>;
-    if (relationship.onRequest === 'sent') return <>Enviada</>;
-    if (relationship.onRequest === 'received') return <>Pendiente</>;
+    if (relationship.isFriend) return <>{t('addNewFriends.userFound.friend')}</>;
+    if (relationship.onRequest === 'sent') return <>{t('addNewFriends.userFound.sent')}</>;
+    if (relationship.onRequest === 'received') return <>{t('addNewFriends.userFound.pending')}</>;
 
-    return <>Agregar</>;
+    return <>{t('addNewFriends.userFound.add')}</>;
 }
 
 export function UserFoundItem({ user, externalLoading }: { user: SearchedUserPublicProfile, externalLoading?: boolean }) {
+    const { t } = useTranslation('friends');
     const { status: sendRequestStatus, send } = useSendFriendRequest();
     const { onError, url } = useAvatarUrl(user.avatar, user._id);
     const canAddFriend = !user.relationship.isFriend && !user.relationship.onRequest;
@@ -52,7 +55,7 @@ export function UserFoundItem({ user, externalLoading }: { user: SearchedUserPub
                     disabled={isDisabled}
                     onClick={canAddFriend ? handleAddFriend : undefined}
                 >
-                    { !isLoading && <FriendRequestLabel relationship={user.relationship} /> }
+                    { !isLoading && <FriendRequestLabel relationship={user.relationship} t={t} /> }
                     { isLoading && <SpinLoader size={16} /> }
                 </FriendsActionButton>
             </div>

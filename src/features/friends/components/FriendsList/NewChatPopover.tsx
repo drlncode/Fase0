@@ -1,4 +1,5 @@
 import { useState, useId, useRef, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { FriendsActionButton } from '@friends/components/FriendsActionButton';
 import { MessagePlusIcon, ArrowUpRightIcon } from '@/shared/components/ui/Icons';
 
@@ -8,6 +9,7 @@ interface NewChatPopoverProps {
 }
 
 export function NewChatPopover({ onSend, loading }: NewChatPopoverProps) {
+    const { t } = useTranslation('friends');
     const [message, setMessage] = useState('');
     const id = useId();
     const isEmpty = message.trim() === '';
@@ -46,8 +48,8 @@ export function NewChatPopover({ onSend, loading }: NewChatPopoverProps) {
                         name={id}
                         value={message}
                         className='w-full min-w-48 appearance-none bg-transparent py-2 pr-5 text-xs focus-visible:outline-none'
-                        placeholder='Escribe un mensaje...'
-                        aria-label='Escribe un mensaje'
+                        placeholder={t('newChatPopover.placeholder')}
+                        aria-label={t('newChatPopover.ariaLabel')}
                         autoComplete='off'
                         onChange={(e) => setMessage(e.currentTarget.value)}
                         disabled={loading}

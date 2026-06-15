@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useValidAuth } from '@auth/hooks/useValidAuth';
 import { useToast } from '@shared/hooks/useToast';
 import { acceptFriendRequest } from '@friends/lib/friendsActions';
+import i18n from '@/lib/i18n';
 
 import type { ActionHookState } from '@shared/types/global.types';
 import type { AcceptFriendRequestResponse } from '@friends/services/friends.service';
@@ -20,17 +21,17 @@ export function useAcceptFriendRequest() {
         const result = await acceptFriendRequest(requestId);
 
         if (result.success) {
-            success('Solicitud de amistad aceptada.');
+            success(i18n.t('friends:toast.friendRequestAccepted'));
             return setStatus({
                 status: 'success' as const,
                 data: result.data
             });
         }
 
-        danger('No fue posible aceptar la solicitud de amistad. Inténtalo de nuevo.');
+        danger(i18n.t('friends:toast.friendRequestAcceptedError'));
         setStatus({
             status: 'error' as const,
-            message: 'No fue posible aceptar la solicitud de amistad.'
+            message: i18n.t('friends:toast.friendRequestAcceptedStatusError')
         });
     }
 

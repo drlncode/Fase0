@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { useFriendsStore } from '@friends/store/useFriendsStore';
 import { useGetFriends } from '@friends/hooks/useGetFriends';
 import { usePagination } from '@shared/hooks/usePagination';
@@ -9,6 +10,7 @@ import { InfiniteLoader } from '@shared/components/InfiniteLoader';
 import { UsersIcon } from '@/shared/components/ui/Icons';
 
 export function FriendsListSection({ highlight = false }) {
+    const { t } = useTranslation('friends');
     const friendsFetch = useFriendsStore(state => state.friendsFetch);
     const friends = useFriendsStore(state => state.friends);
     const friendsCount = friends.length;
@@ -29,7 +31,7 @@ export function FriendsListSection({ highlight = false }) {
 
     return (
         <CollapseableSection
-            title='amigos'
+            title={t('friendsList.sectionTitle')}
             icon={<UsersIcon size={16} />}
             loading={isLoading || isFetching}
             defaultOpen={highlight}
@@ -53,7 +55,7 @@ export function FriendsListSection({ highlight = false }) {
                             canFetchMore={canFetchMore}
                             onLoadMore={handleLoadMore}
                         >
-                            <>{friendsCount} de {totalFriends} amigos</>
+                            <>{t('friendsList.infiniteCount', { count: friendsCount, total: totalFriends })}</>
                         </InfiniteLoader>
                     )}
                 </>

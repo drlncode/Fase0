@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { useAvatarUrl } from '@shared/hooks/useAvatarUrl';
 import { Avatar } from '@shared/components/Avatar';
 import { CalendarIcon } from '@/shared/components/ui/Icons';
@@ -5,6 +6,7 @@ import { CalendarIcon } from '@/shared/components/ui/Icons';
 import type { Friendship } from '@friends/types/friends.types';
 
 export function UserProfile({ user }: { user: Friendship }) {
+    const { t } = useTranslation('friends');
     const { url, onError } = useAvatarUrl(user.friend.avatar, user.friend._id);
 
     return (
@@ -24,7 +26,7 @@ export function UserProfile({ user }: { user: Friendship }) {
                 <span className='flex w-fit items-center gap-0.5 border-b border-b-transparent pt-1 pb-px text-[13px] text-secondary transition-colors duration-250 hover:border-secondary/80'>
                     <CalendarIcon size={17} />
                     <span>
-                        Amigos desde {new Date(user.createdAt).toLocaleDateString()}
+                        {t('friendsList.item.friendsSince', { date: new Date(user.createdAt).toLocaleDateString() })}
                     </span>
                 </span>
             </div>

@@ -3,6 +3,7 @@ import { useSocket } from '@/shared/hooks/useSocket';
 import { useFriendsStore } from '@friends/store/useFriendsStore';
 import { useToast } from '@shared/hooks/useToast';
 import { useValidAuth } from '@auth/hooks/useValidAuth';
+import i18n from '@/lib/i18n';
 
 import type {
     FriendRequestSentEvent,
@@ -45,7 +46,7 @@ export function useFriendsSocket() {
             const store = useFriendsStore.getState();
             store.addFriendRequest(request);
             store.incrementFriendsRequestsFetchTotal();
-            info(`Nueva solicitud de amistad. \nTienes una nueva solicitud de amistad de @${request.sender.username}`);
+            info(i18n.t('friends:toast.newFriendRequest', { username: request.sender.username }));
         };
 
         const handleFriendRequestAccepted = ({ by, friendship }: FriendRequestAcceptedEvent) => {
@@ -59,7 +60,7 @@ export function useFriendsSocket() {
             store.decrementFriendsSentRequestsFetchTotal();
             
             if (by === currentUserId) return;
-            info(`Solicitud de amistad aceptada. \n@${friendship.friend.username} ahora es tu amigo.`);
+            info(i18n.t('friends:toast.friendRequestAccepted', { username: friendship.friend.username }));
         };
 
         const handleFriendRequestRejected = ({ requestId }: FriendRequestRejectedEvent) => {

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useValidAuth } from '@auth/hooks/useValidAuth';
 import { useToast } from '@shared/hooks/useToast';
 import { rejectFriendRequest } from '@friends/lib/friendsActions';
+import i18n from '@/lib/i18n';
 
 import type { ActionHookState } from '@shared/types/global.types';
 import type { RejectFriendRequestResponse } from '@friends/services/friends.service';
@@ -20,17 +21,17 @@ export function useRejectFriendRequest() {
         const result = await rejectFriendRequest(requestId);
 
         if (result.success) {
-            success('Solicitud de amistad rechazada.');
+            success(i18n.t('friends:toast.friendRequestRejected'));
             return setStatus({
                 status: 'success' as const,
                 data: result.data
             });
         }
 
-        danger('No fue posible rechazar la solicitud de amistad. Inténtalo de nuevo.');
+        danger(i18n.t('friends:toast.friendRequestRejectedError'));
         setStatus({
             status: 'error' as const,
-            message: 'No fue posible rechazar la solicitud de amistad.'
+            message: i18n.t('friends:toast.friendRequestRejectedStatusError')
         });
     }
 

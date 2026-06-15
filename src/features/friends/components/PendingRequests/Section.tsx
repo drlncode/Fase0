@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { useFriendsStore } from '@friends/store/useFriendsStore';
 import { useGetFriendsRequests } from '@friends/hooks/useGetFriendsRequests';
 import { usePagination } from '@shared/hooks/usePagination';
@@ -9,6 +10,7 @@ import { InfiniteLoader } from '@shared/components/InfiniteLoader';
 import { UserClockIcon } from '@/shared/components/ui/Icons';
 
 export function PendingRequestsSection({ highlight = false }) {
+    const { t } = useTranslation('friends');
     const friendsRequestsFetch = useFriendsStore(state => state.friendsRequestsFetch);
     const friendsRequests = useFriendsStore(state => state.friendsRequests);
     const requestsCount = friendsRequests.length;
@@ -29,7 +31,7 @@ export function PendingRequestsSection({ highlight = false }) {
 
     return (
         <CollapseableSection
-            title='Solicitudes pendientes'
+            title={t('pendingRequests.sectionTitle')}
             icon={<UserClockIcon size={16} />}
             loading={isLoading || isFetching}
             defaultOpen={highlight}
@@ -53,7 +55,7 @@ export function PendingRequestsSection({ highlight = false }) {
                             canFetchMore={canFetchMore}
                             onLoadMore={handleLoadMore}
                         >
-                            <>{requestsCount} de {totalRequests} solicitudes</>
+                            <>{t('pendingRequests.infiniteCount', { count: requestsCount, total: totalRequests })}</>
                         </InfiniteLoader>
                     )}
                 </>

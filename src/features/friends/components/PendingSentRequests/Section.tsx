@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { useFriendsStore } from '@friends/store/useFriendsStore';
 import { useGetFriendsSentRequests } from '@friends/hooks/useGetFriendsSentRequests';
 import { usePagination } from '@shared/hooks/usePagination';
@@ -9,6 +10,7 @@ import { InfiniteLoader } from '@shared/components/InfiniteLoader';
 import { UserShareIcon } from '@/shared/components/ui/Icons';
 
 export function PendingSentRequestsSection({ highlight = false }) {
+    const { t } = useTranslation('friends');
     const friendsSentRequestsFetch = useFriendsStore(state => state.friendsSentRequestsFetch);
     const friendsSentRequests = useFriendsStore(state => state.friendsSentRequests);
     const requestsCount = friendsSentRequests.length;
@@ -29,7 +31,7 @@ export function PendingSentRequestsSection({ highlight = false }) {
 
     return (
         <CollapseableSection
-            title='Solicitudes enviadas'
+            title={t('sentRequests.sectionTitle')}
             icon={<UserShareIcon size={16} />}
             loading={isLoading || isFetching}
             defaultOpen={highlight}
@@ -53,7 +55,7 @@ export function PendingSentRequestsSection({ highlight = false }) {
                             canFetchMore={canFetchMore}
                             onLoadMore={handleLoadMore}
                         >
-                            <>{requestsCount} de {totalRequests} enviadas</>
+                            <>{t('sentRequests.infiniteCount', { count: requestsCount, total: totalRequests })}</>
                         </InfiniteLoader>
                     )}
                 </>

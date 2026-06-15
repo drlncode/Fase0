@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { UserFoundItem } from '@friends/components/AddNewFriends/UserFoundItem';
 import { SearchedUsersListSkeleton } from '@friends/components/AddNewFriends/SearchedUserItemSkeleton';
 import { InfiniteLoader } from '@shared/components/InfiniteLoader';
@@ -15,6 +16,7 @@ interface UsersFoundContainerProps {
 }
 
 export function UsersFoundContainer({ users, status, username, canFetchMore, total, onLoadMore }: UsersFoundContainerProps) {
+    const { t } = useTranslation('friends');
     const isLoading = status === 'loading';
     const isFetching = status === 'fetching';
 
@@ -27,8 +29,8 @@ export function UsersFoundContainer({ users, status, username, canFetchMore, tot
                         <UserSearchIcon size={24} />
                     </div>
                     <div className='flex flex-col gap-1'>
-                        <p className='text-sm font-medium text-primary'>Buscar usuarios</p>
-                        <p className='text-xs text-secondary'>Escribe un nombre de usuario para buscar</p>
+                        <p className='text-sm font-medium text-primary'>{t('addNewFriends.idleTitle')}</p>
+                        <p className='text-xs text-secondary'>{t('addNewFriends.idleSubtitle')}</p>
                     </div>
                 </div>
             )}
@@ -38,8 +40,8 @@ export function UsersFoundContainer({ users, status, username, canFetchMore, tot
                         <UserSearchIcon size={24} />
                     </div>
                     <div className='flex flex-col gap-1'>
-                        <p className='text-sm font-medium text-primary'>Sin resultados</p>
-                        <p className='text-xs text-secondary'>No se encontraron usuarios con ese nombre</p>
+                        <p className='text-sm font-medium text-primary'>{t('addNewFriends.noResultsTitle')}</p>
+                        <p className='text-xs text-secondary'>{t('addNewFriends.noResultsSubtitle')}</p>
                     </div>
                 </div>
             )}
@@ -52,7 +54,7 @@ export function UsersFoundContainer({ users, status, username, canFetchMore, tot
                     canFetchMore={canFetchMore}
                     onLoadMore={onLoadMore}
                 >
-                    <>{users.length} de {total} usuarios</>
+                    <>{t('addNewFriends.infiniteCount', { count: users.length, total })}</>
                 </InfiniteLoader>
             )}
         </section>

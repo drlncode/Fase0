@@ -1,7 +1,9 @@
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
 import { UserShareIcon, UserPlusIcon } from '@/shared/components/ui/Icons';
 
 export function EmptySentRequestsState() {
+    const { t } = useTranslation('friends');
     const navigate = useNavigate();
 
     return (
@@ -10,8 +12,8 @@ export function EmptySentRequestsState() {
                 <UserShareIcon size={24} />
             </div>
             <div className='flex flex-col gap-1'>
-                <p className='text-sm font-medium text-primary'>Sin solicitudes enviadas</p>
-                <p className='text-xs text-secondary'>Envía solicitudes para conectar con otros</p>
+                <p className='text-sm font-medium text-primary'>{t('sentRequests.emptyTitle')}</p>
+                <p className='text-xs text-secondary'>{t('sentRequests.emptySubtitle')}</p>
             </div>
             <button
                 type='button'
@@ -19,7 +21,7 @@ export function EmptySentRequestsState() {
                 className='flex items-center gap-2 rounded-md border border-default bg-overlay px-4 py-2 text-xs font-medium text-secondary transition-colors hover:cursor-pointer hover:bg-subtle'
             >
                 <UserPlusIcon size={14} />
-                <span>Agregar amigo</span>
+                <span>{t('sentRequests.emptyAction')}</span>
             </button>
         </div>
     );

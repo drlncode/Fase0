@@ -1,7 +1,9 @@
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
 import { UsersIcon, UserPlusIcon } from '@/shared/components/ui/Icons';
 
 export function EmptyFriendsState() {
+    const { t } = useTranslation('friends');
     const navigate = useNavigate();
 
     return (
@@ -10,8 +12,8 @@ export function EmptyFriendsState() {
                 <UsersIcon size={24} />
             </div>
             <div className='flex flex-col gap-1'>
-                <p className='text-sm font-medium text-primary'>No tienes amigos</p>
-                <p className='text-xs text-secondary'>Envía una solicitud para conectar</p>
+                <p className='text-sm font-medium text-primary'>{t('friendsList.emptyTitle')}</p>
+                <p className='text-xs text-secondary'>{t('friendsList.emptySubtitle')}</p>
             </div>
             <button
                 type='button'
@@ -19,7 +21,7 @@ export function EmptyFriendsState() {
                 className='flex items-center gap-2 rounded-md border border-default bg-overlay px-4 py-2 text-xs font-medium text-secondary transition-colors hover:cursor-pointer hover:bg-subtle'
             >
                 <UserPlusIcon size={14} />
-                <span>Agregar amigo</span>
+                <span>{t('friendsList.emptyAction')}</span>
             </button>
         </div>
     );

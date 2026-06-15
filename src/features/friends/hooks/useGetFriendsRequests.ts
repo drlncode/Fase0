@@ -3,6 +3,7 @@ import { useValidAuth } from '@auth/hooks/useValidAuth';
 import { usePagination } from '@shared/hooks/usePagination';
 import { getFriendsRequests } from '@friends/lib/friendsActions';
 import { useFriendsStore } from '@friends/store/useFriendsStore';
+import i18n from '@/lib/i18n';
 
 export function useGetFriendsRequests() {
     const { status: authStatus, user: { session } } = useValidAuth();
@@ -19,7 +20,7 @@ export function useGetFriendsRequests() {
 
     const loadFriendsRequests = useCallback(async () => {
         if (authStatus !== 'valid' || !session) {
-            setFriendsRequestsFetchStatus({ status: 'error', message: 'Sesión inválida.' });
+            setFriendsRequestsFetchStatus({ status: 'error', message: i18n.t('friends:errors.invalidSession') });
             return;
         }
 
@@ -42,7 +43,7 @@ export function useGetFriendsRequests() {
             return;
         }
 
-        setFriendsRequestsFetchStatus({ status: 'error', message: 'No fue posible recuperar las solicitudes.' });
+        setFriendsRequestsFetchStatus({ status: 'error', message: i18n.t('friends:errors.fetchRequests') });
     }, [authStatus, session, canFetchMore, nextPage, setFriendsRequestsSuccess, setFriendsRequestsFetchStatus, setFriendsRequestsFetchPagination]);
 
     return { status: friendsRequestsFetch.status, loadFriendsRequests };

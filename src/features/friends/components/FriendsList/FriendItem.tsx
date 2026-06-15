@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
 import { useAvatarUrl } from '@shared/hooks/useAvatarUrl';
 import { useCreateChat } from '@chats/hooks/useCreateChat';
@@ -20,6 +21,7 @@ interface FriendItemProps {
 }
 
 export function FriendItem({ friendship }: FriendItemProps) {
+    const { t } = useTranslation('friends');
     const navigate = useNavigate();
     const { url, onError } = useAvatarUrl(friendship.friend.avatar, friendship.friend._id);
     const { status: createChatStatus, create } = useCreateChat();
@@ -45,15 +47,15 @@ export function FriendItem({ friendship }: FriendItemProps) {
 
     const handleSeeProfile = () => {
         openInfo({
-            title: `Perfil de @${friendship.friend.username}`,
+            title: t('friendsList.item.profileTitle', { username: friendship.friend.username }),
             content: <UserProfile user={friendship} />
         });
     }
 
     const handleDeleteFriend = () => {
         openConfirm({
-            title: 'Eliminar amigo',
-            message: `¿Estás seguro de que quieres eliminar a @${friendship.friend.username} de tu lista de amigos?`,
+            title: t('friendsList.item.deleteConfirmTitle'),
+            message: t('friendsList.item.deleteConfirmMessage', { username: friendship.friend.username }),
             onConfirm: () => remove(friendship._id),
             danger: true,
             awaitedAction: true
@@ -86,7 +88,7 @@ export function FriendItem({ friendship }: FriendItemProps) {
                         onClick={handleOpenChat}
                     >
                         <MessageShareIcon size={16} />
-                        Abrir
+                        {t('friendsList.item.open')}
                     </FriendsActionButton>
                 ) : (
                     <NewChatDropdown
@@ -104,13 +106,13 @@ export function FriendItem({ friendship }: FriendItemProps) {
                     triggerClassName='w-fit'
                 >
                     <DropdownItem
-                        label='Ver perfil'
+                        label={t('friendsList.item.seeProfile')}
                         icon={<UserIcon size={16} />}
                         onClick={handleSeeProfile}
                     />
                     <DropdownDivider />
                     <DropdownItem
-                        label='Eliminar amigo'
+                        label={t('friendsList.item.deleteFriend')}
                         icon={<TrashIcon size={16} />}
                         danger
                         onClick={handleDeleteFriend}
@@ -133,7 +135,7 @@ function NewChatDropdown({ onSend, loading }: NewChatDropdownProps) {
             trigger={
                 <FriendsActionButton className='w-fit px-2.5'>
                     <MessagePlusIcon size={16} />
-                    Iniciar
+                    {t('friendsList.item.start')}
                 </FriendsActionButton>
             }
             className='p-0'
@@ -141,7 +143,7 @@ function NewChatDropdown({ onSend, loading }: NewChatDropdownProps) {
             minWidth={280}
         >
             <DropdownLabel className='pt-1.5 pb-0 pl-2.75 text-xs font-semibold text-primary/80'>
-                Escribir mensaje
+                {t('friendsList.item.writeMessage')}
             </DropdownLabel>
             <NewChatPopover onSend={onSend} loading={loading} />
         </Dropdown>

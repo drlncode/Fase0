@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useValidAuth } from '@auth/hooks/useValidAuth';
 import { useToast } from '@shared/hooks/useToast';
 import { cancelFriendRequest } from '@friends/lib/friendsActions';
+import i18n from '@/lib/i18n';
 
 import type { ActionHookState } from '@shared/types/global.types';
 import type { CancelFriendRequestResponse } from '@friends/services/friends.service';
@@ -20,17 +21,17 @@ export function useCancelFriendRequest() {
         const result = await cancelFriendRequest(requestId);
 
         if (result.success) {
-            success('Solicitud de amistad cancelada.');
+            success(i18n.t('friends:toast.friendRequestCancelled'));
             return setStatus({
                 status: 'success' as const,
                 data: result.data
             });
         }
 
-        danger('No fue posible cancelar la solicitud de amistad. Inténtalo de nuevo.');
+        danger(i18n.t('friends:toast.friendRequestCancelledError'));
         setStatus({
             status: 'error' as const,
-            message: 'No fue posible cancelar la solicitud de amistad.'
+            message: i18n.t('friends:toast.friendRequestCancelledStatusError')
         });
     }
 
