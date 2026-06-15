@@ -130,6 +130,7 @@ interface NewChatDropdownProps {
 }
 
 function NewChatDropdown({ onSend, loading }: NewChatDropdownProps) {
+    const { t } = useTranslation('friends');
     return (
         <Dropdown
             trigger={
