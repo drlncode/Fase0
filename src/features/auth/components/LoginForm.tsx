@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import { FormProvider, useForm } from 'react-hook-form';
 import { FormContainer } from '@auth/components/FormContainer';
 import { Form } from '@auth/components/Form';
@@ -14,6 +15,7 @@ type SignInFormValues = {
 }
 
 export default function LoginForm() {
+    const { t } = useTranslation('auth');
     const methods = useForm<SignInFormValues>();
     const loading = useRef<boolean>(false);
     const { signin } = useInvalidAuth();
@@ -37,7 +39,7 @@ export default function LoginForm() {
             if (typeof result.error === 'object') {
                 if (result.error.status === 401) {
                     setError('password', {
-                        message: 'Credenciales incorrectas.'
+                        message: t('login.errors.invalidCredentials')
                     });
 
                     return;
@@ -45,7 +47,7 @@ export default function LoginForm() {
             }
 
             setError('password', {
-                message: 'Algo salió mal. Inténtelo de nuevo mas tarde.'
+                message: t('login.errors.generic')
             });
         }
 
@@ -54,8 +56,8 @@ export default function LoginForm() {
 
     return (
         <FormContainer
-            title='Iniciar sesión'
-            label='Ingrese su contraseña para acceder.'
+            title={t('login.title')}
+            label={t('login.label')}
             backButton={{
                 label: email,
                 handleBack: () => goToStep('email-input')
@@ -71,13 +73,13 @@ export default function LoginForm() {
                         defaultValue={email}
                     />
                     <TextField
-                        label='Contraseña'
+                        label={t('login.password.label')}
                         type='password'
-                        placeholder='Ingrese su contraseña'
+                        placeholder={t('login.password.placeholder')}
                         autoComplete='current-password'
                         required
                         registration={register('password', {
-                            required: 'La contraseña es obligatoria',
+                            required: t('login.password.required'),
                         })}
                         error={errors.password?.message}
                     />
@@ -87,12 +89,12 @@ export default function LoginForm() {
                             className="border-b border-b-transparent pb-0.5 text-[14px] transition-all duration-200 ease-out hover:cursor-pointer hover:border-primary/65 active:scale-[0.98] active:border-default"
                             onClick={() => goToStep('pw-recovery-init')}
                         >
-                            ¿Olvidaste tu contraseña?
+                            {t('login.forgotPassword')}
                         </button>
                     </div>
                     <SubmitButton disabled={loading.current}>
                         { loading.current && <SpinLoader size={20} /> }
-                        Entrar
+                        {t('login.submit')}
                     </SubmitButton>
                 </Form>
             </FormProvider>

@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import type { StrengthState } from '@auth/hooks/usePasswordStrength';
 import { CheckIcon } from '@/shared/components/ui/Icons';
 import { cn } from '@/shared/utils/cn';
@@ -18,14 +19,15 @@ function ListItem({ condition, text }: {
 }
 
 export function PasswordStrengthIndicator({ strength }: { strength: StrengthState }) {
+    const { t } = useTranslation('auth');
     return (
         <div className='text-[13px]'>
             <ul>
-                <ListItem condition={strength.hasLetter} text='Al menos una letra' />
-                <ListItem condition={strength.hasNumber} text='Al menos un número' />
-                <ListItem condition={strength.hasSpecialChar} text='Al menos un carácter especial (!@#$%^&*()+=._-)' />
-                <ListItem condition={strength.minLenghth} text='Al menos 8 caracteres' />
-                <ListItem condition={strength.maxLength} text='Máximo 60 caracteres' />
+                <ListItem condition={strength.hasLetter} text={t('passwordStrength.hasLetter')} />
+                <ListItem condition={strength.hasNumber} text={t('passwordStrength.hasNumber')} />
+                <ListItem condition={strength.hasSpecialChar} text={t('passwordStrength.hasSpecialChar')} />
+                <ListItem condition={strength.minLenghth} text={t('passwordStrength.minLength')} />
+                <ListItem condition={strength.maxLength} text={t('passwordStrength.maxLength')} />
             </ul>
         </div>
     )

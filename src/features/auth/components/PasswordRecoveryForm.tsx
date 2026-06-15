@@ -1,28 +1,30 @@
+import { useTranslation } from 'react-i18next';
 import { useAuthFlow } from '@auth/hooks/useAuthFlow';
 import { usePasswordRecoveryFlow } from '@auth/hooks/usePasswordRecoveryFlow';
 import { FormContainer } from '@auth/components/FormContainer';
 import { EmailStep, CodeStep, PasswordStep } from '@auth/components/password-recovery';
 
-const STEP_CONFIG = {
+const STEP_CONFIG: Record<string, { titleKey: string; labelKey: string }> = {
     'pw-recovery-init': {
-        title: 'Recuperar contraseña',
-        label: 'Ingrese su correo electrónico para recuperar su cuenta.'
+        titleKey: 'pwRecovery.init.title',
+        labelKey: 'pwRecovery.init.label'
     },
     'pw-recovery-code-verify': {
-        title: 'Verificar código',
-        label: 'Ingrese el código que se le envió a su correo.'
+        titleKey: 'pwRecovery.codeVerify.title',
+        labelKey: 'pwRecovery.codeVerify.label'
     },
     'pw-reset': {
-        title: 'Nueva contraseña',
-        label: 'Cree una nueva contraseña para su cuenta.'
+        titleKey: 'pwRecovery.reset.title',
+        labelKey: 'pwRecovery.reset.label'
     }
-} as const;
+};
 
 export default function PasswordRecoveryForm() {
+    const { t } = useTranslation('auth');
     const { goToStep } = useAuthFlow();
     const { step, forms, actions, states } = usePasswordRecoveryFlow();
 
-    const config = STEP_CONFIG[step as keyof typeof STEP_CONFIG];
+    const config = STEP_CONFIG[step];
 
     if (!config) return null;
 
@@ -30,9 +32,9 @@ export default function PasswordRecoveryForm() {
 
     return (
         <FormContainer
-            title={config.title}
-            label={config.label}
-            backButton={showBackButton ? { label: 'Cancelar', handleBack: () => goToStep('login') } : undefined}
+            title={t(config.titleKey)}
+            label={t(config.labelKey)}
+            backButton={showBackButton ? { label: t('pwRecovery.cancel'), handleBack: () => goToStep('login') } : undefined}
         >
             {step === 'pw-recovery-init' && (
                 <EmailStep

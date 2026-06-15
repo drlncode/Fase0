@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { FormProvider } from 'react-hook-form';
 import { Form } from '@auth/components/Form';
 import { TextField } from '@/shared/components/TextField';
@@ -17,6 +18,7 @@ interface EmailStepProps {
 }
 
 export function EmailStep({ form, state, onSubmit }: EmailStepProps) {
+    const { t } = useTranslation('auth');
     const { register, handleSubmit, formState: { errors } } = form;
 
     return (
@@ -28,22 +30,22 @@ export function EmailStep({ form, state, onSubmit }: EmailStepProps) {
                 onSubmit={handleSubmit(onSubmit)}
             >
                 <TextField
-                    label='Confirmar correo'
+                    label={t('pwRecovery.init.field.label')}
                     type='email'
-                    placeholder='Ingrese su correo electrónico'
+                    placeholder={t('pwRecovery.init.field.placeholder')}
                     required
                     registration={register('email', {
-                        required: 'El correo electrónico es obligatorio',
+                        required: t('pwRecovery.init.field.required'),
                         pattern: {
                             value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                            message: 'Ingrese un correo electrónico válido'
+                            message: t('pwRecovery.init.field.pattern')
                         }
                     })}
                     error={errors.email?.message || (state.status === 'error' ? state.message : '')}
                 />
                 <SubmitButton disabled={state.status === 'loading'}>
                     {state.status === 'loading' && <SpinLoader size={20} />}
-                    Enviar código
+                    {t('pwRecovery.init.submit')}
                 </SubmitButton>
             </Form>
         </FormProvider>

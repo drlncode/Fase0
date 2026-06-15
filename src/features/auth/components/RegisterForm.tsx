@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import debounce from 'just-debounce-it';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useAuthFlow } from '@auth/hooks/useAuthFlow';
@@ -21,6 +22,7 @@ type SignUpFormValues = {
 }
 
 export default function RegisterForm() {
+    const { t } = useTranslation('auth');
     const [ error, setError ] = useState<string | null>(null);
     const { strength, fullStrength, update } = usePasswordStrength();
     const { email, goToStep } = useAuthFlow();
@@ -88,8 +90,8 @@ export default function RegisterForm() {
 
     return (
         <FormContainer
-            title='Regístrate'
-            label='Ingrese sus datos para crear su cuenta.'
+            title={t('register.title')}
+            label={t('register.label')}
             className='pt-[6vh] pb-[10vh]'
             backButton={{
                 label: email,
@@ -100,61 +102,61 @@ export default function RegisterForm() {
                 <Form className='flex flex-col gap-2' onSubmit={handleSubmit(handleSignUp)}>
                     <input type="hidden" { ...register('email') } value={email} />
                     <TextField
-                        label='Nombre'
-                        placeholder='Ingrese su nombre completo'
+                        label={t('register.name.label')}
+                        placeholder={t('register.name.placeholder')}
                         type='text'
                         autoComplete='name'
                         required
                         registration={register('name', {
-                            required: 'El nombre es obligatorio',
+                            required: t('register.name.required'),
                             maxLength: {
                                 value: 50,
-                                message: 'El nombre debe tener máximo 50 caracteres.'
+                                message: t('register.name.maxLength')
                             }
                         })}
                         error={errors.name?.message}
                     />
                     <div>
                         <TextField
-                            label='Nombre de usuario'
-                            placeholder='Ingrese su nombre de usuario'
+                            label={t('register.username.label')}
+                            placeholder={t('register.username.placeholder')}
                             type='text'
                             autoComplete='username'
                             required
                             registration={register('username', {
-                                required: 'El username es obligatorio',
+                                required: t('register.username.required'),
                                 minLength: {
                                     value: 4,
-                                    message: 'El nombre de usuario debe tener mínimo 4 caracteres.'
+                                    message: t('register.username.minLength')
                                 },
                                 maxLength: {
                                     value: 20,
-                                    message: 'El nombre de usuario debe tener máximo 20 caracteres.'
+                                    message: t('register.username.maxLength')
                                 },
                                 onChange: handleUsernameChange
                             })}
-                            info='Solo se permiten: a-z, 0-9, ., -, _.'
+                            info={t('register.username.info')}
                             error={errors.username?.message}
                         />
                         <UsernameAvailability state={state} currentLenght={cUsername.length} />
                     </div>
                     <TextField
-                        label='Contraseña'
-                        placeholder='Ingrese su contraseña'
+                        label={t('register.password.label')}
+                        placeholder={t('register.password.placeholder')}
                         type='password'
                         autoComplete='new-password'
                         required
                         registration={register('password', {
-                            required: 'La contraseña es obligatoria',
+                            required: t('register.password.required'),
                             onChange: handlePasswordChange
                         })}
                         error={errors.password?.message}
-                        info='La contraseña debe contener:'
+                        info={t('register.password.info')}
                     />
                     <PasswordStrengthIndicator strength={strength} />
                     { error && <span className='text-red-500'>{ error }</span> }
                     <SubmitButton disabled={loading.current} className='mt-3'>
-                        { loading.current ? <SpinLoader size={20} /> : 'Registrarse' }
+                        { loading.current ? <SpinLoader size={20} /> : t('register.submit') }
                     </SubmitButton>
                 </Form>
             </FormProvider>

@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { FormProvider } from 'react-hook-form';
 import { Form } from '@auth/components/Form';
 import { TextField } from '@/shared/components/TextField';
@@ -20,6 +21,7 @@ interface PasswordStepProps {
 }
 
 export function PasswordStep({ form, state, code, onSubmit }: PasswordStepProps) {
+    const { t } = useTranslation('auth');
     const { register, handleSubmit, formState: { errors } } = form;
     const { strength, fullStrength, update } = usePasswordStrength();
 
@@ -27,25 +29,25 @@ export function PasswordStep({ form, state, code, onSubmit }: PasswordStepProps)
         <FormProvider {...form}>
             <Form className='relative flex flex-col gap-3.5' onSubmit={handleSubmit(data => onSubmit(data, code))}>
                 <TextField
-                    label='Nueva contraseña'
+                    label={t('pwRecovery.reset.field.label')}
                     type='password'
-                    placeholder='Ingrese su nueva contraseña'
+                    placeholder={t('pwRecovery.reset.field.placeholder')}
                     required
                     registration={register('password', {
-                        required: 'La contraseña es obligatoria',
+                        required: t('pwRecovery.reset.field.required'),
                         maxLength: {
                             value: 60,
-                            message: 'La contraseña debe tener máximo 60 caracteres.'
+                            message: t('pwRecovery.reset.field.maxLength')
                         },
                         onChange: e => update(e.target.value)
                     })}
                     error={errors.password?.message || (state.status === 'error' ? state.message : '')}
-                    info='La contraseña debe contener:'
+                    info={t('pwRecovery.reset.field.info')}
                 />
                 <PasswordStrengthIndicator strength={strength} />
                 <SubmitButton disabled={state.status === 'loading' || !fullStrength}>
                     {state.status === 'loading' && <SpinLoader size={20} />}
-                    Cambiar contraseña
+                    {t('pwRecovery.reset.submit')}
                 </SubmitButton>
             </Form>
         </FormProvider>

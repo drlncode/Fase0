@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { FormProvider } from 'react-hook-form';
 import { Form } from '@auth/components/Form';
 import { TextField } from '@/shared/components/TextField';
@@ -17,24 +18,25 @@ interface CodeStepProps {
 }
 
 export function CodeStep({ form, state, onSubmit }: CodeStepProps) {
+    const { t } = useTranslation('auth');
     const { register, handleSubmit, formState: { errors } } = form;
 
     return (
         <FormProvider {...form}>
             <Form className='relative flex flex-col gap-3.5' onSubmit={handleSubmit(onSubmit)}>
                 <TextField
-                    label='Código de verificación'
+                    label={t('pwRecovery.codeVerify.field.label')}
                     type='number'
-                    placeholder='Ingrese el código recibido'
+                    placeholder={t('pwRecovery.codeVerify.field.placeholder')}
                     required
                     registration={register('code', {
-                        required: 'El código es obligatorio'
+                        required: t('pwRecovery.codeVerify.field.required')
                     })}
                     error={errors.code?.message || (state.status === 'error' ? state.message : '')}
                 />
                 <SubmitButton disabled={state.status === 'loading'}>
                     {state.status === 'loading' && <SpinLoader size={20} />}
-                    Verificar código
+                    {t('pwRecovery.codeVerify.submit')}
                 </SubmitButton>
             </Form>
         </FormProvider>

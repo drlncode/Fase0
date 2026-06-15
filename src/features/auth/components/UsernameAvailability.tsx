@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { ActionHookState } from '@shared/types/global.types';
 import { SpinLoader } from '@shared/components/ui/SpinLoader';
 import { CheckIcon, CrossIcon } from '@/shared/components/ui/Icons';
@@ -7,6 +8,7 @@ export function UsernameAvailability({ state, currentLenght }: {
     state: ActionHookState<{ isAvailable: boolean }>,
     currentLenght: number
 }) {
+    const { t } = useTranslation('auth');
     if (currentLenght < 4 || state.status === 'idle') return null;
 
     const color = cn(
@@ -25,10 +27,10 @@ export function UsernameAvailability({ state, currentLenght }: {
             </div>
             <div>
                 <span>
-                    { state.status === 'loading' && 'Verificando disponibilidad...' }
+                    { state.status === 'loading' && t('usernameAvailability.checking') }
                     { state.status === 'error' && state.message }
-                    { state.status === 'success' && state.data.isAvailable && 'Nombre de usuario disponible.' }
-                    { state.status === 'success' && !state.data.isAvailable && 'Nombre de usuario no disponible.' }
+                    { state.status === 'success' && state.data.isAvailable && t('usernameAvailability.available') }
+                    { state.status === 'success' && !state.data.isAvailable && t('usernameAvailability.notAvailable') }
                 </span>
             </div>
         </div>

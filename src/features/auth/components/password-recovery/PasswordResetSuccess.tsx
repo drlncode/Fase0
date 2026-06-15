@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useAuthFlow } from '@auth/hooks/useAuthFlow';
 import { CheckIcon } from '@/shared/components/ui/Icons';
 import { SpinLoader } from '@shared/components/ui/SpinLoader';
 
 export default function PasswordResetSuccess() {
+    const { t } = useTranslation('auth');
     const [ countdown, setCountdown ] = useState(3);
     const { goToStep } = useAuthFlow();
 
@@ -25,15 +27,15 @@ export default function PasswordResetSuccess() {
                 <img src="/fase0-logo-white.svg" alt="Fase0 logo" width="100" />
 
                 <div className='flex flex-col items-center gap-2'>
-                    <h1 className='text-2xl font-bold text-primary'>Contraseña cambiada exitosamente.</h1>
-                    <p className='text-muted'>Ya puedes iniciar sesión con tu nueva contraseña.</p>
+                    <h1 className='text-2xl font-bold text-primary'>{t('pwRecovery.success.title')}</h1>
+                    <p className='text-muted'>{t('pwRecovery.success.message')}</p>
                 </div>
 
                 <CheckIcon size={36} />
 
                 <div className='flex items-center gap-2 text-sm text-muted'>
                     <SpinLoader size={18} />
-                    <span>Redirigiendo en... {countdown}</span>
+                    <span>{t('pwRecovery.success.redirecting', { count: countdown })}</span>
                 </div>
             </div>
         </div>

@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useAuthFlow } from '@auth/hooks/useAuthFlow';
 import { useRefreshSession } from '@auth/hooks/useRefreshSession';
 import { FormProvider, useForm } from 'react-hook-form';
@@ -13,6 +14,7 @@ type SignInFormValues = {
 }
 
 export default function ConfirmSession() {
+    const { t } = useTranslation('auth');
     const methods = useForm<SignInFormValues>();
     const { state, refresh, refreshState } = useRefreshSession();
     const { goToStep } = useAuthFlow();
@@ -35,24 +37,24 @@ export default function ConfirmSession() {
 
     return (
         <FormContainer
-            title='Confirme su inicio de sesión'
-            label='Ingrese el código que se le envió a su correo.'
+            title={t('confirmSession.title')}
+            label={t('confirmSession.label')}
         >
             <FormProvider { ...methods }>
                 <Form className='relative flex flex-col gap-3.5' onSubmit={handleSubmit(onSubmit)}>
                     <TextField
-                        label='Código de confirmación'
+                        label={t('confirmSession.code.label')}
                         type='number'
-                        placeholder='Ingrese su código de confirmación'
+                        placeholder={t('confirmSession.code.placeholder')}
                         required
                         registration={register('code', {
-                            required: 'El código de confirmación es obligatorio',
+                            required: t('confirmSession.code.required'),
                         })}
                         error={errors.code?.message || (state.status === 'error' ? state.message : '')}
                     />
                     <SubmitButton disabled={(state.status === 'loading')}>
                         { state.status === 'loading' && <SpinLoader size={20} /> }
-                        Confirmar
+                        {t('confirmSession.submit')}
                     </SubmitButton>
                 </Form>
             </FormProvider>

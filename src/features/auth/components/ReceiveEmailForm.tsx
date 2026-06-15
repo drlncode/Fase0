@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useForm, FormProvider } from 'react-hook-form';
 import { FormContainer } from '@auth/components/FormContainer';
 import { Form } from '@auth/components/Form';
@@ -13,6 +14,7 @@ type ReceiveEmailFormValues = {
 }
 
 export default function ReceiveEmailForm() {
+    const { t } = useTranslation('auth');
     const loading = useRef<boolean>(false);
     const methods = useForm<ReceiveEmailFormValues>();
     const { isEmailAvailable } = useInvalidAuth();
@@ -52,22 +54,22 @@ export default function ReceiveEmailForm() {
 
     return (
         <FormContainer
-            title='Bienvenido'
-            label='Ingrese su correo para continuar.'
+            title={t('emailInput.title')}
+            label={t('emailInput.label')}
         >
             <FormProvider { ...methods }>
                 <Form className='flex flex-col items-start gap-5' onSubmit={handleSubmit(onSubmit)}>
                     <TextField
-                        label="Email"
+                        label={t('emailInput.field.label')}
                         type="email"
-                        placeholder='name@example.com'
+                        placeholder={t('emailInput.field.placeholder')}
                         autoComplete='email'
                         required
                         registration={register('email', {
-                            required: 'El correo es obligatorio.',
+                            required: t('emailInput.field.required'),
                             maxLength: {
                                 value: 254,
-                                message: 'El correo debe tener máximo 254 caracteres.'
+                                message: t('emailInput.field.maxLength')
                             }
                         })}
                         defaultValue={email}
@@ -75,7 +77,7 @@ export default function ReceiveEmailForm() {
                     />
                     <SubmitButton disabled={loading.current}>
                         { loading.current && <SpinLoader size={20} /> }
-                        Continuar
+                        {t('emailInput.submit')}
                     </SubmitButton>
                 </Form>
             </FormProvider>
