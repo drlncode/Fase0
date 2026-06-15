@@ -7,12 +7,14 @@ import enCommon from '@/lib/i18n/en/common.json';
 import enApp from '@/lib/i18n/en/app.json';
 import enUsers from '@/lib/i18n/en/users.json';
 import enAuth from '@/lib/i18n/en/auth.json';
+import enChats from '@/lib/i18n/en/chats.json';
 
 // Spanish translations
 import esCommon from '@/lib/i18n/es/common.json';
 import esApp from '@/lib/i18n/es/app.json';
 import esUsers from '@/lib/i18n/es/users.json';
 import esAuth from '@/lib/i18n/es/auth.json';
+import esChats from '@/lib/i18n/es/chats.json';
 
 type AvailableLanguages = 'en' | 'es';
 
@@ -53,12 +55,14 @@ i18n
                 app: esApp,
                 users: esUsers,
                 auth: esAuth,
+                chats: esChats,
             },
             en: {
                 common: enCommon,
                 app: enApp,
                 users: enUsers,
                 auth: enAuth,
+                chats: enChats,
             },
         },
         defaultNS: 'common',

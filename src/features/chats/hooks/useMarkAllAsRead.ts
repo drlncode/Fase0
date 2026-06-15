@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useValidAuth } from '@auth/hooks/useValidAuth';
 import { useChatStore } from '@chats/store/useChatStore';
 import { markAllAsRead } from '@chats/lib/chatActions';
@@ -6,6 +7,7 @@ import { markAllAsRead } from '@chats/lib/chatActions';
 import type { ActionHookState } from '@shared/types/global.types';
 
 export function useMarkAllAsRead() {
+    const { t } = useTranslation('chats');
     const { status: authStatus, user: { session } } = useValidAuth();
     const findChat = useChatStore(state => state.findChat);
     const setChat = useChatStore(state => state.setChat);
@@ -42,7 +44,7 @@ export function useMarkAllAsRead() {
         setChat(previousChat);
         setStatus({
             status: 'error' as const,
-            message: 'No fue posible marcar todos los mensajes como leídos.'
+            message: t('errors.markRead')
         });
     }
 

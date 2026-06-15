@@ -1,0 +1,93 @@
+{
+    "input": {
+        "placeholder": "Escribe un mensaje...",
+        "sendAriaLabel": "Enviar mensaje",
+        "replyingTo": "Respondiendo a:",
+        "cancelReplyAriaLabel": "Cancelar respuesta",
+        "editingMessage": "Editando mensaje:",
+        "cancelEditAriaLabel": "Cancelar edición",
+        "deletedMessage": "Mensaje eliminado",
+        "you": "Tú",
+        "user": "Usuario"
+    },
+    "list": {
+        "ariaLabel": "Chat con {{name}}",
+        "avatarAlt": "Avatar de {{name}}"
+    },
+    "header": {
+        "searchLabel": "Buscar chats",
+        "filterAll": "Todos",
+        "filterUnread": "No leídos",
+        "filterFavorites": "Favoritos"
+    },
+    "dropdown": {
+        "ariaLabel": "Opciones del chat",
+        "pin": "Fijar",
+        "unpin": "Desfijar",
+        "addToFavorites": "Agregar a favoritos",
+        "removeFromFavorites": "Quitar de favoritos",
+        "markAsRead": "Marcar mensajes como leidos",
+        "clear": "Vaciar",
+        "delete": "Eliminar",
+        "blockUser": "Bloquear a @{{username}}",
+        "unblockUser": "Desbloquear a @{{username}}"
+    },
+    "dialogs": {
+        "clearTitle": "¿Vaciar el chat?",
+        "clearMessage": "Esta acción eliminará todos los mensajes del chat. Esta acción no se puede deshacer.",
+        "clearConfirm": "Vaciar",
+        "deleteTitle": "¿Eliminar el chat?",
+        "deleteMessage": "Esta acción eliminará el chat y todos sus mensajes. Esta acción no se puede deshacer.",
+        "deleteConfirm": "Eliminar",
+        "unblockTitle": "¿Desbloquear a @{{username}}?",
+        "unblockMessage": "Podrás volver a enviar y recibir mensajes de @{{username}}.",
+        "blockTitle": "¿Bloquear a @{{username}}?",
+        "blockMessage": "Esta acción bloqueará a @{{username}} y no podrás enviar ni recibir mensajes de este usuario.",
+        "blockConfirm": "Bloquear",
+        "unblockConfirm": "Desbloquear"
+    },
+    "empty": {
+        "title": "No tienes conversaciones",
+        "subtitle": "Agrega amigos o inicia un nuevo chat para empezar a chatear",
+        "addFriend": "Agregar amigo",
+        "newChat": "Iniciar nuevo chat"
+    },
+    "idle": {
+        "noChats": "No tienes conversaciones",
+        "noChatsSubtitle": "Agrega amigos o inicia un chat para empezar a chatear",
+        "noUnread": "No tienes chats sin leer",
+        "noUnreadSubtitle": "Todos tus chats están al día",
+        "noFavorites": "No tienes chats favoritos",
+        "noFavoritesSubtitle": "Marca chats como favoritos para encontrarlos rápido",
+        "noResults": "Sin resultados",
+        "noResultsSubtitle": "No se encontraron chats para \"{{query}}\""
+    },
+    "toast": {
+        "chatDeleted": "Chat eliminado correctamente.",
+        "userBlocked": "Usuario bloqueado correctamente.",
+        "userUnblocked": "Usuario desbloqueado correctamente.",
+        "addedToFavorites": "Chat agregado a favoritos.",
+        "removedFromFavorites": "Chat removido de favoritos.",
+        "chatPinned": "Chat fijado correctamente.",
+        "chatUnpinned": "Chat desfijado correctamente.",
+        "chatUpdated": "Chat actualizado correctamente.",
+        "messagesCleared": "Mensajes eliminados correctamente.",
+        "clearError": "Error al limpiar los mensajes del chat. Intenta de nuevo más tarde.",
+        "updateError": "Error al actualizar el chat de {{name}}. Intenta de nuevo más tarde."
+    },
+    "errors": {
+        "notFound": "El chat no fue encontrado.",
+        "create": "No fue posible crear el chat.",
+        "fetch": "No fue posible recuperar los chats.",
+        "update": "No fue posible actualizar el chat.",
+        "markRead": "No fue posible marcar todos los mensajes como leídos.",
+        "clear": "No fue posible limpiar todos los mensajes.",
+        "invalidSession": "Sesión inválida."
+    },
+    "page": {
+        "title": "{{prefix}}Chat de @{{username}} | Fase0"
+    },
+    "infiniteLoader": {
+        "count": "{{count}} de {{total}} chats"
+    }
+}

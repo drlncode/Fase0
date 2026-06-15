@@ -1,4 +1,5 @@
 import { useLayoutEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useChatStore } from '@chats/store/useChatStore';
 import { useGetChats } from '@chats/hooks/useGetChats';
 import { usePagination } from '@shared/hooks/usePagination';
@@ -10,6 +11,7 @@ import { FilterIdleState } from '@chats/components/FilterIdleState';
 import { InfiniteLoader } from '@shared/components/InfiniteLoader';
 
 export function ChatsListContainer() {
+    const { t } = useTranslation('chats');
     const status = useChatStore(state => state.chatsFetch.status);
     const chats = useChatStore(state => state.filteredChats);
     const allChats = useChatStore(state => state.chats);
@@ -70,7 +72,7 @@ export function ChatsListContainer() {
                         canFetchMore={canFetchMore}
                         onLoadMore={handleLoadMore}
                     >
-                        <>{chatsFetched} de {totalChats} chats</>
+                        <>{t('infiniteLoader.count', { count: chatsFetched, total: totalChats })}</>
                     </InfiniteLoader>
                 )}
             </section>

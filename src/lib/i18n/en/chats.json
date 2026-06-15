@@ -1,0 +1,93 @@
+{
+    "input": {
+        "placeholder": "Write a message...",
+        "sendAriaLabel": "Send message",
+        "replyingTo": "Replying to:",
+        "cancelReplyAriaLabel": "Cancel reply",
+        "editingMessage": "Editing message:",
+        "cancelEditAriaLabel": "Cancel edit",
+        "deletedMessage": "Deleted message",
+        "you": "You",
+        "user": "User"
+    },
+    "list": {
+        "ariaLabel": "Chat with {{name}}",
+        "avatarAlt": "{{name}}'s avatar"
+    },
+    "header": {
+        "searchLabel": "Search chats",
+        "filterAll": "All",
+        "filterUnread": "Unread",
+        "filterFavorites": "Favorites"
+    },
+    "dropdown": {
+        "ariaLabel": "Chat options",
+        "pin": "Pin",
+        "unpin": "Unpin",
+        "addToFavorites": "Add to favorites",
+        "removeFromFavorites": "Remove from favorites",
+        "markAsRead": "Mark as read",
+        "clear": "Clear",
+        "delete": "Delete",
+        "blockUser": "Block @{{username}}",
+        "unblockUser": "Unblock @{{username}}"
+    },
+    "dialogs": {
+        "clearTitle": "Clear chat?",
+        "clearMessage": "This will delete all messages in the chat. This action cannot be undone.",
+        "clearConfirm": "Clear",
+        "deleteTitle": "Delete chat?",
+        "deleteMessage": "This will delete the chat and all its messages. This action cannot be undone.",
+        "deleteConfirm": "Delete",
+        "unblockTitle": "Unblock @{{username}}?",
+        "unblockMessage": "You will be able to send and receive messages from @{{username}} again.",
+        "blockTitle": "Block @{{username}}?",
+        "blockMessage": "This will block @{{username}} and you won't be able to send or receive messages from this user.",
+        "blockConfirm": "Block",
+        "unblockConfirm": "Unblock"
+    },
+    "empty": {
+        "title": "No conversations",
+        "subtitle": "Add friends or start a new chat to begin chatting",
+        "addFriend": "Add friend",
+        "newChat": "Start new chat"
+    },
+    "idle": {
+        "noChats": "No conversations",
+        "noChatsSubtitle": "Add friends or start a chat to begin chatting",
+        "noUnread": "No unread chats",
+        "noUnreadSubtitle": "All your chats are up to date",
+        "noFavorites": "No favorite chats",
+        "noFavoritesSubtitle": "Mark chats as favorites to find them quickly",
+        "noResults": "No results",
+        "noResultsSubtitle": "No chats found for \"{{query}}\""
+    },
+    "toast": {
+        "chatDeleted": "Chat deleted successfully.",
+        "userBlocked": "User blocked successfully.",
+        "userUnblocked": "User unblocked successfully.",
+        "addedToFavorites": "Chat added to favorites.",
+        "removedFromFavorites": "Chat removed from favorites.",
+        "chatPinned": "Chat pinned successfully.",
+        "chatUnpinned": "Chat unpinned successfully.",
+        "chatUpdated": "Chat updated successfully.",
+        "messagesCleared": "Messages cleared successfully.",
+        "clearError": "Error clearing messages. Try again later.",
+        "updateError": "Error updating chat with {{name}}. Try again later."
+    },
+    "errors": {
+        "notFound": "Chat not found.",
+        "create": "Could not create chat.",
+        "fetch": "Could not load chats.",
+        "update": "Could not update chat.",
+        "markRead": "Could not mark all messages as read.",
+        "clear": "Could not clear all messages.",
+        "invalidSession": "Invalid session."
+    },
+    "page": {
+        "title": "{{prefix}}Chat de @{{username}} | Fase0"
+    },
+    "infiniteLoader": {
+        "count": "{{count}} of {{total}} chats"
+    }
+}

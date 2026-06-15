@@ -1,7 +1,9 @@
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
 import { MessageIcon, UserPlusIcon, MessagePlusIcon } from '@/shared/components/ui/Icons';
 
 export function EmptyChatsState() {
+    const { t } = useTranslation('chats');
     const navigate = useNavigate();
 
     return (
@@ -10,8 +12,8 @@ export function EmptyChatsState() {
                 <MessageIcon size={28} />
             </div>
             <div className='flex flex-col items-center gap-1'>
-                <p className='text-sm font-medium text-primary'>No tienes conversaciones</p>
-                <p className='max-w-[82%] text-xs text-secondary'>Agrega amigos o inicia un nuevo chat para empezar a chatear</p>
+                <p className='text-sm font-medium text-primary'>{t('empty.title')}</p>
+                <p className='max-w-[82%] text-xs text-secondary'>{t('empty.subtitle')}</p>
             </div>
             <div className='flex flex-col gap-1.25'>
                 <button
@@ -20,7 +22,7 @@ export function EmptyChatsState() {
                     className='flex min-w-38 items-center gap-2 rounded-md border border-default bg-overlay px-4 py-2 text-xs font-medium text-secondary transition-colors hover:cursor-pointer hover:bg-subtle'
                 >
                     <UserPlusIcon size={14} />
-                    <span>Agregar amigo</span>
+                    <span>{t('empty.addFriend')}</span>
                 </button>
                 <button
                     type='button'
@@ -28,7 +30,7 @@ export function EmptyChatsState() {
                     className='flex min-w-38 items-center gap-2 rounded-md border border-default bg-overlay px-4 py-2 text-xs font-medium text-secondary transition-colors hover:cursor-pointer hover:bg-subtle'
                 >
                     <MessagePlusIcon size={14} />
-                    <span>Iniciar nuevo chat</span>
+                    <span>{t('empty.newChat')}</span>
                 </button>
             </div>
         </div>

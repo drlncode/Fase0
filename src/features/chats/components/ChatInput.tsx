@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect, useId } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useValidAuth } from '@auth/hooks/useValidAuth';
 import { useChatStore } from '@chats/store/useChatStore';
 import { useMessageStore } from '@messages/store/useMessageStore';
@@ -8,6 +9,7 @@ import { isDeletedMessage } from '@messages/utils/isDeletedMessage';
 import { ArrowUpIcon, CrossIcon, CornerDownLeftIcon } from '@/shared/components/ui/Icons';
 
 export function ChatInput() {
+    const { t } = useTranslation('chats');
     const id = useId();
     const inputRef = useRef<HTMLInputElement>(null);
     const [ message, setMessage ] = useState('');
@@ -59,7 +61,7 @@ export function ChatInput() {
                 },
                 onReplyMessage && replyMessage ? {
                     replyToSenderUsername: replySenderName,
-                    replyToContent: isDeletedMessage(replyMessage) ? 'Mensaje eliminado' : replyMessage.content,
+                    replyToContent: isDeletedMessage(replyMessage) ? t('input.deletedMessage') : replyMessage.content,
                 } : undefined,
             );
             if (onReplyMessage) {
@@ -94,14 +96,14 @@ export function ChatInput() {
 
     const replySenderName = replyMessage
         ? replyMessage.senderId === currentUserId
-            ? 'Tú'
+            ? t('input.you')
             : activeChat
                 ? `@${activeChat.participant.username}`
-                : 'Usuario'
+                : t('input.user')
         : null;
 
     const replyContent = replyMessage
-        ? (isDeletedMessage(replyMessage) ? 'Mensaje eliminado' : replyMessage.content)
+        ? (isDeletedMessage(replyMessage) ? t('input.deletedMessage') : replyMessage.content)
         : '';
 
     return (
@@ -112,12 +114,12 @@ export function ChatInput() {
                         <span className='shrink-0'>
                             <CornerDownLeftIcon size={16} />
                         </span>
-                        <span className='truncate'>Respondiendo a:</span>
+                        <span className='truncate'>{t('input.replyingTo')}</span>
                         <button
                             type='button'
                             onClick={handleCancelReply}
                             className='ml-auto shrink-0 rounded p-0.5 transition-colors hover:cursor-pointer hover:text-primary'
-                            aria-label='Cancelar respuesta'
+                            aria-label={t('input.cancelReplyAriaLabel')}
                         >
                             <CrossIcon size={16} />
                         </button>
@@ -136,12 +138,12 @@ export function ChatInput() {
                         <span className='shrink-0'>
                             <CornerDownLeftIcon size={16} />
                         </span>
-                        <span className='truncate'>Editando mensaje:</span>
+                        <span className='truncate'>{t('input.editingMessage')}</span>
                         <button
                             type='button'
                             onClick={handleCancelEdit}
                             className='ml-auto shrink-0 rounded p-0.5 transition-colors hover:cursor-pointer hover:text-primary'
-                            aria-label='Cancelar edición'
+                            aria-label={t('input.cancelEditAriaLabel')}
                         >
                             <CrossIcon size={16} />
                         </button>
@@ -161,7 +163,7 @@ export function ChatInput() {
                         onChange={(e) => setMessage(e.target.value)}
                         onKeyDown={handleKeyDown}
                         disabled={isSending}
-                        placeholder='Escribe un mensaje...'
+                        placeholder={t('input.placeholder')}
                         className='w-full outline-0 placeholder:text-muted disabled:opacity-50'
                         autoComplete='off'
                     />
@@ -170,7 +172,7 @@ export function ChatInput() {
                     type='submit'
                     disabled={isEmpty || isSending}
                     className='ml-5 shrink-0 cursor-pointer rounded-lg bg-subtle p-2 transition-opacity disabled:cursor-not-allowed disabled:opacity-50'
-                    aria-label='Enviar mensaje'
+                    aria-label={t('input.sendAriaLabel')}
                 >
                     <ArrowUpIcon size={20} />
                 </button>

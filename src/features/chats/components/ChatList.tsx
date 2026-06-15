@@ -1,4 +1,5 @@
 import { useMatch } from 'react-router';
+import { useTranslation } from 'react-i18next';
 import { Avatar } from '@shared/components/Avatar';
 import { useAvatarUrl } from '@shared/hooks/useAvatarUrl';
 import { ChatListDropdown } from '@chats/components/ChatListDropdown';
@@ -10,6 +11,7 @@ import { NavLink } from 'react-router';
 import { cn } from '@/shared/utils/cn';
 
 export function ChatList({ chat }: { chat: Chat }) {
+    const { t } = useTranslation('chats');
     const { onError, url } = useAvatarUrl(chat.participant.avatar, chat.participant._id);
     const match = useMatch('/app/chat/:chatId');
     const isActive = match?.params?.chatId === chat._id;
@@ -24,7 +26,7 @@ export function ChatList({ chat }: { chat: Chat }) {
             <NavLink 
                 to={`/app/chat/${chat._id}`} 
                 className='flex flex-col p-2.5'
-                aria-label={`Chat con ${chat.participant.name}`}
+                aria-label={t('list.ariaLabel', { name: chat.participant.name })}
             >
                 <div className='flex items-center gap-2'>
 
@@ -33,7 +35,7 @@ export function ChatList({ chat }: { chat: Chat }) {
                             url={url}
                             userUrlStatus={chat.participant.avatar}
                             externalError={onError}
-                            alt={`${chat.participant.name.split(' ')[0]}'s avatar`}
+                            alt={t('list.avatarAlt', { name: chat.participant.name.split(' ')[0] })}
                             name={chat.participant.name}
                         />
                     </div>

@@ -1,10 +1,12 @@
 import { useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useValidAuth } from '@auth/hooks/useValidAuth';
 import { usePagination } from '@shared/hooks/usePagination';
 import { getAllChats } from '@chats/lib/chatActions';
 import { useChatStore } from '@chats/store/useChatStore';
 
 export function useGetChats() {
+    const { t } = useTranslation('chats');
     const { status: authStatus, user: { session } } = useValidAuth();
 
     const chatsFetch = useChatStore(state => state.chatsFetch);
@@ -19,7 +21,7 @@ export function useGetChats() {
 
     const loadChats = useCallback(async () => {
         if (authStatus !== 'valid' || !session) {
-            setChatsFetchStatus({ status: 'error', message: 'Sesión inválida.' });
+            setChatsFetchStatus({ status: 'error', message: t('errors.invalidSession') });
             return;
         }
 
@@ -37,8 +39,8 @@ export function useGetChats() {
             return;
         }
 
-        setChatsFetchStatus({ status: 'error', message: 'No fue posible recuperar los chats.' });
-    }, [authStatus, session, canFetchMore, nextPage, setChatsSuccess, setChatsFetchStatus, setChatsFetchPagination]);
+        setChatsFetchStatus({ status: 'error', message: t('errors.fetch') });
+    }, [authStatus, session, canFetchMore, nextPage, setChatsSuccess, setChatsFetchStatus, setChatsFetchPagination, t]);
 
     return { status: chatsFetch.status, loadChats };
 }

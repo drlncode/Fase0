@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useValidAuth } from '@auth/hooks/useValidAuth';
 import { createChat } from '@chats/lib/chatActions';
 
@@ -6,6 +7,7 @@ import type { ActionHookState } from '@shared/types/global.types';
 import type { Chat } from '@chats/types/chat.types';
 
 export function useCreateChat() {
+    const { t } = useTranslation('chats');
     const { status: authStatus, user: { session } } = useValidAuth();
 
     if (authStatus !== 'valid' || !session)
@@ -26,7 +28,7 @@ export function useCreateChat() {
 
         setStatus({
             status: 'error' as const,
-            message: 'No fue posible crear el chat.'
+            message: t('errors.create')
         });
     }
 

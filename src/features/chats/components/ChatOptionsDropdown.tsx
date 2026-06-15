@@ -1,4 +1,5 @@
 import { cn } from '@/shared/utils/cn';
+import { useTranslation } from 'react-i18next';
 import {
     useState, useEffect, useLayoutEffect,
     useRef, createContext, useId, type MouseEvent
@@ -23,6 +24,7 @@ interface ChatOptionsDropdownProps {
 }
 
 export function ChatOptionsDropdown({ children, pinned, favorite, unreadMessages = 0, className }: ChatOptionsDropdownProps) {
+    const { t } = useTranslation('chats');
     const dropdownId = useId();
     const isOpen = useDropdownStore((s) => s.openId === dropdownId);
     const { open: openDropdown, close: closeDropdown } = useDropdownStore();
@@ -154,7 +156,7 @@ export function ChatOptionsDropdown({ children, pinned, favorite, unreadMessages
                 ref={btnRef}
                 aria-expanded={isOpen}
                 aria-haspopup="menu"
-                aria-label="Opciones del chat"
+                aria-label={t('dropdown.ariaLabel')}
             >
                 <span className='pointer-events-none'>
                     {isOpen ? <ChevronUpIcon size={18} /> : <ChevronDownIcon size={18} />}

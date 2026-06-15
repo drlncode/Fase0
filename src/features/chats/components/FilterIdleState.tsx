@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { MessageIcon, MessageSearchIcon, StarIcon, MessageOffIcon } from '@/shared/components/ui/Icons';
 
 interface FilterIdleStateProps {
@@ -5,34 +6,36 @@ interface FilterIdleStateProps {
     searchQuery?: string;
 }
 
-const IDLE_CONFIG: Record<string, { icon: React.ReactNode; title: string; subtitle: string }> = {
-    ALL: {
-        icon: <MessageIcon size={28} />,
-        title: 'No tienes conversaciones',
-        subtitle: 'Agrega amigos o inicia un chat para empezar a chatear'
-    },
-    UNREAD: {
-        icon: <MessageOffIcon size={28} />,
-        title: 'No tienes chats sin leer',
-        subtitle: 'Todos tus chats están al día'
-    },
-    FAVORITES: {
-        icon: <StarIcon size={28} />,
-        title: 'No tienes chats favoritos',
-        subtitle: 'Marca chats como favoritos para encontrarlos rápido'
-    },
-    SEARCH: {
-        icon: <MessageSearchIcon size={28} />,
-        title: 'Sin resultados',
-        subtitle: ''
-    }
-};
-
 export function FilterIdleState({ filter, searchQuery }: FilterIdleStateProps) {
+    const { t } = useTranslation('chats');
+
+    const IDLE_CONFIG: Record<string, { icon: React.ReactNode; title: string; subtitle: string }> = {
+        ALL: {
+            icon: <MessageIcon size={28} />,
+            title: t('idle.noChats'),
+            subtitle: t('idle.noChatsSubtitle')
+        },
+        UNREAD: {
+            icon: <MessageOffIcon size={28} />,
+            title: t('idle.noUnread'),
+            subtitle: t('idle.noUnreadSubtitle')
+        },
+        FAVORITES: {
+            icon: <StarIcon size={28} />,
+            title: t('idle.noFavorites'),
+            subtitle: t('idle.noFavoritesSubtitle')
+        },
+        SEARCH: {
+            icon: <MessageSearchIcon size={28} />,
+            title: t('idle.noResults'),
+            subtitle: ''
+        }
+    };
+
     const config = IDLE_CONFIG[filter];
 
     const subtitle = filter === 'SEARCH' && searchQuery
-        ? `No se encontraron chats para "${searchQuery}"`
+        ? t('idle.noResultsSubtitle', { query: searchQuery })
         : config.subtitle;
 
     return (

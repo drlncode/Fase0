@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useValidAuth } from '@auth/hooks/useValidAuth';
 import { useChatStore } from '@chats/store/useChatStore';
 import { useToast } from '@/shared/hooks/useToast';
@@ -26,6 +27,7 @@ function buildOptimisticChat(previousChat: Chat, toUpdate: UpdatableChatData) {
 }
 
 export function useUpdateChat() {
+    const { t } = useTranslation('chats');
     const { status: authStatus, user: { session } } = useValidAuth();
     const findChat = useChatStore(state => state.findChat);
     const updateStoredChat = useChatStore(state => state.updateChat);
@@ -38,11 +40,11 @@ export function useUpdateChat() {
     const [ status, setStatus ] = useState<ActionHookState<Chat | null>>({ status: 'idle' });
 
     function getSuccessMessage(toUpdate: UpdatableChatData): string {
-        if (toUpdate.chatDeleted) return 'Chat eliminado correctamente.';
-        if (toUpdate.chatBlocked !== undefined) return `Usuario ${toUpdate.chatBlocked ? 'bloqueado' : 'desbloqueado'} correctamente.`;
-        if (toUpdate.favorite !== undefined) return `Chat ${toUpdate.favorite ? 'agregado a' : 'removido de'} favoritos.`;
-        if (toUpdate.pinned !== undefined) return `Chat ${toUpdate.pinned ? 'fijado' : 'desfijado'} correctamente.`;
-        return 'Chat actualizado correctamente.';
+        if (toUpdate.chatDeleted) return t('toast.chatDeleted');
+        if (toUpdate.chatBlocked !== undefined) return toUpdate.chatBlocked ? t('toast.userBlocked') : t('toast.userUnblocked');
+        if (toUpdate.favorite !== undefined) return toUpdate.favorite ? t('toast.addedToFavorites') : t('toast.removedFromFavorites');
+        if (toUpdate.pinned !== undefined) return toUpdate.pinned ? t('toast.chatPinned') : t('toast.chatUnpinned');
+        return t('toast.chatUpdated');
     }
 
     async function update(chatId: string, toUpdate: UpdatableChatData) {
@@ -81,11 +83,11 @@ export function useUpdateChat() {
             }
 
             const name = `@${previousChat.participant.username}`;
-            danger(`Error al actualizar el chat de ${name}. Intenta de nuevo más tarde.`);
+            danger(t('toast.updateError', { name }));
             
             setStatus({
                 status: 'error' as const,
-                message: 'No fue posible actualizar el chat.'
+                message: t('errors.update')
             });
         }
     }

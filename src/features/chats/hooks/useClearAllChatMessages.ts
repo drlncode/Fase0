@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useValidAuth } from '@auth/hooks/useValidAuth';
 import { useChatStore } from '@chats/store/useChatStore';
 import { useMessageStore } from '@messages/store/useMessageStore';
@@ -8,6 +9,7 @@ import { clearAllChatMessages } from '@chats/lib/chatActions';
 import type { ActionHookState } from '@shared/types/global.types';
 
 export function useClearAllChatMessages() {
+    const { t } = useTranslation('chats');
     const { status: authStatus, user: { session } } = useValidAuth();
     const findChat = useChatStore(state => state.findChat);
     const setChat = useChatStore(state => state.setChat);
@@ -39,7 +41,7 @@ export function useClearAllChatMessages() {
         const result = await clearAllChatMessages(chatId);
 
         if (result.success) {
-            success('Mensajes eliminados correctamente.');
+            success(t('toast.messagesCleared'));
             return setStatus({
                 status: 'success' as const,
                 data: null
@@ -47,10 +49,10 @@ export function useClearAllChatMessages() {
         }
 
         setChat(previousChat);
-        danger(`Error al limpiar los mensajes del chat. Intenta de nuevo más tarde.`);
+        danger(t('toast.clearError'));
         setStatus({
             status: 'error' as const,
-            message: 'No fue posible limpiar todos los mensajes.'
+            message: t('errors.clear')
         });
     }
 

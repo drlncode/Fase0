@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { useChatStore } from '@chats/store/useChatStore';
 import { SearchBar } from '@shared/components/SearchBar';
 import { ChatBadge } from '@chats/components/ChatBadge';
@@ -6,6 +7,7 @@ import { MessageSearchIcon } from '@/shared/components/ui/Icons';
 import type { ChatsFilter } from '@chats/types/chat.types';
 
 export function ChatListContainerHeader() {
+    const { t } = useTranslation('chats');
     const unreadChats = useChatStore(state => state.unreadChats);
     const selectedChatsFilter = useChatStore(state => state.selectedChatsFilter);
     const setSelectedChatsFilter = useChatStore(state => state.setSelectedChatsFilter);
@@ -19,24 +21,24 @@ export function ChatListContainerHeader() {
         <header className='sticky top-0 z-10 -mx-2.5 mb-2 flex justify-center rounded-tl-xl bg-surface px-2.5 pt-3 backdrop-blur-sm'>
             <div className='w-full border-b border-b-default pb-1'>
                 <SearchBar
-                    label='Buscar chats'
+                    label={t('header.searchLabel')}
                     icon={<MessageSearchIcon size={18} />}
                     onSearch={setSearchQuery}
                 />
                 <div className='flex gap-1.5 py-2'>
                     <ChatBadge
-                        label='Todos'
+                        label={t('header.filterAll')}
                         isActive={selectedChatsFilter === 'ALL'}
                         onClick={() => handleFilterClick('ALL')}
                     />
                     <ChatBadge
-                        label='No leídos'
+                        label={t('header.filterUnread')}
                         isActive={selectedChatsFilter === 'UNREAD'}
                         info={unreadChats}
                         onClick={() => handleFilterClick('UNREAD')}
                     />
                     <ChatBadge
-                        label='Favoritos'
+                        label={t('header.filterFavorites')}
                         isActive={selectedChatsFilter === 'FAVORITES'}
                         onClick={() => handleFilterClick('FAVORITES')}
                     />

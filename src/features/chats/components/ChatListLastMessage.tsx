@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { cn } from '@/shared/utils/cn';
 import { useValidAuth } from '@auth/hooks/useValidAuth';
 import { MessageStatus } from '@messages/ui/MessageStatus';
@@ -10,6 +11,7 @@ interface ChatListLastMessageProps {
 }
 
 export function ChatListLastMessage({ message, totalBadges }: ChatListLastMessageProps) {
+    const { t } = useTranslation('chats');
     const { user: { _id } } = useValidAuth();
 
     const classesByNumberOfBadges = {
@@ -28,7 +30,7 @@ export function ChatListLastMessage({ message, totalBadges }: ChatListLastMessag
                     <>
                         { _id === message.senderId && <MessageStatus size={19} status={message.status} /> }
                         <span className={cn('mt-0.5 truncate', isDeletedMessage(message) && 'italic')}>
-                            { isDeletedMessage(message) ? 'Mensaje eliminado' : message.content }
+                            { isDeletedMessage(message) ? t('input.deletedMessage') : message.content }
                         </span>
                     </>
                 }

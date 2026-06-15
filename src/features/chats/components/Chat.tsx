@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { ChatHeader } from '@chats/components/ChatHeader';
 import { MessagesContainer } from '@messages/components/MessagesContainer';
 import { ChatInput } from '@chats/components/ChatInput';
@@ -5,6 +6,7 @@ import { ChatInput } from '@chats/components/ChatInput';
 import type { Chat } from '@chats/types/chat.types';
 
 export function Chat({ chat }: { chat: Chat }) {
+    const { t } = useTranslation('chats');
     return (
         <section className='relative flex min-h-0 w-full flex-1 flex-col'>
             <div
@@ -18,7 +20,7 @@ export function Chat({ chat }: { chat: Chat }) {
                 }}
             />
             <div className='relative z-10 flex min-h-0 w-full flex-1 flex-col'>
-                <title>{`${chat.chatInfo.unreadMessages > 0 ? `(${chat.chatInfo.unreadMessages}) ` : ''}Chat de @${chat.participant.username} | Fase0`}</title>
+                <title>{t('page.title', { prefix: chat.chatInfo.unreadMessages > 0 ? `(${chat.chatInfo.unreadMessages}) ` : '', username: chat.participant.username })}</title>
                 <ChatHeader participant={chat.participant} />
                 <MessagesContainer chatId={chat._id} />
                 <ChatInput />
