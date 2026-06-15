@@ -1,4 +1,4 @@
-import { useReducer, useState } from 'react';
+import { useCallback, useReducer, useRef, useState } from 'react';
 import { useLocalStorage } from '@shared/hooks/useLocalStorage';
 import { authReducer, initialState } from '@auth/reducers/auth.reducer';
 import { authApiService } from '@auth/services/auth.service';
@@ -25,15 +25,17 @@ export type useAuthReducerReturnType = AuthContextType & {
 export function useAuthReducer(): useAuthReducerReturnType {
     const [state, dispatch] = useReducer(authReducer, initialState);
     const [isVerifying, setIsVerifying] = useState(false);
+    const isVerifyingRef = useRef(false);
     const storage = useLocalStorage();
 
-    const setAsInvalid = () => dispatch({ type: 'SET_AS_INVALID' });
-    const setAsPreValid = (session: string) => dispatch({ type: 'SET_AS_PRE_VALID', payload: { session } });
-    const resetGlobalState = () => dispatch({ type: 'SET_AS_PENDING' });
-    const updateUser = (payload: Partial<ActiveUser>) => dispatch({ type: 'UPDATE_USER', payload });
+    const setAsInvalid = useCallback(() => dispatch({ type: 'SET_AS_INVALID' }), []);
+    const setAsPreValid = useCallback((session: string) => dispatch({ type: 'SET_AS_PRE_VALID', payload: { session } }), []);
+    const resetGlobalState = useCallback(() => dispatch({ type: 'SET_AS_PENDING' }), []);
+    const updateUser = useCallback((payload: Partial<ActiveUser>) => dispatch({ type: 'UPDATE_USER', payload }), []);
 
-    const checkSession = async ({ session }: { session: string }) => {
-        if (isVerifying) return;
+    const checkSession = useCallback(async ({ session }: { session: string }) => {
+        if (isVerifyingRef.current) return;
+        isVerifyingRef.current = true;
         setIsVerifying(true);
 
         const result = await authApiService.authVerifySession();
@@ -49,6 +51,7 @@ export function useAuthReducer(): useAuthReducerReturnType {
             }
             
             setIsVerifying(false);
+            isVerifyingRef.current = false;
             
             throw new Error(
                 result.error?.message || 'An error occurred while verifying the session.'
@@ -57,7 +60,8 @@ export function useAuthReducer(): useAuthReducerReturnType {
 
         dispatch({ type: 'SET_AS_VALID', payload: { ...result.data, session } });
         setIsVerifying(false);
-    };
+        isVerifyingRef.current = false;
+    }, []);
 
     const actions = {
         signin: (p: SignInParams) => authActions.signin(p, dispatch, storage),
