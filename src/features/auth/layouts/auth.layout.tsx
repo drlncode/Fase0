@@ -2,6 +2,7 @@ import { Outlet } from 'react-router';
 import { useAuth } from '@auth/hooks/useAuth';
 import { AuthFlowContextProvider } from '@auth/providers/AuthFlowContextProvider';
 import { FullScreenLoader } from '@shared/components/FullScreenLoader';
+import { LangSelector } from '@auth/components/LangSelector';
 
 export default function AuthLayout() {
     const { status } = useAuth();
@@ -12,6 +13,9 @@ export default function AuthLayout() {
         <AuthFlowContextProvider>
             <div className='flex min-h-screen w-full flex-col items-center justify-center overflow-x-hidden p-2 pr-3 pb-3 select-none dark:bg-surface dark:text-secondary'>
                 <title>Autenticación | Fase0</title>
+                <div className='fixed top-4 right-4'>
+                    <LangSelector />
+                </div>
                 <Outlet />
             </div>
         </AuthFlowContextProvider>
