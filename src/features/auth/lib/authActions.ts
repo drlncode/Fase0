@@ -1,3 +1,4 @@
+import i18n from '@/lib/i18n';
 import { useLocalStorage } from '@shared/hooks/useLocalStorage';
 import { authApiService } from '@auth/services/auth.service';
 import { getErrorObject } from '../utils/getErrorObject';
@@ -131,14 +132,14 @@ export async function refreshUserSession({ code }: {
 
             if (status === 400) return {
                 success: false,
-                error: 'Código de confirmación inválido.'
+                error: i18n.t('errors.invalidCode', { ns: 'auth' })
             }
         }
     }
 
     return {
         success: false,
-        error: 'No se pudo confirmar la sesión.'
+        error: i18n.t('errors.confirmSessionFailed', { ns: 'auth' })
     }
 }
 
@@ -162,7 +163,7 @@ export async function isEmailAvailable({ email }: IsEmailAvailableParams): Promi
         success: false,
         error: {
             status: 500,
-            message: 'No se pudo verificar la disponibilidad del correo.'
+            message: i18n.t('errors.emailAvailabilityFailed', { ns: 'auth' })
         }
     }
 };
@@ -178,14 +179,14 @@ export async function initPwRecovery({ email }: InitPwRecoveryParams): Promise<A
         if (isAxiosError(error)) {
             return {
                 success: false,
-                error: 'Error: Algo salió mal al iniciar la recuperación.'
+                error: i18n.t('errors.initRecoveryFailed', { ns: 'auth' })
             }
         }
     }
 
     return {
         success: false,
-        error: 'Error: No se pudo iniciar la recuperación.'
+        error: i18n.t('errors.initRecoveryFailed', { ns: 'auth' })
     }
 };
 
@@ -200,19 +201,19 @@ export async function verifyPwRecoveryCode({ code }: VerifyPwRecoveryCodeParams)
         if (isAxiosError(error)) {
             if (error.status === 400) return {
                 success: false,
-                error: 'El formato del codigo es incorrecto.'
+                error: i18n.t('errors.invalidRecoveryCodeFormat', { ns: 'auth' })
             }
 
             if (error.status === 422) return {
                 success: false,
-                error: 'El código de recuperación no es válido.'
+                error: i18n.t('errors.invalidRecoveryCode', { ns: 'auth' })
             }
         }
     }
 
     return {
         success: false,
-        error: 'Error: No se pudo verificar la validez del codigo.'
+        error: i18n.t('errors.verifyRecoveryFailed', { ns: 'auth' })
     }
 };
 
@@ -227,18 +228,18 @@ export async function recoverPw({ code, password }: RecoverPwParams): Promise<Au
         if (isAxiosError(error)) {
             if (error.status === 400) return {
                 success: false,
-                error: 'El formato de la contraseña es incorrecto.'
+                error: i18n.t('errors.invalidPasswordFormat', { ns: 'auth' })
             }
 
             if (error.status === 422) return {
                 success: false,
-                error: 'Código de recuperación no válido.'
+                error: i18n.t('errors.invalidRecoveryCode', { ns: 'auth' })
             }
         }
     }
 
     return {
         success: false,
-        error: 'Error: No se pudo restablecer la contraseña.'
+        error: i18n.t('errors.recoveryFailed', { ns: 'auth' })
     }
 };
