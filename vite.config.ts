@@ -24,6 +24,13 @@ export default defineConfig({
         entryFileNames: 'assets/[hash].js',
         chunkFileNames: 'assets/[hash].js',
         assetFileNames: 'assets/[hash][extname]', // CSS, imágenes, etc.
+        manualChunks(id) {
+          if (id.includes('node_modules/react')) return 'vendor-react';
+          if (id.includes('node_modules/socket.io-client')) return 'vendor-socketio';
+          if (id.includes('node_modules/i18next')) return 'vendor-i18n';
+          if (id.includes('node_modules/axios')) return 'vendor-axios';
+          if (id.includes('node_modules')) return 'vendor';
+        },
       },
     },
   },
