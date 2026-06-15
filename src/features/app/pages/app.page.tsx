@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
 import { useFriendsStore } from '@friends/store/useFriendsStore';
+import { useValidAuth } from '@auth/hooks/useValidAuth';
 import { Fase0Logo } from '@shared/components/ui/Fase0Logo';
 import {
     UsersIcon,
@@ -11,6 +12,8 @@ import {
 export default function AppPage() {
     const { t } = useTranslation('app');
     const navigate = useNavigate();
+    const { user: { name: fullName } } = useValidAuth();
+    const firstName = fullName.split(' ')[0];
     const numberOfFriends = useFriendsStore(state => state.friends.length);
     const numberOfPendingRequests = useFriendsStore(state => state.friendsRequests.length);
     const title = t('page.title');
@@ -21,7 +24,7 @@ export default function AppPage() {
             <section className='animate-page-enter flex h-full w-full flex-col items-center justify-center gap-6 px-4'>
                 <div className='flex flex-col items-center gap-2 text-center'>
                     <Fase0Logo color='white' className='w-30' />
-                    <h2 className='text-2xl font-semibold text-primary'>{t('welcome.title')}</h2>
+                    <h2 className='text-2xl font-semibold text-primary'>{t('welcome.title', { name: firstName })}</h2>
                     <p className='max-w-sm text-sm text-secondary'>
                         {t('welcome.description')}
                     </p>

@@ -3,7 +3,7 @@
         "title": "Chats | Fase0"
     },
     "welcome": {
-        "title": "Welcome to Fase0",
+        "title": "Welcome, {{name}}",
         "description": "Select a chat from the list or explore the following options to get started."
     },
     "nav": {
