@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useValidAuth } from '@auth/hooks/useValidAuth';
 import { getMessageById } from '@messages/lib/messageActions';
+import i18n from '@/lib/i18n';
 
 import type { ActionHookState } from '@shared/types/global.types';
 import type { VisibleMessage } from '@messages/types/message.types';
@@ -26,7 +27,7 @@ export function useGetMessageById() {
 
         setStatus({
             status: 'error' as const,
-            message: 'El mensaje no fue encontrado.'
+            message: i18n.t('messages:errors.messageNotFound')
         });
     }
 

@@ -3,6 +3,7 @@ import { useValidAuth } from '@auth/hooks/useValidAuth';
 import { createMessage } from '@messages/lib/messageActions';
 import { useMessageStore } from '@messages/store/useMessageStore';
 import { createOptimisticMessage } from '@messages/utils/createOptimisticMessage';
+import i18n from '@/lib/i18n';
 
 import type { ActionHookState } from '@shared/types/global.types';
 import type { PublicMessage, CreateMessageBody } from '@messages/types/message.types';
@@ -39,7 +40,7 @@ export function useCreateMessage() {
             setStatus({ status: 'success', data: result.data.message });
         } else {
             useMessageStore.getState().removeMessage(body.chatId, optimistic._id);
-            setStatus({ status: 'error', message: 'No fue posible crear el mensaje.' });
+            setStatus({ status: 'error', message: i18n.t('messages:errors.createMessage') });
         }
     }
 

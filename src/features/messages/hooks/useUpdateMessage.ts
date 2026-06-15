@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useValidAuth } from '@auth/hooks/useValidAuth';
 import { useMessageStore } from '@messages/store/useMessageStore';
 import { updateMessage } from '@messages/lib/messageActions';
+import i18n from '@/lib/i18n';
 
 import type { ActionHookState } from '@shared/types/global.types';
 import type { VisibleMessage, UpdateMessageBody } from '@messages/types/message.types';
@@ -16,10 +17,10 @@ export function useUpdateMessage() {
     const [status, setStatus] = useState<ActionHookState<VisibleMessage>>({ status: 'idle' });
 
     function getSuccessMessage(body: UpdateMessageBody): string {
-        if (body.deletedDef) return 'Mensaje eliminado para todos.';
-        if (body.deleted) return 'Mensaje eliminado.';
-        if (body.read) return 'Mensaje marcado como leído.';
-        return 'Mensaje actualizado correctamente.';
+        if (body.deletedDef) return i18n.t('messages:toast.deletedForEveryone');
+        if (body.deleted) return i18n.t('messages:toast.deleted');
+        if (body.read) return i18n.t('messages:toast.markedAsRead');
+        return i18n.t('messages:toast.updated');
     }
 
     async function update(chatId: string, messageId: string, body: UpdateMessageBody) {
@@ -38,7 +39,7 @@ export function useUpdateMessage() {
 
         setStatus({
             status: 'error' as const,
-            message: 'No fue posible actualizar el mensaje.'
+            message: i18n.t('messages:errors.updateMessage')
         });
     }
 

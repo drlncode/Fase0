@@ -2,6 +2,7 @@ import { useCallback } from 'react';
 import { useValidAuth } from '@auth/hooks/useValidAuth';
 import { useMessageStore } from '@messages/store/useMessageStore';
 import { getMessages } from '@messages/lib/messageActions';
+import i18n from '@/lib/i18n';
 
 import type { ChatMessageState } from '@messages/types/message.types';
 
@@ -42,7 +43,7 @@ export function useGetMessages(chatId: string) {
             return;
         }
 
-        setChatFetchState(chatId, 'error', 'No fue posible recuperar los mensajes.');
+        setChatFetchState(chatId, 'error', i18n.t('messages:errors.fetchMessages'));
     }, [authStatus, session, chatId, setMessages, setChatFetchState, setChatPagination]);
 
     return {

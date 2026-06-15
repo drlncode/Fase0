@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useValidAuth } from '@auth/hooks/useValidAuth';
 import { markBatchAsRead } from '@messages/lib/messageActions';
+import i18n from '@/lib/i18n';
 
 import type { ActionHookState } from '@shared/types/global.types';
 
@@ -27,7 +28,7 @@ export function useMarkMessagesAsRead() {
 
         setStatus({
             status: 'error' as const,
-            message: 'No fue posible marcar los mensajes como leídos.'
+            message: i18n.t('messages:errors.markAsRead')
         });
     }
 

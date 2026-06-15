@@ -38,7 +38,7 @@ function formatShortDate(date: Date): string {
     return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
 }
 
-function getDayLabel(date: Date): string {
+function getDayLabel(date: Date, t: (key: string) => string, language: string): string {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
@@ -49,23 +49,27 @@ function getDayLabel(date: Date): string {
     yesterday.setDate(yesterday.getDate() - 1);
 
     if (isSameDay(messageDay, today)) {
-        return 'Hoy';
+        return t('date.today');
     }
 
     if (isSameDay(messageDay, yesterday)) {
-        return 'Ayer';
+        return t('date.yesterday');
     }
 
     const startOfWeek = getStartOfWeek(today);
     if (messageDay >= startOfWeek) {
-        const weekday = new Intl.DateTimeFormat('es', { weekday: 'long' }).format(messageDay);
+        const weekday = new Intl.DateTimeFormat(language, { weekday: 'long' }).format(messageDay);
         return weekday.charAt(0).toUpperCase() + weekday.slice(1);
     }
 
     return formatShortDate(messageDay);
 }
 
-export function groupMessagesByDate(messages: StoreMessage[]): MessageDateGroup[] {
+export function groupMessagesByDate(
+    messages: StoreMessage[],
+    t: (key: string) => string,
+    language: string
+): MessageDateGroup[] {
     const groupsMap = new Map<string, StoreMessage[]>();
 
     for (const message of messages) {
@@ -83,7 +87,7 @@ export function groupMessagesByDate(messages: StoreMessage[]): MessageDateGroup[
 
     for (const [dateKey, dayMessages] of groupsMap) {
         const date = getMessageDate(dayMessages[0]);
-        const label = getDayLabel(date);
+        const label = getDayLabel(date, t, language);
 
         groups.push({
             dateKey,
