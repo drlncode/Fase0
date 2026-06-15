@@ -1,4 +1,5 @@
 import { Fragment, useRef, useState, useEffect, useLayoutEffect, useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useValidAuth } from '@auth/hooks/useValidAuth';
 import { useGetMessages } from '@messages/hooks/useGetMessages';
 import { Message } from '@messages/components/Message';
@@ -34,10 +35,11 @@ function scrollToBottom(container: HTMLElement, smooth = false) {
 }
 
 export function MessagesContainer({ chatId }: { chatId: string }) {
+    const { t, i18n } = useTranslation('messages');
     const { user: { _id: currentUserId } } = useValidAuth();
     const { state, messages, pagination, loadMore } = useGetMessages(chatId);
     const sortedMessages = [...messages].reverse();
-    const dateGroups = groupMessagesByDate(sortedMessages);
+    const dateGroups = groupMessagesByDate(sortedMessages, t, i18n.language);
     const scrollRef = useRef<HTMLElement>(null);
     const scrollMetricsRef = useRef<{ height: number; top: number } | null>(null);
     const isInitialLoadRef = useRef(true);
@@ -168,7 +170,7 @@ export function MessagesContainer({ chatId }: { chatId: string }) {
                     if (container) scrollToBottom(container, true);
                 }}
                 className={`absolute left-11 bottom-6 z-20 cursor-pointer rounded-lg border border-default bg-subtle p-2 shadow-lg transition-all duration-200 hover:cursor-pointer ${showScrollButton ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0 pointer-events-none'}`}
-                aria-label='Ir al final del chat'
+                aria-label={t('aria.scrollToBottom')}
             >
                 <ChevronDownIcon size={20} />
             </button>

@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useValidAuth } from '@auth/hooks/useValidAuth';
 import { useChatStore } from '@/features/chats/store/useChatStore';
 import { useUpdateMessage } from '@messages/hooks/useUpdateMessage';
@@ -32,6 +33,7 @@ interface MessageProps {
 }
 
 export function Message({ message, side, firstOfGroup }: MessageProps) {
+    const { t } = useTranslation('messages');
     const { user: { _id: currentUserId } } = useValidAuth();
     const isSender = currentUserId === message.senderId;
     const [ copied, setCopied ] = useState(false);
@@ -93,11 +95,11 @@ export function Message({ message, side, firstOfGroup }: MessageProps) {
 
     const handleDeleteForMe = () => {
         openConfirm({
-            title: 'Eliminar para mi',
-            message: '¿Estás seguro de que quieres eliminar este mensaje para ti? Esta acción no se puede deshacer.',
-            confirmText: 'Eliminar',
+            title: t('dialogs.deleteForMe.title'),
+            message: t('dialogs.deleteForMe.message'),
+            confirmText: t('dialogs.deleteForMe.confirm'),
             onConfirm: () => update(message.chatId, message._id, { deleted: true }),
-            onSuccess: () => success('Mensaje eliminado para ti.'),
+            onSuccess: () => success(t('toast.deletedForMe')),
             awaitedAction: true,
             danger: true
         });
@@ -105,11 +107,11 @@ export function Message({ message, side, firstOfGroup }: MessageProps) {
 
     const handleDeleteForEveryone = () => {
         openConfirm({
-            title: 'Eliminar para todos',
-            message: '¿Estás seguro de que quieres eliminar este mensaje para todos? Esta acción no se puede deshacer.',
-            confirmText: 'Eliminar',
+            title: t('dialogs.deleteForEveryone.title'),
+            message: t('dialogs.deleteForEveryone.message'),
+            confirmText: t('dialogs.deleteForEveryone.confirm'),
             onConfirm: () => update(message.chatId, message._id, { deletedDef: true }),
-            onSuccess: () => success('Mensaje eliminado para todos.'),
+            onSuccess: () => success(t('toast.deletedForEveryone')),
             awaitedAction: true,
             danger: true
         });
@@ -138,7 +140,7 @@ export function Message({ message, side, firstOfGroup }: MessageProps) {
                         <>
                             <MessageDropdownItem
                                 icon={<CornerDownLeftIcon size={16} />}
-                                label='Responder'
+                                label={t('actions.reply')}
                                 onClick={handleReply}
                             />
                             {(isTimeRemainingForEdit && isSender) && (
@@ -147,7 +149,7 @@ export function Message({ message, side, firstOfGroup }: MessageProps) {
                                         icon={<PencilIcon size={16} />}
                                         label={
                                             <span className='flex w-full flex-1 items-center justify-between gap-2.5'>
-                                                <span>Editar</span>
+                                                <span>{t('actions.edit')}</span>
                                                 {isTimeRemainingForEdit && <Countdown targetTimestamp={message.editInfo.editableUntil} className='mt-0.5 text-[10px]' />}
                                             </span>
                                         }
@@ -159,7 +161,7 @@ export function Message({ message, side, firstOfGroup }: MessageProps) {
                             { !isTimeRemainingForEdit && <DropdownDivider /> }
                             <MessageDropdownItem
                                 icon={copied ? <ClipboardCheckIcon size={16} /> : <ClipboardIcon size={16} />}
-                                label={ copied ? 'Copiado' : 'Copiar' }
+                                label={ copied ? t('actions.copied') : t('actions.copy') }
                                 closeOnClick={false}
                                 onClick={handleCopy}
                                 disabled={copied}
@@ -171,7 +173,7 @@ export function Message({ message, side, firstOfGroup }: MessageProps) {
                         <>
                             <MessageDropdownItem
                                 icon={<TrashIcon size={16} />}
-                                label='Eliminar para mí'
+                                label={t('actions.deleteForMe')}
                                 danger
                                 onClick={handleDeleteForMe}
                                 disabled={updateStatus === 'loading'}
@@ -181,7 +183,7 @@ export function Message({ message, side, firstOfGroup }: MessageProps) {
                                     icon={<TrashIcon size={16} />}
                                     label={
                                         <span className='flex items-center justify-between gap-2.5'>
-                                            <span>Eliminar para todos</span>
+                                            <span>{t('actions.deleteForEveryone')}</span>
                                             {isTimeRemainingForDelete && <Countdown targetTimestamp={message.deletableUntil} className='mt-0.5 text-[10px]' />}
                                         </span>
                                     }

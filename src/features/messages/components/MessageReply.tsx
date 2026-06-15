@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useValidAuth } from '@auth/hooks/useValidAuth';
 import { useMessageStore } from '@messages/store/useMessageStore';
 import { useChatStore } from '@chats/store/useChatStore';
@@ -17,8 +18,9 @@ interface MessageReplyProps {
 }
 
 export function MessageReply({ replyToMessageId, chatId, side }: MessageReplyProps) {
+    const { t } = useTranslation('messages');
     const [ messageRepliedState, setMessageRepliedState ] = useState<
-        | { message: PublicMessage | DeletedMessage, senderUsername: string } 
+        | { message: PublicMessage | DeletedMessage }
         | null
         | 'searching'
     >('searching');
@@ -40,8 +42,7 @@ export function MessageReply({ replyToMessageId, chatId, side }: MessageReplyPro
                 getMessageById(chatId, replyToMessageId).then(result => {
                     if (fetchId !== fetchIdRef.current) return;
                     if (result.success) {
-                        const senderUsername = result.data.senderId === currentUserId ? 'Tú' : `@${activeChat.participant.username}`;
-                        setMessageRepliedState({ message: result.data, senderUsername });
+                        setMessageRepliedState({ message: result.data });
                     } else {
                         setMessageRepliedState(null);
                     }
@@ -58,8 +59,7 @@ export function MessageReply({ replyToMessageId, chatId, side }: MessageReplyPro
                 getMessageById(chatId, replyToMessageId).then(result => {
                     if (fetchId !== fetchIdRef.current) return;
                     if (result.success) {
-                        const senderUsername = result.data.senderId === currentUserId ? 'Tú' : `@${activeChat.participant.username}`;
-                        setMessageRepliedState({ message: result.data, senderUsername });
+                        setMessageRepliedState({ message: result.data });
                     } else {
                         setMessageRepliedState(null);
                     }
@@ -73,28 +73,31 @@ export function MessageReply({ replyToMessageId, chatId, side }: MessageReplyPro
             return;
         }
 
-        const senderUsername = messageReplied.senderId === currentUserId ? 'Tú' : `@${activeChat.participant.username}`;
-        setMessageRepliedState({ message: messageReplied as VisibleMessage, senderUsername });
+        setMessageRepliedState({ message: messageReplied as VisibleMessage });
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [activeChat, chatId, replyToMessageId, authStatus]);
 
     if (messageRepliedState === 'searching') return <SpinLoader size={16} />;
     if (!messageRepliedState) return null;
 
+    const { message } = messageRepliedState;
+    const isCurrentUser = !isDeletedMessage(message) && message.senderId === currentUserId;
+    const senderUsername = isCurrentUser ? t('reply.you') : activeChat ? `@${activeChat.participant.username}` : '';
+
     return (
         <div className={cn('mb-1 flex min-w-0 items-center gap-1.5 overflow-hidden rounded-xs border-l-2 border-primary/30 px-2 py-1 text-xs', side === 'sent' ? 'bg-overlay' : 'bg-subtle')}>
             <span className='shrink-0 text-primary'>
                 <CornerDownLeftIcon size={14} />
             </span>
-            {(messageRepliedState && !isDeletedMessage(messageRepliedState.message))
+            {!isDeletedMessage(message)
                 ? (
-                    <span className='min-w-0 shrink-0 font-medium text-secondary'>{messageRepliedState.senderUsername}</span>
+                    <span className='min-w-0 shrink-0 font-medium text-secondary'>{senderUsername}</span>
                 ) : (
-                    <span className='italic'>Mensaje eliminado</span>
+                    <span className='italic'>{t('reply.deletedMessage')}</span>
                 )
             }
-            {messageRepliedState && !isDeletedMessage(messageRepliedState.message) && (
-                <p className='min-w-0 truncate text-secondary/75'>{messageRepliedState.message.content}</p>
+            {!isDeletedMessage(message) && (
+                <p className='min-w-0 truncate text-secondary/75'>{message.content}</p>
             )}
         </div>
     );

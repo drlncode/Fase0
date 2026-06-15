@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { cn } from '@/shared/utils/cn';
 import {
     useState, useEffect, useLayoutEffect,
@@ -21,6 +22,7 @@ interface MessageDropdownProps {
 }
 
 export function MessageDropdown({ children, side = 'sent', className }: MessageDropdownProps) {
+    const { t } = useTranslation('messages');
     const dropdownId = useId();
     const isOpen = useDropdownStore((s) => s.openId === dropdownId);
     const { open: openDropdown, close: closeDropdown } = useDropdownStore();
@@ -143,7 +145,7 @@ export function MessageDropdown({ children, side = 'sent', className }: MessageD
                 ref={btnRef}
                 aria-expanded={isOpen}
                 aria-haspopup="menu"
-                aria-label="Opciones del mensaje"
+                aria-label={t('aria.messageOptions')}
             >
                 <span className='pointer-events-none'>
                     {isOpen ? <ChevronUpIcon size={18} /> : <ChevronDownIcon size={18} />}
