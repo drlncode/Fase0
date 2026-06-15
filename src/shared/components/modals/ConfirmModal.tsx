@@ -79,7 +79,7 @@ export function ConfirmModal({
                         onClick={close}
                         disabled={isWaiting}
                         className={cn(
-                            'min-w-22.5 cursor-pointer rounded-md px-4 py-2 text-left text-sm text-secondary transition-colors select-none',
+                            'min-w-22.5 cursor-pointer rounded-md px-4 py-2 text-center text-sm text-secondary transition-colors select-none',
                             'hover:bg-subtle',
                             'disabled:cursor-not-allowed disabled:opacity-50'
                         )}
