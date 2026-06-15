@@ -3,6 +3,7 @@ import { useValidAuth } from '@auth/hooks/useValidAuth';
 import { useToast } from '@shared/hooks/useToast';
 import { useAvatarCacheStore } from '@shared/store/useAvatarCacheStore';
 import { deleteAvatar } from '@media/lib/mediaActions';
+import i18n from '@/lib/i18n';
 
 import type { ActionHookState } from '@shared/types/global.types';
 
@@ -23,7 +24,7 @@ export function useDeleteAvatar() {
         if (result.success) {
             useAvatarCacheStore.getState().removeAvatar(_id);
             updateUser({ avatar: null });
-            success('Avatar eliminado correctamente.');
+            success(i18n.t('media:toast.avatarDeleted'));
 
             setStatus({
                 status: 'success' as const,
@@ -33,10 +34,10 @@ export function useDeleteAvatar() {
             return true;
         }
 
-        danger('No fue posible eliminar el avatar. Inténtalo de nuevo.');
+        danger(i18n.t('media:toast.avatarDeleteError'));
         setStatus({
             status: 'error' as const,
-            message: 'No fue posible eliminar el avatar.'
+            message: i18n.t('media:errors.avatarDelete')
         });
 
         return false;

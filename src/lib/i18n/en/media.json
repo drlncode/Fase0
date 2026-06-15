@@ -1,0 +1,12 @@
+{
+    "toast": {
+        "avatarDeleted": "Avatar deleted successfully.",
+        "avatarUploaded": "Avatar updated successfully.",
+        "avatarDeleteError": "Could not delete avatar. Try again.",
+        "avatarUploadError": "Could not upload avatar. Try again."
+    },
+    "errors": {
+        "avatarDelete": "Could not delete avatar.",
+        "avatarUpload": "Could not upload avatar."
+    }
+}

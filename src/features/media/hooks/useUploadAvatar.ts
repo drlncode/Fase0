@@ -3,6 +3,7 @@ import { useValidAuth } from '@auth/hooks/useValidAuth';
 import { useToast } from '@shared/hooks/useToast';
 import { useAvatarCacheStore } from '@shared/store/useAvatarCacheStore';
 import { uploadAvatar } from '@media/lib/mediaActions';
+import i18n from '@/lib/i18n';
 
 import type { ActionHookState } from '@shared/types/global.types';
 import type { UploadAvatarData } from '@media/types/media.types';
@@ -22,12 +23,10 @@ export function useUploadAvatar() {
         const result = await uploadAvatar(file);
 
         if (result.success) {
-            // Seed the avatar cache with the freshly selected file so the UI can
-            // keep showing it while the server-side asset becomes available.
             const localUrl = URL.createObjectURL(file);
             useAvatarCacheStore.getState().setAvatar(_id, result.data.fileName, file, localUrl);
             updateUser({ avatar: result.data.fileName });
-            success('Avatar actualizado correctamente.');
+            success(i18n.t('media:toast.avatarUploaded'));
 
             setStatus({
                 status: 'success' as const,
@@ -37,10 +36,10 @@ export function useUploadAvatar() {
             return result.data;
         }
 
-        danger('No fue posible subir el avatar. Inténtalo de nuevo.');
+        danger(i18n.t('media:toast.avatarUploadError'));
         setStatus({
             status: 'error' as const,
-            message: 'No fue posible subir el avatar.'
+            message: i18n.t('media:errors.avatarUpload')
         });
 
         return null;
