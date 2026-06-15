@@ -628,7 +628,7 @@ export function AdjustmentsHorizontalIcon({ size = 24 }: { size?: number }) {
 
 export function LangIcon({ size = 24 }: { size?: number }) {
     return (
-        <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
             <path d="M9 6.371c0 4.418 -2.239 6.629 -5 6.629" />
             <path d="M4 6.371h7" />
@@ -642,7 +642,7 @@ export function LangIcon({ size = 24 }: { size?: number }) {
 
 export function ActivityIcon({ size = 24 }: { size?: number }) {
     return (
-        <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
             <path d="M3 12h4.5l1.5 -6l4 12l2 -9l1.5 3h4.5" />
         </svg>
