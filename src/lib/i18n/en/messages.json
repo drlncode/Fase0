@@ -1,0 +1,49 @@
+{
+    "deletedMessage": "Deleted message",
+    "actions": {
+        "reply": "Reply",
+        "edit": "Edit",
+        "copy": "Copy",
+        "copied": "Copied",
+        "deleteForMe": "Delete for me",
+        "deleteForEveryone": "Delete for everyone"
+    },
+    "dialogs": {
+        "deleteForMe": {
+            "title": "Delete for me",
+            "message": "Are you sure you want to delete this message? This action cannot be undone.",
+            "confirm": "Delete"
+        },
+        "deleteForEveryone": {
+            "title": "Delete for everyone",
+            "message": "Are you sure you want to delete this message for everyone? This action cannot be undone.",
+            "confirm": "Delete"
+        }
+    },
+    "toast": {
+        "deletedForMe": "Message deleted for you.",
+        "deletedForEveryone": "Message deleted for everyone.",
+        "deleted": "Message deleted.",
+        "markedAsRead": "Message marked as read.",
+        "updated": "Message updated successfully."
+    },
+    "reply": {
+        "you": "You",
+        "deletedMessage": "Deleted message"
+    },
+    "aria": {
+        "messageOptions": "Message options",
+        "scrollToBottom": "Scroll to bottom of chat"
+    },
+    "errors": {
+        "fetchMessages": "Could not load messages.",
+        "createMessage": "Could not create message.",
+        "updateMessage": "Could not update message.",
+        "messageNotFound": "Message not found.",
+        "markAsRead": "Could not mark messages as read."
+    },
+    "date": {
+        "today": "Today",
+        "yesterday": "Yesterday"
+    }
+}

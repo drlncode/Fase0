@@ -1,0 +1,49 @@
+{
+    "deletedMessage": "Mensaje eliminado",
+    "actions": {
+        "reply": "Responder",
+        "edit": "Editar",
+        "copy": "Copiar",
+        "copied": "Copiado",
+        "deleteForMe": "Eliminar para mí",
+        "deleteForEveryone": "Eliminar para todos"
+    },
+    "dialogs": {
+        "deleteForMe": {
+            "title": "Eliminar para mi",
+            "message": "¿Estás seguro de que quieres eliminar este mensaje para ti? Esta acción no se puede deshacer.",
+            "confirm": "Eliminar"
+        },
+        "deleteForEveryone": {
+            "title": "Eliminar para todos",
+            "message": "¿Estás seguro de que quieres eliminar este mensaje para todos? Esta acción no se puede deshacer.",
+            "confirm": "Eliminar"
+        }
+    },
+    "toast": {
+        "deletedForMe": "Mensaje eliminado para ti.",
+        "deletedForEveryone": "Mensaje eliminado para todos.",
+        "deleted": "Mensaje eliminado.",
+        "markedAsRead": "Mensaje marcado como leído.",
+        "updated": "Mensaje actualizado correctamente."
+    },
+    "reply": {
+        "you": "Tú",
+        "deletedMessage": "Mensaje eliminado"
+    },
+    "aria": {
+        "messageOptions": "Opciones del mensaje",
+        "scrollToBottom": "Ir al final del chat"
+    },
+    "errors": {
+        "fetchMessages": "No fue posible recuperar los mensajes.",
+        "createMessage": "No fue posible crear el mensaje.",
+        "updateMessage": "No fue posible actualizar el mensaje.",
+        "messageNotFound": "El mensaje no fue encontrado.",
+        "markAsRead": "No fue posible marcar los mensajes como leídos."
+    },
+    "date": {
+        "today": "Hoy",
+        "yesterday": "Ayer"
+    }
+}
