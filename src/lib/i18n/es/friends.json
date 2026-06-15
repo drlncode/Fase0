@@ -1,0 +1,80 @@
+{
+    "page": {
+        "title": "Amigos | Fase0"
+    },
+    "addNewFriends": {
+        "headerLabel": "Buscar por nombre de usuario",
+        "idleTitle": "Buscar usuarios",
+        "idleSubtitle": "Escribe un nombre de usuario para buscar",
+        "noResultsTitle": "Sin resultados",
+        "noResultsSubtitle": "No se encontraron usuarios con ese nombre",
+        "infiniteCount": "{{count}} de {{total}} usuarios",
+        "userFound": {
+            "friend": "Amigo",
+            "sent": "Enviada",
+            "pending": "Pendiente",
+            "add": "Agregar"
+        }
+    },
+    "friendsList": {
+        "sectionTitle": "Amigos",
+        "infiniteCount": "{{count}} de {{total}} amigos",
+        "emptyTitle": "No tienes amigos",
+        "emptySubtitle": "Envía una solicitud para conectar",
+        "emptyAction": "Agregar amigo",
+        "item": {
+            "open": "Abrir",
+            "start": "Iniciar",
+            "writeMessage": "Escribir mensaje",
+            "seeProfile": "Ver perfil",
+            "deleteFriend": "Eliminar amigo",
+            "deleteConfirmTitle": "Eliminar amigo",
+            "deleteConfirmMessage": "¿Estás seguro de que quieres eliminar a @{{username}} de tu lista de amigos?",
+            "profileTitle": "Perfil de @{{username}}",
+            "friendsSince": "Amigos desde {{date}}"
+        }
+    },
+    "pendingRequests": {
+        "sectionTitle": "Solicitudes pendientes",
+        "infiniteCount": "{{count}} de {{total}} solicitudes",
+        "emptyTitle": "Sin solicitudes pendientes",
+        "emptySubtitle": "Aquí aparecerán las solicitudes que te envíen"
+    },
+    "sentRequests": {
+        "sectionTitle": "Solicitudes enviadas",
+        "infiniteCount": "{{count}} de {{total}} enviadas",
+        "emptyTitle": "Sin solicitudes enviadas",
+        "emptySubtitle": "Envía solicitudes para conectar con otros",
+        "emptyAction": "Agregar amigo",
+        "cancel": "Cancelar"
+    },
+    "newChatPopover": {
+        "placeholder": "Escribe un mensaje...",
+        "ariaLabel": "Escribe un mensaje"
+    },
+    "toast": {
+        "friendRequestSent": "Solicitud de amistad enviada.",
+        "friendRequestAccepted": "Solicitud de amistad aceptada.",
+        "friendRequestRejected": "Solicitud de amistad rechazada.",
+        "friendRequestCancelled": "Solicitud de amistad cancelada.",
+        "friendDeleted": "Amigo eliminado correctamente.",
+        "friendRequestSentError": "No fue posible enviar la solicitud de amistad. Inténtalo de nuevo.",
+        "friendRequestAcceptedError": "No fue posible aceptar la solicitud de amistad. Inténtalo de nuevo.",
+        "friendRequestRejectedError": "No fue posible rechazar la solicitud de amistad. Inténtalo de nuevo.",
+        "friendRequestCancelledError": "No fue posible cancelar la solicitud de amistad. Inténtalo de nuevo.",
+        "friendDeletedError": "No fue posible eliminar el amigo. Inténtalo de nuevo.",
+        "friendRequestSentStatusError": "No fue posible enviar la solicitud de amistad.",
+        "friendRequestAcceptedStatusError": "No fue posible aceptar la solicitud de amistad.",
+        "friendRequestRejectedStatusError": "No fue posible rechazar la solicitud de amistad.",
+        "friendRequestCancelledStatusError": "No fue posible cancelar la solicitud de amistad.",
+        "friendDeletedStatusError": "No fue posible eliminar el amigo.",
+        "newFriendRequest": "Nueva solicitud de amistad. \nTienes una nueva solicitud de amistad de @{{username}}.",
+        "friendRequestAccepted": "Solicitud de amistad aceptada. \n@{{username}} ahora es tu amigo."
+    },
+    "errors": {
+        "invalidSession": "Sesión inválida.",
+        "fetchFriends": "No fue posible recuperar los amigos.",
+        "fetchRequests": "No fue posible recuperar las solicitudes.",
+        "fetchSentRequests": "No fue posible recuperar las solicitudes enviadas."
+    }
+}

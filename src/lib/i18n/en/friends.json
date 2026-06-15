@@ -1,0 +1,80 @@
+{
+    "page": {
+        "title": "Friends | Fase0"
+    },
+    "addNewFriends": {
+        "headerLabel": "Search by username",
+        "idleTitle": "Search users",
+        "idleSubtitle": "Type a username to search",
+        "noResultsTitle": "No results",
+        "noResultsSubtitle": "No users found with that username",
+        "infiniteCount": "{{count}} of {{total}} users",
+        "userFound": {
+            "friend": "Friend",
+            "sent": "Sent",
+            "pending": "Pending",
+            "add": "Add"
+        }
+    },
+    "friendsList": {
+        "sectionTitle": "Friends",
+        "infiniteCount": "{{count}} of {{total}} friends",
+        "emptyTitle": "No friends yet",
+        "emptySubtitle": "Send a request to connect",
+        "emptyAction": "Add friend",
+        "item": {
+            "open": "Open",
+            "start": "Start",
+            "writeMessage": "Write a message",
+            "seeProfile": "See profile",
+            "deleteFriend": "Delete friend",
+            "deleteConfirmTitle": "Delete friend",
+            "deleteConfirmMessage": "Are you sure you want to remove @{{username}} from your friends list?",
+            "profileTitle": "@{{username}}'s profile",
+            "friendsSince": "Friends since {{date}}"
+        }
+    },
+    "pendingRequests": {
+        "sectionTitle": "Pending requests",
+        "infiniteCount": "{{count}} of {{total}} requests",
+        "emptyTitle": "No pending requests",
+        "emptySubtitle": "Requests you receive will appear here"
+    },
+    "sentRequests": {
+        "sectionTitle": "Sent requests",
+        "infiniteCount": "{{count}} of {{total}} sent",
+        "emptyTitle": "No sent requests",
+        "emptySubtitle": "Send requests to connect with others",
+        "emptyAction": "Add friend",
+        "cancel": "Cancel"
+    },
+    "newChatPopover": {
+        "placeholder": "Write a message...",
+        "ariaLabel": "Write a message"
+    },
+    "toast": {
+        "friendRequestSent": "Friend request sent.",
+        "friendRequestAccepted": "Friend request accepted.",
+        "friendRequestRejected": "Friend request rejected.",
+        "friendRequestCancelled": "Friend request cancelled.",
+        "friendDeleted": "Friend removed successfully.",
+        "friendRequestSentError": "Could not send friend request. Try again.",
+        "friendRequestAcceptedError": "Could not accept friend request. Try again.",
+        "friendRequestRejectedError": "Could not reject friend request. Try again.",
+        "friendRequestCancelledError": "Could not cancel friend request. Try again.",
+        "friendDeletedError": "Could not remove friend. Try again.",
+        "friendRequestSentStatusError": "Could not send friend request.",
+        "friendRequestAcceptedStatusError": "Could not accept friend request.",
+        "friendRequestRejectedStatusError": "Could not reject friend request.",
+        "friendRequestCancelledStatusError": "Could not cancel friend request.",
+        "friendDeletedStatusError": "Could not remove friend.",
+        "newFriendRequest": "New friend request.\nYou have a new friend request from @{{username}}.",
+        "friendRequestAccepted": "Friend request accepted.\n@{{username}} is now your friend."
+    },
+    "errors": {
+        "invalidSession": "Invalid session.",
+        "fetchFriends": "Could not load friends.",
+        "fetchRequests": "Could not load requests.",
+        "fetchSentRequests": "Could not load sent requests."
+    }
+}

@@ -9,6 +9,7 @@ import enUsers from '@/lib/i18n/en/users.json';
 import enAuth from '@/lib/i18n/en/auth.json';
 import enChats from '@/lib/i18n/en/chats.json';
 import enMessages from '@/lib/i18n/en/messages.json';
+import enFriends from '@/lib/i18n/en/friends.json';
 
 // Spanish translations
 import esCommon from '@/lib/i18n/es/common.json';
@@ -17,6 +18,7 @@ import esUsers from '@/lib/i18n/es/users.json';
 import esAuth from '@/lib/i18n/es/auth.json';
 import esChats from '@/lib/i18n/es/chats.json';
 import esMessages from '@/lib/i18n/es/messages.json';
+import esFriends from '@/lib/i18n/es/friends.json';
 
 type AvailableLanguages = 'en' | 'es';
 
@@ -59,6 +61,7 @@ i18n
                 auth: esAuth,
                 chats: esChats,
                 messages: esMessages,
+                friends: esFriends,
             },
             en: {
                 common: enCommon,
@@ -67,6 +70,7 @@ i18n
                 auth: enAuth,
                 chats: enChats,
                 messages: enMessages,
+                friends: enFriends,
             },
         },
         defaultNS: 'common',
