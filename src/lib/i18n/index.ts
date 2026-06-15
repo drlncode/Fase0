@@ -2,18 +2,23 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import DetectetLanguage from 'i18next-browser-languagedetector';
 
+// English translations
 import enCommon from '@/lib/i18n/en/common.json';
 import enApp from '@/lib/i18n/en/app.json';
 import enUsers from '@/lib/i18n/en/users.json';
+import enAuth from '@/lib/i18n/en/auth.json';
 
+// Spanish translations
 import esCommon from '@/lib/i18n/es/common.json';
 import esApp from '@/lib/i18n/es/app.json';
 import esUsers from '@/lib/i18n/es/users.json';
+import esAuth from '@/lib/i18n/es/auth.json';
+
+type AvailableLanguages = 'en' | 'es';
 
 const PREFERENCES_KEY = 'preferences';
-const OLD_DETECTOR_KEY = 'i18nextLng';
 
-function readLanguage(): string | undefined {
+function readLanguage(): AvailableLanguages | undefined {
     try {
         const raw = localStorage.getItem(PREFERENCES_KEY);
         if (raw) {
@@ -26,33 +31,12 @@ function readLanguage(): string | undefined {
     return undefined;
 }
 
-function saveLanguage(lng: string): void {
+function saveLanguage(lng: AvailableLanguages): void {
     try {
         const raw = localStorage.getItem(PREFERENCES_KEY);
         const prefs = raw ? JSON.parse(raw) : {};
         prefs.language = lng;
         localStorage.setItem(PREFERENCES_KEY, JSON.stringify(prefs));
-    } catch { /* noop */ }
-}
-
-// Migrate old i18nextLng key → preferences.language
-const oldVal = localStorage.getItem(OLD_DETECTOR_KEY);
-if (oldVal !== null) {
-    if (['es', 'en'].includes(oldVal) && !readLanguage()) {
-        saveLanguage(oldVal);
-    }
-    localStorage.removeItem(OLD_DETECTOR_KEY);
-}
-
-// Clean up stale region-coded values that may have been stored before migration
-const stale = localStorage.getItem(PREFERENCES_KEY);
-if (stale) {
-    try {
-        const prefs = JSON.parse(stale);
-        if (prefs.language && !['es', 'en'].includes(prefs.language)) {
-            prefs.language = 'en';
-            localStorage.setItem(PREFERENCES_KEY, JSON.stringify(prefs));
-        }
     } catch { /* noop */ }
 }
 
@@ -68,16 +52,18 @@ i18n
                 common: esCommon,
                 app: esApp,
                 users: esUsers,
+                auth: esAuth,
             },
             en: {
                 common: enCommon,
                 app: enApp,
                 users: enUsers,
+                auth: enAuth,
             },
         },
         defaultNS: 'common',
         fallbackLng: 'en',
-        supportedLngs: ['es', 'en'],
+        supportedLngs: ['es', 'en'] satisfies AvailableLanguages[],
         nonExplicitSupportedLngs: true,
         detection: {
             order: ['navigator'],
@@ -88,7 +74,7 @@ i18n
         },
     });
 
-i18n.on('languageChanged', (lng) => {
+i18n.on('languageChanged', (lng: AvailableLanguages) => {
     document.documentElement.lang = lng;
     saveLanguage(lng);
 });
