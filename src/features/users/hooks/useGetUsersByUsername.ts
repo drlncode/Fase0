@@ -18,6 +18,7 @@ export function useGetUsersByUsername() {
     const { t } = useTranslation('users');
     const { user: { session } } = useValidAuth();
     const paginationRef = useRef<PaginationState>({ ...INITIAL_PAGINATION });
+    const requestIdRef = useRef(0);
     const [status, setStatus] = useState<SearchStatus>('idle');
     const [users, setUsers] = useState<SearchedUserPublicProfile[]>([]);
     const [canFetchMore, setCanFetchMore] = useState(false);
@@ -33,15 +34,17 @@ export function useGetUsersByUsername() {
     const loadUsers = useCallback(async (username: string) => {
         if (!username) return;
 
-        const isInitial = paginationRef.current.total === null;
-        setStatus(isInitial ? 'loading' : 'fetching');
+        const currentRequestId = ++requestIdRef.current;
+
+        paginationRef.current = { ...INITIAL_PAGINATION };
+        setUsers([]);
+        setStatus('loading');
 
         const { page, limit } = paginationRef.current;
-        const canMore = paginationRef.current.total !== null
-            && paginationRef.current.page <= Math.ceil(paginationRef.current.total / paginationRef.current.limit);
-        const nextPage = canMore ? paginationRef.current.page : page;
 
-        const result = await getUsersByUsernameAction(username, { page: nextPage, limit });
+        const result = await getUsersByUsernameAction(username, { page, limit });
+
+        if (currentRequestId !== requestIdRef.current) return;
 
         if (!result.success) {
             setStatus('error');
@@ -49,10 +52,10 @@ export function useGetUsersByUsername() {
         }
 
         const { totalCount, data } = result.data;
-        const newPagination = { ...paginationRef.current, total: totalCount, page: nextPage + 1 };
+        const newPagination = { ...paginationRef.current, total: totalCount, page: page + 1 };
         paginationRef.current = newPagination;
         updateCanFetchMore(newPagination);
-        setUsers(prev => isInitial ? data.users : [...prev, ...data.users]);
+        setUsers(data.users);
         setStatus('success');
 
         return {
@@ -69,10 +72,44 @@ export function useGetUsersByUsername() {
     const loadMore = useCallback(async (username: string) => {
         if (!username) return;
         if (status === 'loading' || status === 'fetching') return;
-        return loadUsers(username);
-    }, [loadUsers, status]);
+
+        const currentRequestId = ++requestIdRef.current;
+        setStatus('fetching');
+
+        const { page, limit } = paginationRef.current;
+        const canMore = paginationRef.current.total !== null
+            && paginationRef.current.page <= Math.ceil(paginationRef.current.total / paginationRef.current.limit);
+        const nextPage = canMore ? paginationRef.current.page : page;
+
+        const result = await getUsersByUsernameAction(username, { page: nextPage, limit });
+
+        if (currentRequestId !== requestIdRef.current) return;
+
+        if (!result.success) {
+            setStatus('error');
+            return { status: 'error' as const, message: t('api.fetchUsersError') };
+        }
+
+        const { totalCount, data } = result.data;
+        const newPagination = { ...paginationRef.current, total: totalCount, page: nextPage + 1 };
+        paginationRef.current = newPagination;
+        updateCanFetchMore(newPagination);
+        setUsers(prev => [...prev, ...data.users]);
+        setStatus('success');
+
+        return {
+            status: 'success' as const,
+            data: data.users,
+            pagination: {
+                page: result.data.page,
+                limit: result.data.limit,
+                totalCount: result.data.totalCount
+            }
+        };
+    }, [session, t, status]);
 
     const reset = useCallback(() => {
+        requestIdRef.current++;
         paginationRef.current = { ...INITIAL_PAGINATION };
         setUsers([]);
         setStatus('idle');
