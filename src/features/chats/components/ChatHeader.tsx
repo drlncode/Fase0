@@ -10,7 +10,7 @@ export function ChatHeader({ participant }: { participant: UserPublicProfile }) 
     const avatarUrl = useAvatarUrl(participant.avatar, participant._id);
 
     return (
-        <header className='bg-overlay flex items-center gap-3 px-4 py-2 border-b border-b-border-default'>
+        <header className='flex items-center gap-3 border-b border-b-border-default bg-overlay px-4 py-2'>
             <Avatar
                 alt={t('list.avatarAlt', { name: participant.name.split(' ')[0] })}
                 url={avatarUrl.url}

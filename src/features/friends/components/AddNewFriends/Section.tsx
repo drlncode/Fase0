@@ -53,7 +53,7 @@ export function AddNewFriendsSection({ highlight = false }) {
     };
 
     return (
-        <div className='-m-0.5 mr-1 flex h-full max-w-89 flex-1 flex-col overflow-auto p-0.5 pr-1'>
+        <div className='-m-0.5 mr-2.5 flex h-full max-w-89 flex-1 flex-col overflow-auto border-r border-default/70 p-0.5 pr-2'>
             <AddNewFriendsHeader onSearch={handleSearch} focus={highlight} />
             <UsersFoundContainer
                 users={users}
