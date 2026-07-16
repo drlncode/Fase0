@@ -16,7 +16,7 @@ Built with React 19, TypeScript, and Vite.
 
 | | |
 |---|---|
-| **Framework** | React 19, TypeScript 6, Vite 8 |
+| **Framework** | React 19, TypeScript 7, Vite 8 |
 | **Routing** | React Router 7 |
 | **State** | Zustand 5, React Context |
 | **Forms** | React Hook Form 7 + Zod 3 |
