@@ -3,9 +3,10 @@
         "title": "Friends | Fase0"
     },
     "addNewFriends": {
-        "headerLabel": "Search by username",
-        "idleTitle": "Search users",
-        "idleSubtitle": "Type a username to search",
+        "headerLabel": " Search by username",
+        "tabLabel": "Add friends",
+        "idleTitle": "Add friends",
+        "idleSubtitle": "Type a username to add",
         "noResultsTitle": "No results",
         "noResultsSubtitle": "No users found with that username",
         "infiniteCount": "{{count}} of {{total}} users",

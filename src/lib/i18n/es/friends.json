@@ -3,9 +3,10 @@
         "title": "Amigos | Fase0"
     },
     "addNewFriends": {
-        "headerLabel": "Buscar por nombre de usuario",
-        "idleTitle": "Buscar usuarios",
-        "idleSubtitle": "Escribe un nombre de usuario para buscar",
+        "headerLabel": " Buscar por nombre de usuario",
+        "tabLabel": "Agregar amigos",
+        "idleTitle": "Agregar amigos",
+        "idleSubtitle": "Escribe un nombre de usuario para agregar",
         "noResultsTitle": "Sin resultados",
         "noResultsSubtitle": "No se encontraron usuarios con ese nombre",
         "infiniteCount": "{{count}} de {{total}} usuarios",
