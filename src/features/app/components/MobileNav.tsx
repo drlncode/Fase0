@@ -9,7 +9,7 @@ import { MessageIcon, UsersIcon, UserPlusIcon } from '@/shared/components/ui/Ico
 import { cn } from '@/shared/utils/cn';
 import { SettingsModalContent } from '@users/components/SettingsModalContent';
 
-const ICON_SIZE = 24;
+const ICON_SIZE = 22;
 
 const itemBase = 'group/mobile-nav relative flex flex-1 items-center justify-center rounded-lg border border-transparent py-2.5 transition-all duration-200 ease-out active:scale-[0.95] focus-visible:ring-2 focus-visible:ring-strong focus-visible:outline-none';
 
@@ -94,7 +94,7 @@ export function MobileNav() {
                 aria-label={t('nav.settings')}
                 className={cn(itemBase, 'text-secondary hover:bg-surface/60 hover:text-primary')}
             >
-                <span className={cn(iconWrap, 'h-7 w-7 overflow-hidden rounded-full')}>
+                <span className={cn(iconWrap, 'h-6.5 w-6.5 overflow-hidden rounded-full')}>
                     <Avatar url={url} userUrlStatus={avatar} alt={t('avatarAlt', { name })} name={name} className='h-full w-full rounded-full' />
                 </span>
             </button>
