@@ -18,7 +18,7 @@ export function SettingsModalContent() {
 
     return (
         <div className='flex min-h-72 w-full min-w-0 flex-col gap-4 pt-2 sm:min-w-130 sm:flex-row sm:gap-6'>
-            <nav className='flex w-full shrink-0 flex-row items-center gap-1 overflow-x-auto border-b border-default pb-3 sm:w-44 sm:flex-col sm:items-stretch sm:overflow-visible sm:border-b-0 sm:border-r sm:pb-0 sm:pr-6'>
+            <nav className='flex w-full shrink-0 flex-row items-center justify-center gap-1 overflow-x-auto border-b border-default pb-3 sm:w-44 sm:flex-col sm:items-stretch sm:justify-start sm:overflow-visible sm:border-b-0 sm:border-r sm:pb-0 sm:pr-6'>
                 {tabs.map((tab) => {
                     const isActive = activeTab === tab.id;
 
@@ -33,7 +33,7 @@ export function SettingsModalContent() {
                                 'hover:cursor-pointer hover:border-default/75 hover:bg-surface',
                                 'active:border-default',
                                 'active:scale-[0.98]',
-                                'w-auto shrink-0 px-2 py-1.5 sm:mx-1 sm:w-full',
+                                'w-40 max-w-[calc(50%-0.25rem)] shrink-0 px-2 py-1.5 sm:mx-1 sm:w-full sm:max-w-none',
                                 {
                                     'bg-surface text-primary': isActive,
                                     'text-secondary': !isActive,
