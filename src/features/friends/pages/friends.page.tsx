@@ -21,26 +21,26 @@ export default function FriendsPage() {
     };
 
     return (
-        <section className='animate-page-enter flex h-full w-full flex-col overflow-hidden select-text'>
+        <section className='animate-page-enter flex h-full w-full flex-col overflow-hidden select-text lg:p-2.5 lg:pt-3'>
             <title>{t('page.title')}</title>
             <FriendsMobileTabs active={activeTab} onChange={handleTabChange} />
 
-            {/* Vista móvil: una sola sección por tab */}
+            {/* Vista móvil: una sola sección por tab, siempre abierta */}
             <div className='flex h-full min-h-0 w-full flex-1 flex-col overflow-hidden lg:hidden'>
                 {activeTab === 'add-friend' && <AddNewFriendsSection highlight />}
                 {activeTab === 'active-friends' && (
                     <div className='flex h-full min-h-0 flex-1 flex-col overflow-hidden'>
-                        <FriendsListSection highlight defaultOpen />
+                        <FriendsListSection highlight defaultOpen collapsible={false} />
                     </div>
                 )}
                 {activeTab === 'pending-requests' && (
                     <div className='flex h-full min-h-0 flex-1 flex-col overflow-hidden'>
-                        <PendingRequestsSection highlight defaultOpen />
+                        <PendingRequestsSection highlight defaultOpen collapsible={false} />
                     </div>
                 )}
                 {activeTab === 'sent-requests' && (
                     <div className='flex h-full min-h-0 flex-1 flex-col overflow-hidden'>
-                        <PendingSentRequestsSection highlight defaultOpen />
+                        <PendingSentRequestsSection highlight defaultOpen collapsible={false} />
                     </div>
                 )}
             </div>

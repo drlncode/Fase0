@@ -9,7 +9,7 @@ import { EmptyPendingRequestsState } from '@friends/components/PendingRequests/E
 import { InfiniteLoader } from '@shared/components/InfiniteLoader';
 import { UserClockIcon } from '@/shared/components/ui/Icons';
 
-export function PendingRequestsSection({ highlight = false, defaultOpen }: { highlight?: boolean; defaultOpen?: boolean }) {
+export function PendingRequestsSection({ highlight = false, defaultOpen, collapsible = true }: { highlight?: boolean; defaultOpen?: boolean; collapsible?: boolean }) {
     const { t } = useTranslation('friends');
     const friendsRequestsFetch = useFriendsStore(state => state.friendsRequestsFetch);
     const friendsRequests = useFriendsStore(state => state.friendsRequests);
@@ -37,7 +37,9 @@ export function PendingRequestsSection({ highlight = false, defaultOpen }: { hig
             defaultOpen={defaultOpen ?? highlight}
             highlight={highlight}
             notification={requestsCount}
+            position='middle'
             empty={friendsRequests.length === 0 && !isLoading}
+            collapsible={collapsible}
         >
             {isLoading ? (
                 <FriendSectionSkeleton />
