@@ -13,7 +13,6 @@ export interface CollapseableSectionProps {
     children: React.ReactNode;
     defaultOpen?: boolean;
     highlight?: boolean;
-    position: 'first' | 'middle' | 'last';
     empty?: boolean;
     collapsible?: boolean;
 };
@@ -26,7 +25,6 @@ export function CollapseableSection({
     children,
     defaultOpen = false,
     highlight = false,
-    position,
     empty = false,
     collapsible = false
 }: CollapseableSectionProps) {
@@ -49,11 +47,8 @@ export function CollapseableSection({
     }, [highlight]);
 
     const headerClasses = cn(
-        'flex items-center gap-1.5 border-b border-transparent px-1 py-1.5 text-xs font-bold uppercase transition-colors duration-150 select-none', {
-            'rounded-t-lg': position === 'first',
-            'rounded-b-lg': position === 'last' && !isOpen,
-            'overflow-hidden border-b-default': isOpen
-        }
+        'flex items-center gap-1.5 border-b border-transparent px-1 py-1.5 text-xs font-bold uppercase transition-colors duration-150 select-none',
+        { 'overflow-hidden border-b-default': isOpen }
     );
 
     const headerContent = (
@@ -74,14 +69,11 @@ export function CollapseableSection({
 
     return (
         <section className={cn(
-            'flex min-h-0 flex-col overflow-hidden border bg-overlay',
+            'flex min-h-0 flex-col overflow-hidden bg-overlay',
             'transition-all duration-250 ease-out',
             {
                 'flex-1': isOpen,
-                'rounded-t-lg': position === 'first',
-                'rounded-b-lg': position === 'last',
-                'border-primary/50': isHighlighting,
-                'border-default': !isHighlighting,
+                'ring-1 ring-inset ring-primary/50': isHighlighting,
             }
         )}>
             {/* Header fijo */}

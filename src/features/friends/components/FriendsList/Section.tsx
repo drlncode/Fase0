@@ -37,7 +37,6 @@ export function FriendsListSection({ highlight = false, defaultOpen }: { highlig
             defaultOpen={defaultOpen ?? highlight}
             highlight={highlight}
             notification={friendsCount}
-            position='first'
             empty={friends.length === 0 && !isLoading}
         >
             {isLoading ? (

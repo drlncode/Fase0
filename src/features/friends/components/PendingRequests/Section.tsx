@@ -37,7 +37,6 @@ export function PendingRequestsSection({ highlight = false, defaultOpen }: { hig
             defaultOpen={defaultOpen ?? highlight}
             highlight={highlight}
             notification={requestsCount}
-            position='middle'
             empty={friendsRequests.length === 0 && !isLoading}
         >
             {isLoading ? (
