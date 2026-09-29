@@ -1,4 +1,5 @@
-import { Fragment, useTranslation } from 'react-i18next';
+import { Fragment } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useFriendsStore } from '@friends/store/useFriendsStore';
 import { cn } from '@/shared/utils/cn';
 import { UsersIcon, UserClockIcon, UserShareIcon, UserPlusIcon } from '@/shared/components/ui/Icons';
