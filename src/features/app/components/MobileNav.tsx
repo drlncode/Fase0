@@ -9,7 +9,7 @@ import { MessageIcon, UsersIcon, UserPlusIcon } from '@/shared/components/ui/Ico
 import { cn } from '@/shared/utils/cn';
 import { SettingsModalContent } from '@users/components/SettingsModalContent';
 
-const itemBase = 'group/mobile-nav relative flex min-h-12 flex-1 flex-col items-center justify-center gap-1 rounded-md border border-transparent px-1.5 py-2 text-[11px] leading-tight transition-all duration-200 ease-out active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-strong focus-visible:outline-none';
+const itemBase = 'group/mobile-nav relative flex flex-1 flex-col items-center justify-center gap-1 rounded-md border border-transparent px-1.5 py-1.5 text-[11px] leading-tight transition-all duration-200 ease-out active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-strong focus-visible:outline-none';
 
 function itemState(isActive: boolean) {
     return isActive
@@ -36,7 +36,7 @@ export function MobileNav() {
     return (
         <nav
             aria-label={t('nav.main')}
-            className='flex w-full shrink-0 items-stretch gap-1.5 border-t border-default bg-overlay px-2.5 pt-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] md:hidden'
+            className='flex w-full shrink-0 items-stretch gap-1.5 border-t border-default bg-overlay px-2.5 pt-1.5 pb-[max(0.375rem,env(safe-area-inset-bottom))] md:hidden'
         >
             <NavLink to='app' end className={({ isActive }) => cn(itemBase, itemState(isActive))}>
                 <span className='relative flex transition-transform duration-200 ease-out group-hover/mobile-nav:-translate-y-px'>
@@ -55,7 +55,7 @@ export function MobileNav() {
                 <span className='flex transition-transform duration-200 ease-out group-hover/mobile-nav:-translate-y-px'>
                     <UserPlusIcon size={24} />
                 </span>
-                <span className='max-w-full truncate'>{t('nav.addFriend')}</span>
+                <span className='max-w-full truncate'>{t('nav.addFriendShort')}</span>
             </NavLink>
             <button
                 type='button'
