@@ -43,6 +43,7 @@ export function FriendsMobileTabs({ active, onChange }: FriendsMobileTabsProps) 
                         className={cn(
                             'group/friend-tab relative flex min-w-0 flex-col items-center justify-center gap-0.5 rounded-lg border border-transparent px-1 py-1.5',
                             'transition-all duration-200 ease-out active:scale-[0.97] focus-visible:ring-2 focus-visible:ring-strong focus-visible:outline-none',
+                            tab.id === 'add-friend' && 'before:absolute before:top-1.5 before:bottom-1.5 before:-left-0.75 before:w-px before:bg-default before:content-[""]',
                             isActive
                                 ? 'bg-overlay text-primary border-default/75'
                                 : 'text-secondary hover:bg-overlay/60 hover:text-primary'
