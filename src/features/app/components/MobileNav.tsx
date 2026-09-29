@@ -42,7 +42,7 @@ export function MobileNav() {
     const isFriendsPage = pathname.startsWith('/app/friends');
     const section = searchParams.get('section') ?? 'active-friends';
     const isChatsActive = pathname === '/app' || pathname.startsWith('/app/chat');
-    const isFriendsActive = isFriendsPage && section === 'active-friends';
+    const isFriendsActive = isFriendsPage && section !== 'add-friend';
     const isAddActive = isFriendsPage && section === 'add-friend';
 
     return (
