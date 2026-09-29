@@ -40,7 +40,7 @@ export function SettingsModalContent() {
                                 }
                             )}
                         >
-                            <div className='flex items-center gap-2'>
+                            <div className='flex w-full items-center justify-center gap-2 sm:justify-start'>
                                 <span className='flex h-5 w-5 items-center justify-center transition-transform duration-200 ease-out group-hover/settings-item:-translate-y-px group-hover/settings-item:scale-105'>
                                     {tab.icon}
                                 </span>
