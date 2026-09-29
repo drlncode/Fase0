@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router';
+import { NavLink, useLocation, useSearchParams } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { useChatStore } from '@/features/chats/store/useChatStore';
 import { useValidAuth } from '@auth/hooks/useValidAuth';
@@ -9,7 +9,7 @@ import { MessageIcon, UsersIcon, UserPlusIcon } from '@/shared/components/ui/Ico
 import { cn } from '@/shared/utils/cn';
 import { SettingsModalContent } from '@users/components/SettingsModalContent';
 
-const ICON_SIZE = 26;
+const ICON_SIZE = 24;
 
 const itemBase = 'group/mobile-nav relative flex flex-1 items-center justify-center rounded-lg border border-transparent py-2.5 transition-all duration-200 ease-out active:scale-[0.95] focus-visible:ring-2 focus-visible:ring-strong focus-visible:outline-none';
 
@@ -36,17 +36,26 @@ export function MobileNav() {
     const { user: { _id, name, avatar } } = useValidAuth();
     const { url } = useAvatarUrl(avatar, _id);
     const { openInfo } = useModal();
+    const { pathname } = useLocation();
+    const [ searchParams ] = useSearchParams();
+
+    const isFriendsPage = pathname.startsWith('/app/friends');
+    const section = searchParams.get('section') ?? 'active-friends';
+    const isChatsActive = pathname === '/app' || pathname.startsWith('/app/chat');
+    const isFriendsActive = isFriendsPage && section === 'active-friends';
+    const isAddActive = isFriendsPage && section === 'add-friend';
 
     return (
         <nav
             aria-label={t('nav.main')}
-            className='flex w-full shrink-0 items-stretch gap-1.5 border-t border-default bg-overlay px-2.5 pt-1.5 pb-[max(0.375rem,env(safe-area-inset-bottom))] md:hidden'
+            className='flex w-full shrink-0 items-stretch gap-1.5 border-t border-default bg-overlay px-2.5 pt-1.5 pb-[max(0.875rem,env(safe-area-inset-bottom))] md:hidden'
         >
             <NavLink
                 to='app'
                 end
                 aria-label={t('nav.chats')}
-                className={({ isActive }) => cn(itemBase, itemState(isActive))}
+                aria-current={isChatsActive ? 'page' : undefined}
+                className={cn(itemBase, itemState(isChatsActive))}
             >
                 <span className={cn(iconWrap, 'relative')}>
                     <MessageIcon size={ICON_SIZE} />
@@ -57,7 +66,8 @@ export function MobileNav() {
                 to='app/friends?section=active-friends'
                 end
                 aria-label={t('nav.friends')}
-                className={({ isActive }) => cn(itemBase, itemState(isActive))}
+                aria-current={isFriendsActive ? 'page' : undefined}
+                className={cn(itemBase, itemState(isFriendsActive))}
             >
                 <span className={iconWrap}>
                     <UsersIcon size={ICON_SIZE} />
@@ -67,7 +77,8 @@ export function MobileNav() {
                 to='app/friends?section=add-friend'
                 end
                 aria-label={t('nav.addFriendShort')}
-                className={({ isActive }) => cn(itemBase, itemState(isActive))}
+                aria-current={isAddActive ? 'page' : undefined}
+                className={cn(itemBase, itemState(isAddActive))}
             >
                 <span className={iconWrap}>
                     <UserPlusIcon size={ICON_SIZE} />
