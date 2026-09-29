@@ -17,10 +17,10 @@ export function ChatHeader({ participant }: { participant: UserPublicProfile }) 
             <button
                 type='button'
                 onClick={() => navigate('/app')}
-                className='shrink-0 rounded-md p-2 text-secondary transition-colors hover:bg-surface hover:text-primary md:hidden'
+                className='shrink-0 rounded-md p-2 pr-0 text-secondary transition-colors hover:bg-surface hover:text-primary md:hidden'
                 aria-label={t('header.backAriaLabel')}
             >
-                <LargeLeftArrowIcon size={20} />
+                <LargeLeftArrowIcon size={28} />
             </button>
             <Avatar
                 alt={t('list.avatarAlt', { name: participant.name.split(' ')[0] })}
