@@ -4,7 +4,7 @@
     },
     "addNewFriends": {
         "headerLabel": " Buscar por nombre de usuario",
-        "tabLabel": "Agregar amigos",
+        "tabLabel": "Agregar",
         "idleTitle": "Agregar amigos",
         "idleSubtitle": "Escribe un nombre de usuario para agregar",
         "noResultsTitle": "Sin resultados",
@@ -19,6 +19,7 @@
     },
     "friendsList": {
         "sectionTitle": "Amigos",
+        "shortTitle": "Amigos",
         "infiniteCount": "{{count}} de {{total}} amigos",
         "emptyTitle": "No tienes amigos",
         "emptySubtitle": "Envía una solicitud para conectar",
@@ -37,12 +38,14 @@
     },
     "pendingRequests": {
         "sectionTitle": "Solicitudes pendientes",
+        "shortTitle": "Solicitudes",
         "infiniteCount": "{{count}} de {{total}} solicitudes",
         "emptyTitle": "Sin solicitudes pendientes",
         "emptySubtitle": "Aquí aparecerán las solicitudes que te envíen"
     },
     "sentRequests": {
         "sectionTitle": "Solicitudes enviadas",
+        "shortTitle": "Enviadas",
         "infiniteCount": "{{count}} de {{total}} enviadas",
         "emptyTitle": "Sin solicitudes enviadas",
         "emptySubtitle": "Envía solicitudes para conectar con otros",

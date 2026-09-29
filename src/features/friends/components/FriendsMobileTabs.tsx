@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next';
+import { useFriendsStore } from '@friends/store/useFriendsStore';
 import { cn } from '@/shared/utils/cn';
 import { UsersIcon, UserClockIcon, UserShareIcon, UserPlusIcon } from '@/shared/components/ui/Icons';
 
@@ -11,22 +12,27 @@ interface FriendsMobileTabsProps {
 
 export function FriendsMobileTabs({ active, onChange }: FriendsMobileTabsProps) {
     const { t } = useTranslation('friends');
+    const numberOfFriends = useFriendsStore(state => state.friends.length);
+    const numberOfPendingRequests = useFriendsStore(state => state.friendsRequests.length);
+    const numberOfSentRequests = useFriendsStore(state => state.friendsSentRequests.length);
 
-    const tabs: { id: FriendsMobileTab; label: string; icon: React.ReactNode }[] = [
-        { id: 'active-friends', label: t('friendsList.sectionTitle'), icon: <UsersIcon size={16} /> },
-        { id: 'pending-requests', label: t('pendingRequests.sectionTitle'), icon: <UserClockIcon size={16} /> },
-        { id: 'sent-requests', label: t('sentRequests.sectionTitle'), icon: <UserShareIcon size={16} /> },
-        { id: 'add-friend', label: t('addNewFriends.tabLabel'), icon: <UserPlusIcon size={16} /> },
+    const tabs: { id: FriendsMobileTab; label: string; icon: React.ReactNode; notification?: number }[] = [
+        { id: 'active-friends', label: t('friendsList.shortTitle'), icon: <UsersIcon size={20} />, notification: numberOfFriends },
+        { id: 'pending-requests', label: t('pendingRequests.shortTitle'), icon: <UserClockIcon size={20} />, notification: numberOfPendingRequests },
+        { id: 'sent-requests', label: t('sentRequests.shortTitle'), icon: <UserShareIcon size={20} />, notification: numberOfSentRequests },
+        { id: 'add-friend', label: t('addNewFriends.tabLabel'), icon: <UserPlusIcon size={20} /> },
     ];
 
     return (
         <div
             role='tablist'
             aria-label={t('page.title')}
-            className='flex w-full shrink-0 gap-1 overflow-x-auto border-b border-default bg-surface px-2 py-2 lg:hidden'
+            className='grid w-full shrink-0 grid-cols-4 gap-1.5 border-b border-default bg-surface px-2 py-2 lg:hidden'
         >
             {tabs.map(tab => {
                 const isActive = active === tab.id;
+                const showBadge = !!tab.notification;
+
                 return (
                     <button
                         key={tab.id}
@@ -35,14 +41,22 @@ export function FriendsMobileTabs({ active, onChange }: FriendsMobileTabsProps) 
                         type='button'
                         onClick={() => onChange(tab.id)}
                         className={cn(
-                            'flex min-h-9 shrink-0 items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-medium whitespace-nowrap transition-colors',
+                            'group/friend-tab relative flex min-w-0 flex-col items-center justify-center gap-0.5 rounded-lg border border-transparent px-1 py-1.5',
+                            'transition-all duration-200 ease-out active:scale-[0.97] focus-visible:ring-2 focus-visible:ring-strong focus-visible:outline-none',
                             isActive
-                                ? 'bg-surface text-primary border border-default'
-                                : 'text-secondary hover:bg-surface hover:text-primary'
+                                ? 'bg-overlay text-primary border-default/75'
+                                : 'text-secondary hover:bg-overlay/60 hover:text-primary'
                         )}
                     >
-                        <span className='flex shrink-0 items-center justify-center'>{tab.icon}</span>
-                        {tab.label}
+                        <span className='relative flex transition-transform duration-200 ease-out group-hover/friend-tab:-translate-y-px'>
+                            {tab.icon}
+                            {showBadge && (
+                                <span className='absolute -top-1 -right-1.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-badge px-1 text-[9px] leading-none font-semibold text-secondary'>
+                                    {tab.notification}
+                                </span>
+                            )}
+                        </span>
+                        <span className='max-w-full truncate text-[10px] leading-tight'>{tab.label}</span>
                     </button>
                 );
             })}
