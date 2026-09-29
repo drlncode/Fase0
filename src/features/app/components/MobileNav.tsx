@@ -48,7 +48,7 @@ export function MobileNav() {
     return (
         <nav
             aria-label={t('nav.main')}
-            className='flex w-full shrink-0 items-stretch gap-1.5 border-t border-default bg-overlay px-2.5 pt-1.5 pb-[max(0.875rem,env(safe-area-inset-bottom))] md:hidden'
+            className='flex w-full shrink-0 items-stretch gap-1.5 bg-overlay px-2.5 pt-1.5 pb-[max(0.875rem,env(safe-area-inset-bottom))] md:hidden'
         >
             <NavLink
                 to='app'
