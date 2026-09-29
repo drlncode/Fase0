@@ -21,7 +21,7 @@ export default function AuthPage() {
     const StepComponent = AUTH_FLOW_COMPONENTS[step];
 
     return (
-        <div>
+        <div className='flex w-full justify-center'>
             <title>{`${t(STEP_TITLE_KEYS[step])} | Fase0`}</title>
             <StepComponent />
         </div>
