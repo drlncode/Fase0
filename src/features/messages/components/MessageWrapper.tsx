@@ -8,7 +8,7 @@ interface MessageWrapperProps {
 
 export function MessageWrapper({ side, className, children }: MessageWrapperProps) {
     return (
-        <div className={cn('flex w-full px-11', {
+        <div className={cn('flex w-full px-2 sm:px-6 md:px-11', {
             'justify-start': side === 'received',
             'justify-end': side === 'sent',
         }, className)}>

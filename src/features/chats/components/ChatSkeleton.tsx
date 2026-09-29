@@ -26,7 +26,7 @@ export function ChatSkeleton({ children }: ChatSkeletonProps) {
                 </div>
             </header>
             {children}
-            <div className='shrink-0 px-10 pb-3'>
+            <div className='shrink-0 px-2 pb-3 sm:px-4 lg:px-10'>
                 <div className='rounded-lg border border-default bg-overlay px-1.5 py-2 text-sm'>
                     <Skeleton className='h-5 w-full rounded' />
                 </div>

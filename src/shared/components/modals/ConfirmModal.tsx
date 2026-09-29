@@ -44,14 +44,15 @@ export function ConfirmModal({
     };
 
     return (
-        <div className='flex h-full w-full cursor-default items-center justify-center'>
+        <div className='flex h-full w-full cursor-default items-end justify-center p-0 sm:items-center sm:p-4'>
             <div
                 role='dialog'
                 aria-modal='true'
                 aria-labelledby='modal-title'
                 className={cn(
-                    'animate-modal-enter relative flex flex-col gap-4 rounded-lg border border-default bg-overlay p-6 shadow-lg',
-                    !fullWidth && 'max-w-md min-w-72'
+                    'animate-modal-enter relative flex max-h-[90dvh] w-full flex-col gap-4 overflow-y-auto rounded-t-xl border border-default bg-overlay p-4 pb-[max(1rem,env(safe-area-inset-bottom))] shadow-lg',
+                    'sm:w-[calc(100vw-2rem)] sm:max-w-md sm:rounded-lg sm:p-6 sm:pb-6',
+                    fullWidth && 'sm:max-w-2xl'
                 )}
             >
                 <button
@@ -73,13 +74,13 @@ export function ConfirmModal({
                     </h2>
                     <p className='text-sm text-secondary'>{message}</p>
                 </div>
-                <div className='flex justify-end gap-2'>
+                <div className='flex flex-col-reverse gap-2 sm:flex-row sm:justify-end'>
                     <button
                         type='button'
                         onClick={close}
                         disabled={isWaiting}
                         className={cn(
-                            'min-w-22.5 cursor-pointer rounded-md px-4 py-2 text-center text-sm text-secondary transition-colors select-none',
+                            'w-full cursor-pointer rounded-md px-4 py-2 text-center text-sm text-secondary transition-colors select-none sm:w-auto sm:min-w-22.5',
                             'hover:bg-subtle',
                             'disabled:cursor-not-allowed disabled:opacity-50'
                         )}
@@ -90,7 +91,7 @@ export function ConfirmModal({
                         type='button'
                         onClick={handleConfirm}
                         className={cn(
-                            'flex min-w-22.5 cursor-pointer items-center justify-center gap-1.5 rounded-md px-4 py-2 text-left text-sm font-medium transition-colors select-none',
+                            'flex w-full cursor-pointer items-center justify-center gap-1.5 rounded-md px-4 py-2 text-left text-sm font-medium transition-colors select-none sm:w-auto sm:min-w-22.5',
                             'disabled:cursor-not-allowed disabled:opacity-50',
                             danger
                                 ? 'bg-red-800/20 text-danger hover:bg-red-800/40'

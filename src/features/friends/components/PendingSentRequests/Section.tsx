@@ -9,7 +9,7 @@ import { EmptySentRequestsState } from './EmptySentRequestsState';
 import { InfiniteLoader } from '@shared/components/InfiniteLoader';
 import { UserShareIcon } from '@/shared/components/ui/Icons';
 
-export function PendingSentRequestsSection({ highlight = false }) {
+export function PendingSentRequestsSection({ highlight = false, defaultOpen }: { highlight?: boolean; defaultOpen?: boolean }) {
     const { t } = useTranslation('friends');
     const friendsSentRequestsFetch = useFriendsStore(state => state.friendsSentRequestsFetch);
     const friendsSentRequests = useFriendsStore(state => state.friendsSentRequests);
@@ -34,7 +34,7 @@ export function PendingSentRequestsSection({ highlight = false }) {
             title={t('sentRequests.sectionTitle')}
             icon={<UserShareIcon size={16} />}
             loading={isLoading || isFetching}
-            defaultOpen={highlight}
+            defaultOpen={defaultOpen ?? highlight}
             highlight={highlight}
             notification={requestsCount}
             position='last'

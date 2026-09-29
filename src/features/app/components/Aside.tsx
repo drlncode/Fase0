@@ -48,8 +48,8 @@ export function Aside() {
 
     return (
         <aside aria-label={t('nav.main')} className={cn(
-            'h-full min-h-0 min-w-14 shrink-0 overflow-hidden bg-overlay pt-1.25 transition-[width] duration-300 ease-out',
-            collapsed ? 'w-14' : 'w-61'
+            'hidden h-full min-h-0 min-w-14 shrink-0 overflow-hidden bg-overlay pt-1.25 transition-[width] duration-300 ease-out md:block',
+            collapsed ? 'md:w-14' : 'md:w-61'
         )}>
             <nav aria-label={t('nav.menu')} className='flex h-full flex-col justify-between'>
                 <div className='flex flex-col gap-1'>
@@ -137,7 +137,7 @@ export function Aside() {
                         trigger={
                             <AsideUserSection collapsed={collapsed} />
                         }
-                        className='w-56'
+                        className='w-56 max-w-[calc(100vw-1rem)]'
                     >
                         <DropdownItem
                             label={t('nav.settings')}

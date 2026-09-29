@@ -12,6 +12,7 @@ import { useMessageSync } from '@messages/hooks/useMessageSync';
 import { useUserSocket } from '@users/hooks/useUserSocket';
 import { Header } from '@app/components/Header';
 import { Aside } from '@app/components/Aside';
+import { MobileNav } from '@app/components/MobileNav';
 
 export default function AppLayout() {
     const { user: { session } } = useValidAuth();
@@ -37,14 +38,15 @@ export default function AppLayout() {
     }, [session]); // las funciones load deben ser estables en sus hooks
 
     return (
-        <div className='flex h-screen max-h-screen w-screen flex-col overflow-hidden p-2 pr-3 pb-3 select-none dark:bg-overlay dark:text-secondary'>
+        <div className='flex h-dvh max-h-dvh w-full flex-col overflow-hidden p-0 select-none md:p-2 md:pr-3 md:pb-3 dark:bg-overlay dark:text-secondary'>
             <Header />
-            <main className='flex h-full min-h-0 w-full overflow-hidden rounded-xl transition-all duration-150 ease-in-out dark:bg-overlay'>
+            <main className='flex h-full min-h-0 w-full flex-1 overflow-hidden transition-all duration-150 ease-in-out md:rounded-xl dark:bg-overlay'>
                 <Aside />
-                <div className='h-full w-full overflow-hidden rounded-xl border border-default bg-surface'>
+                <div className='h-full w-full min-w-0 overflow-hidden border-0 bg-surface md:rounded-xl md:border md:border-default'>
                     <Outlet />
                 </div>
             </main>
+            <MobileNav />
         </div>
     );
 }

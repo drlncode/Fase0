@@ -18,7 +18,8 @@
         "searchLabel": "Buscar chats",
         "filterAll": "Todos",
         "filterUnread": "No leídos",
-        "filterFavorites": "Favoritos"
+        "filterFavorites": "Favoritos",
+        "backAriaLabel": "Volver a los chats"
     },
     "dropdown": {
         "ariaLabel": "Opciones del chat",

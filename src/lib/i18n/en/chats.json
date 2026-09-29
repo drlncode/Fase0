@@ -18,7 +18,8 @@
         "searchLabel": "Search chats",
         "filterAll": "All",
         "filterUnread": "Unread",
-        "filterFavorites": "Favorites"
+        "filterFavorites": "Favorites",
+        "backAriaLabel": "Back to chats"
     },
     "dropdown": {
         "ariaLabel": "Chat options",

@@ -143,7 +143,7 @@ export function Dropdown({
         <div
             role="menu"
             className={cn(
-                'fixed z-50 flex flex-col rounded-md border border-default bg-overlay p-1.5 text-xs text-secondary shadow-dropdown',
+                'fixed z-50 flex max-h-[calc(100dvh-1rem)] max-w-[calc(100vw-1rem)] flex-col overflow-y-auto rounded-md border border-default bg-overlay p-1.5 text-xs text-secondary shadow-dropdown',
                 pos ? 'animate-dropdown-enter' : 'invisible',
                 className
             )}

@@ -9,7 +9,7 @@ import { EmptyFriendsState } from '@friends/components/FriendsList/EmptyFriendsS
 import { InfiniteLoader } from '@shared/components/InfiniteLoader';
 import { UsersIcon } from '@/shared/components/ui/Icons';
 
-export function FriendsListSection({ highlight = false }) {
+export function FriendsListSection({ highlight = false, defaultOpen }: { highlight?: boolean; defaultOpen?: boolean }) {
     const { t } = useTranslation('friends');
     const friendsFetch = useFriendsStore(state => state.friendsFetch);
     const friends = useFriendsStore(state => state.friends);
@@ -34,7 +34,7 @@ export function FriendsListSection({ highlight = false }) {
             title={t('friendsList.sectionTitle')}
             icon={<UsersIcon size={16} />}
             loading={isLoading || isFetching}
-            defaultOpen={highlight}
+            defaultOpen={defaultOpen ?? highlight}
             highlight={highlight}
             notification={friendsCount}
             position='first'

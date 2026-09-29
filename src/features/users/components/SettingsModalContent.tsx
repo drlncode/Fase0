@@ -17,8 +17,8 @@ export function SettingsModalContent() {
     ], [t]);
 
     return (
-        <div className='flex min-h-72 min-w-130 gap-6 pt-2'>
-            <nav className='flex w-44 flex-col gap-1 border-r border-default pr-6'>
+        <div className='flex w-full min-w-0 flex-col gap-4 pt-2 sm:min-w-130 sm:flex-row sm:gap-6'>
+            <nav className='flex w-full shrink-0 flex-row gap-1 overflow-x-auto border-b border-default pb-3 sm:w-44 sm:flex-col sm:overflow-visible sm:border-r sm:border-b-0 sm:pr-6 sm:pb-0'>
                 {tabs.map((tab) => {
                     const isActive = activeTab === tab.id;
 
@@ -54,7 +54,7 @@ export function SettingsModalContent() {
                 })}
             </nav>
 
-            <section className='-mr-6 min-w-82 flex-1'>
+            <section className='min-w-0 flex-1 sm:-mr-6 sm:min-w-82'>
                 {activeTab === 'account' && <AccountContent />}
                 {activeTab === 'preferences' && <PreferencesContent />}
             </section>
