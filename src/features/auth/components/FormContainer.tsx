@@ -20,7 +20,7 @@ export function FormContainer({
     className
 }: FormContainerProps) {
     return (
-        <section className={cn('flex w-90 flex-col', className)}>
+        <section className={cn('flex w-full max-w-90 flex-col px-4 sm:px-0', className)}>
             <header>
                 <div className='mb-8 flex flex-col items-center gap-3 text-center'>
                     <div>

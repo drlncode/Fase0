@@ -16,6 +16,7 @@
         "requests": "Requests",
         "sentRequests": "Sent requests",
         "addFriend": "Add friend",
+        "addFriendShort": "Add",
         "settings": "Settings",
         "signOut": "Sign out"
     },

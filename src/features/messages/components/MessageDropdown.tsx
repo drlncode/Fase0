@@ -113,7 +113,7 @@ export function MessageDropdown({ children, side = 'sent', className }: MessageD
         <div
             role="menu"
             className={cn(
-                'fixed z-50 flex shrink-0 flex-col rounded-md border border-default bg-overlay p-1.5 text-xs text-secondary shadow-dropdown',
+                'fixed z-50 flex max-w-[calc(100vw-1rem)] shrink-0 flex-col rounded-md border border-default bg-overlay p-1.5 text-xs text-secondary shadow-dropdown',
                 pos ? 'animate-dropdown-enter' : 'invisible',
                 className
             )}

@@ -3,9 +3,10 @@
         "title": "Friends | Fase0"
     },
     "addNewFriends": {
-        "headerLabel": "Search by username",
-        "idleTitle": "Search users",
-        "idleSubtitle": "Type a username to search",
+        "headerLabel": " Search by username",
+        "tabLabel": "Add",
+        "idleTitle": "Add friends",
+        "idleSubtitle": "Type a username to add",
         "noResultsTitle": "No results",
         "noResultsSubtitle": "No users found with that username",
         "infiniteCount": "{{count}} of {{total}} users",
@@ -18,6 +19,7 @@
     },
     "friendsList": {
         "sectionTitle": "Friends",
+        "shortTitle": "Friends",
         "infiniteCount": "{{count}} of {{total}} friends",
         "emptyTitle": "No friends yet",
         "emptySubtitle": "Send a request to connect",
@@ -36,12 +38,14 @@
     },
     "pendingRequests": {
         "sectionTitle": "Pending requests",
+        "shortTitle": "Requests",
         "infiniteCount": "{{count}} of {{total}} requests",
         "emptyTitle": "No pending requests",
         "emptySubtitle": "Requests you receive will appear here"
     },
     "sentRequests": {
         "sectionTitle": "Sent requests",
+        "shortTitle": "Sent",
         "infiniteCount": "{{count}} of {{total}} sent",
         "emptyTitle": "No sent requests",
         "emptySubtitle": "Send requests to connect with others",

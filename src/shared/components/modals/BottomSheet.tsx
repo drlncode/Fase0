@@ -24,7 +24,7 @@ export function BottomSheet({ id, title, children }: BottomSheetProps) {
                 role='dialog'
                 aria-modal='true'
                 className={cn(
-                    'animate-sheet-enter relative flex max-h-[80vh] w-full flex-col rounded-t-xl border-t border-default bg-overlay',
+                    'animate-sheet-enter relative flex max-h-[85dvh] w-full flex-col rounded-t-xl border-t border-default bg-overlay',
                     'shadow-xl'
                 )}
             >
@@ -44,7 +44,7 @@ export function BottomSheet({ id, title, children }: BottomSheetProps) {
                         <h2 className='text-lg font-semibold text-primary'>{title}</h2>
                     </div>
                 )}
-                <div className='flex-1 overflow-y-auto p-4'>
+                <div className='flex-1 overflow-y-auto p-4 pb-[max(1rem,env(safe-area-inset-bottom))]'>
                     {content}
                 </div>
             </div>

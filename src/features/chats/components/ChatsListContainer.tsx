@@ -53,7 +53,7 @@ export function ChatsListContainer() {
     const idleFilterType = searchQuery ? 'SEARCH' : selectedChatsFilter;
 
     return (
-        <div ref={containerRef} className='flex h-full min-h-0 w-91.5 shrink-0 flex-col gap-1 overflow-auto border-r border-r-default px-2.5'>
+        <div ref={containerRef} className='flex h-full min-h-0 w-full flex-col gap-1 overflow-auto border-r-0 px-2.5 md:w-91.5 md:shrink-0 md:border-r md:border-r-default'>
             <ChatListContainerHeader />
             <section className='flex h-full w-full flex-1 flex-col justify-between gap-1 pb-4'>
                 {status.status === 'loading' && <ChatListSkeleton />}

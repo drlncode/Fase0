@@ -119,7 +119,7 @@ export function Message({ message, side, firstOfGroup }: MessageProps) {
     
     return (
         <MessageWrapper className='group/message' side={side}>
-            <div ref={messageRef} className='relative w-fit max-w-[80%] min-w-0'>
+            <div ref={messageRef} className='relative w-fit max-w-[85%] min-w-0 sm:max-w-[80%]'>
                 <span className={cn('absolute', {
                     'right-[98.5%] text-overlay': side === 'received',
                     'left-[98.5%] text-subtle': side === 'sent',
@@ -135,7 +135,7 @@ export function Message({ message, side, firstOfGroup }: MessageProps) {
                         status={message.status}
                     />
                 </MessageBubble>
-                <MessageDropdown className='min-w-42.5' side={side}>
+                <MessageDropdown className='max-w-[calc(100vw-2rem)] min-w-42.5' side={side}>
                     { !isOptimisticMsg && !isDeletedMessage(message) && (
                         <>
                             <MessageDropdownItem

@@ -53,7 +53,7 @@ export function Toast({ toast }: ToastProps) {
         <div
             role='alert'
             className={cn(
-                'pointer-events-auto flex w-80 shrink-0 items-start gap-2.5',
+                'pointer-events-auto flex w-[calc(100vw-2rem)] max-w-80 shrink-0 items-start gap-2.5',
                 'rounded-lg border border-default bg-overlay px-3.5 py-3',
                 'opacity-95 shadow-dropdown',
                 isExiting ? 'animate-toast-exit' : 'animate-toast-enter'

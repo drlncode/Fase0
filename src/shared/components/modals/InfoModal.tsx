@@ -18,14 +18,15 @@ export function InfoModal({
     const close = useModalStore(state => state.close);
 
     return (
-        <div className='flex h-full w-full cursor-default items-center justify-center'>
+        <div className='flex h-full w-full cursor-default items-end justify-center p-0 sm:items-center sm:p-4'>
             <div
                 role='dialog'
                 aria-modal='true'
                 aria-labelledby='modal-title'
                 className={cn(
-                    'animate-modal-enter relative flex flex-col gap-4 rounded-lg border border-default bg-overlay p-6 shadow-lg',
-                    !fullWidth && 'max-w-md min-w-72'
+                    'animate-modal-enter relative flex max-h-[90dvh] w-full flex-col gap-4 overflow-y-auto rounded-t-xl border border-default bg-overlay p-4 pb-[max(1rem,env(safe-area-inset-bottom))] shadow-lg',
+                    'sm:w-[calc(100vw-2rem)] sm:max-w-md sm:rounded-lg sm:p-6 sm:pb-6',
+                    fullWidth && 'sm:max-w-2xl'
                 )}
             >
                 <button
@@ -44,7 +45,7 @@ export function InfoModal({
                         {title}
                     </h2>
                 )}
-                <div className='pr-6'>
+                <div className='min-w-0 pr-6'>
                     {content}
                 </div>
             </div>

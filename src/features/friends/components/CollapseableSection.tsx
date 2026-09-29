@@ -15,6 +15,7 @@ export interface CollapseableSectionProps {
     highlight?: boolean;
     position: 'first' | 'middle' | 'last';
     empty?: boolean;
+    collapsible?: boolean;
 };
 
 export function CollapseableSection({
@@ -26,10 +27,12 @@ export function CollapseableSection({
     defaultOpen = false,
     highlight = false,
     position,
-    empty = false
+    empty = false,
+    collapsible = true
 }: CollapseableSectionProps) {
     const [open, setOpen] = useState(defaultOpen);
     const [isHighlighting, setIsHighlighting] = useState(false);
+    const isOpen = collapsible ? open : true;
 
     useEffect(() => {
         if (defaultOpen) setOpen(true);
@@ -45,42 +48,59 @@ export function CollapseableSection({
         }
     }, [highlight]);
 
+    const headerClasses = cn(
+        'flex items-center gap-1.5 border-b border-transparent px-1 py-1.5 text-xs font-bold uppercase transition-colors duration-150 select-none',
+        {
+            'overflow-hidden border-b-default': isOpen,
+            'lg:rounded-t-lg': position === 'first',
+            'lg:rounded-b-lg': position === 'last' && !isOpen,
+        }
+    );
+
+    const headerContent = (
+        <>
+            { collapsible && (
+                <span className={cn('transition-transform', { 'rotate-90': isOpen })}>
+                    <ChevronRightIcon size={18} />
+                </span>
+            )}
+            <span className='flex items-center justify-center gap-1.5'>
+                { icon && <span>{ icon }</span> }
+                <span>{ title }</span>
+                { !!notification && <CollapseableSectionBadge>{ notification }</CollapseableSectionBadge> }
+                { loading && <SpinLoader size={18} /> }
+            </span>
+        </>
+    );
+
     return (
         <section className={cn(
-            'flex min-h-0 flex-col overflow-hidden border bg-overlay',
+            'flex min-h-0 flex-col overflow-hidden bg-overlay',
             'transition-all duration-250 ease-out',
             {
-                'flex-1': open,
-                'rounded-t-lg': position === 'first',
-                'rounded-b-lg': position === 'last',
-                'border-primary/50': isHighlighting,
-                'border-default': !isHighlighting,
+                'flex-1': isOpen,
+                'lg:border lg:border-default': !isHighlighting,
+                'lg:rounded-t-lg': position === 'first',
+                'lg:rounded-b-lg': position === 'last',
+                'lg:border-primary/50': isHighlighting,
             }
         )}>
             {/* Header fijo */}
-            <button
-                onClick={() => setOpen(!open)}
-                className={cn(
-                    'flex items-center gap-0.5 border-b border-transparent px-1 py-1.5 text-xs font-bold uppercase transition-colors duration-150 select-none hover:cursor-pointer hover:bg-surface/60', {
-                        'rounded-t-lg': position === 'first',
-                        'rounded-b-lg': position === 'last' && !open,
-                        'overflow-hidden border-b-default': open
-                    }
-                )}
-            >
-                <span className={cn('transition-transform', { 'rotate-90': open })}>
-                    <ChevronRightIcon size={18} />
-                </span>
-                <span className='flex items-center justify-center gap-1.5'>
-                    { icon && <span>{ icon }</span> }
-                    <span>{ title }</span>
-                    { !!notification && <CollapseableSectionBadge>{ notification }</CollapseableSectionBadge> }
-                    { loading && <SpinLoader size={18} /> }
-                </span>
-            </button>
+            { collapsible ? (
+                <button
+                    onClick={() => setOpen(!open)}
+                    className={cn(headerClasses, 'cursor-pointer hover:bg-surface/60')}
+                >
+                    {headerContent}
+                </button>
+            ) : (
+                <div className={headerClasses}>
+                    {headerContent}
+                </div>
+            )}
 
             {/* Contenido scrolleable */}
-            {open && (
+            {isOpen && (
                 <CollapseableSectionItemsContainer empty={empty}>
                     {children}
                 </CollapseableSectionItemsContainer>

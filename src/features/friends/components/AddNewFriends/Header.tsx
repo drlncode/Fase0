@@ -10,7 +10,7 @@ interface AddNewFriendsHeaderProps {
 export function AddNewFriendsHeader({ onSearch, focus }: AddNewFriendsHeaderProps) {
     const { t } = useTranslation('friends');
     return (
-        <header className='sticky -top-px z-10 bg-surface px-0.5 backdrop-blur-sm'>
+        <header className='sticky -top-1 z-10 bg-surface px-0.5 py-0.5 backdrop-blur-sm'>
             <SearchBar
                 icon={<UserSearchIcon size={18} />}
                 label={t('addNewFriends.headerLabel')}

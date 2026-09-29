@@ -25,7 +25,7 @@ export function ChatListContainerHeader() {
                     icon={<MessageSearchIcon size={18} />}
                     onSearch={setSearchQuery}
                 />
-                <div className='flex gap-1.5 py-2'>
+                <div className='flex flex-wrap gap-1.5 py-2'>
                     <ChatBadge
                         label={t('header.filterAll')}
                         isActive={selectedChatsFilter === 'ALL'}

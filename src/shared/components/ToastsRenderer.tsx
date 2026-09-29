@@ -9,7 +9,7 @@ export function ToastsRenderer() {
 
     return createPortal(
         <div
-            className='pointer-events-none fixed inset-0 z-9999 flex flex-col items-end justify-start gap-2 p-4'
+            className='pointer-events-none fixed inset-0 z-9999 flex flex-col items-center justify-start gap-2 p-4 pt-[max(1rem,env(safe-area-inset-top))] pb-20 sm:items-end sm:justify-start sm:pb-4'
             aria-live='polite'
             aria-atomic='false'
         >

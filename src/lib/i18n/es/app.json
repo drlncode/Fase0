@@ -16,6 +16,7 @@
         "requests": "Solicitudes",
         "sentRequests": "Solicitudes enviadas",
         "addFriend": "Agregar amigo",
+        "addFriendShort": "Agregar",
         "settings": "Ajustes",
         "signOut": "Cerrar sesión"
     },

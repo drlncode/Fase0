@@ -107,7 +107,7 @@ export function ChatInput() {
         : '';
 
     return (
-        <div className='shrink-0 px-10 pb-3'>
+        <div className='shrink-0 px-2 pb-[max(0.75rem,env(safe-area-inset-bottom))] sm:px-4 lg:px-10'>
             {onReplyMessage && replyMessage && (
                 <div className='mb-1 flex flex-col gap-1.5 overflow-hidden rounded-t-lg border border-b-0 border-default bg-overlay px-2.5 py-2 text-xs'>
                     <div className='flex min-w-0 items-center gap-1.5 text-secondary'>

@@ -17,8 +17,8 @@ export function SettingsModalContent() {
     ], [t]);
 
     return (
-        <div className='flex min-h-72 min-w-130 gap-6 pt-2'>
-            <nav className='flex w-44 flex-col gap-1 border-r border-default pr-6'>
+        <div className='flex min-h-72 w-full min-w-0 flex-col gap-4 pt-2 sm:min-w-130 sm:flex-row sm:gap-6'>
+            <nav className='flex w-full shrink-0 flex-row items-center justify-center gap-1 overflow-x-auto border-b border-default pb-3 sm:w-44 sm:flex-col sm:items-stretch sm:justify-start sm:overflow-visible sm:border-b-0 sm:border-r sm:pb-0 sm:pr-6'>
                 {tabs.map((tab) => {
                     const isActive = activeTab === tab.id;
 
@@ -32,16 +32,15 @@ export function SettingsModalContent() {
                                 'transition-all duration-200 ease-out',
                                 'hover:cursor-pointer hover:border-default/75 hover:bg-surface',
                                 'active:border-default',
-                                'mx-1',
                                 'active:scale-[0.98]',
-                                'w-full px-2 py-1.5',
+                                'w-40 max-w-[calc(50%-0.25rem)] shrink-0 px-2 py-1.5 sm:mx-1 sm:w-full sm:max-w-none',
                                 {
                                     'bg-surface text-primary': isActive,
                                     'text-secondary': !isActive,
                                 }
                             )}
                         >
-                            <div className='flex items-center gap-2'>
+                            <div className='flex w-full items-center justify-center gap-2 sm:justify-start'>
                                 <span className='flex h-5 w-5 items-center justify-center transition-transform duration-200 ease-out group-hover/settings-item:-translate-y-px group-hover/settings-item:scale-105'>
                                     {tab.icon}
                                 </span>
@@ -54,7 +53,7 @@ export function SettingsModalContent() {
                 })}
             </nav>
 
-            <section className='-mr-6 min-w-82 flex-1'>
+            <section className='min-w-0 flex-1 sm:-mr-6 sm:min-w-82'>
                 {activeTab === 'account' && <AccountContent />}
                 {activeTab === 'preferences' && <PreferencesContent />}
             </section>

@@ -11,9 +11,9 @@ export default function AuthLayout() {
 
     return (
         <AuthFlowContextProvider>
-            <div className='flex min-h-screen w-full flex-col items-center justify-center overflow-x-hidden p-2 pr-3 pb-3 select-none dark:bg-surface dark:text-secondary'>
+            <div className='flex min-h-dvh w-full flex-col items-center justify-center overflow-x-hidden p-4 select-none sm:p-2 sm:pr-3 sm:pb-3 dark:bg-surface dark:text-secondary'>
                 <title>Autenticación | Fase0</title>
-                <div className='fixed top-4 right-4'>
+                <div className='mb-4 flex w-full max-w-90 justify-end sm:fixed sm:top-4 sm:right-4 sm:mb-0 sm:w-auto'>
                     <LangSelector />
                 </div>
                 <Outlet />

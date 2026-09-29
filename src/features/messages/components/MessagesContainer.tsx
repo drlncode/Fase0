@@ -148,7 +148,7 @@ export function MessagesContainer({ chatId }: { chatId: string }) {
                     />
                 )}
                 {dateGroups.map((group, groupIndex) => (
-                    <div key={group.dateKey} className={`flex flex-col gap-0.75${groupIndex === dateGroups.length - 1 ? ' pb-5' : ''}`}>
+                    <div key={group.dateKey} className={`flex flex-col gap-0.75${groupIndex === dateGroups.length - 1 ? 'pb-5' : ''}`}>
                         <DateSeparator label={group.label} />
                         {group.messages.map((message, index) => {
                             const side = message.senderId === currentUserId ? 'sent' : 'received';
@@ -169,7 +169,7 @@ export function MessagesContainer({ chatId }: { chatId: string }) {
                     const container = scrollRef.current;
                     if (container) scrollToBottom(container, true);
                 }}
-                className={`absolute left-11 bottom-6 z-20 cursor-pointer rounded-lg border border-default bg-subtle p-2 shadow-lg transition-all duration-200 hover:cursor-pointer ${showScrollButton ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0 pointer-events-none'}`}
+                className={`absolute bottom-6 left-1/2 z-20 -translate-x-1/2 cursor-pointer rounded-lg border border-default bg-subtle p-2 shadow-lg transition-all duration-200 hover:cursor-pointer md:left-11 md:translate-x-0 ${showScrollButton ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-4 opacity-0'}`}
                 aria-label={t('aria.scrollToBottom')}
             >
                 <ChevronDownIcon size={20} />
