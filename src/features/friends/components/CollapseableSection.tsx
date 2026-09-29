@@ -73,7 +73,7 @@ export function CollapseableSection({
             'transition-all duration-250 ease-out',
             {
                 'flex-1': isOpen,
-                'ring-1 ring-inset ring-primary/50': isHighlighting,
+                'lg:ring-1 lg:ring-inset lg:ring-primary/50': isHighlighting,
             }
         )}>
             {/* Header fijo */}
