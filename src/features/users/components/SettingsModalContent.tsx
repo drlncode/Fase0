@@ -17,7 +17,7 @@ export function SettingsModalContent() {
     ], [t]);
 
     return (
-        <div className='flex w-full min-w-0 flex-col gap-4 pt-2 sm:min-w-130 sm:flex-row sm:gap-6'>
+        <div className='flex min-h-72 w-full min-w-0 flex-col gap-4 pt-2 sm:min-w-130 sm:flex-row sm:gap-6'>
             <nav className='flex w-full shrink-0 flex-row gap-1 overflow-x-auto border-b border-default pb-3 sm:w-44 sm:flex-col sm:overflow-visible sm:border-r sm:border-b-0 sm:pr-6 sm:pb-0'>
                 {tabs.map((tab) => {
                     const isActive = activeTab === tab.id;
