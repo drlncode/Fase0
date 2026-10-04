@@ -24,7 +24,7 @@ export function BottomSheet({ id, title, children }: BottomSheetProps) {
                 role='dialog'
                 aria-modal='true'
                 className={cn(
-                    'animate-sheet-enter relative flex max-h-[85dvh] w-full flex-col rounded-t-xl border-t border-default bg-overlay',
+                    'animate-sheet-enter relative flex max-h-[85dvh] w-full flex-col rounded-t-xl border-t border-default bg-overlay text-secondary',
                     'shadow-xl'
                 )}
             >
@@ -32,12 +32,12 @@ export function BottomSheet({ id, title, children }: BottomSheetProps) {
                     type='button'
                     onClick={close}
                     className={cn(
-                        'absolute top-3 right-3 cursor-pointer rounded-md p-1 text-secondary transition-colors select-none',
+                        'absolute top-3 right-3 cursor-pointer rounded-md p-1.5 text-secondary transition-colors select-none',
                         'hover:bg-subtle'
                     )}
                     aria-label={t('actions.close')}
                 >
-                    <CrossIcon size={18} />
+                    <CrossIcon size={20} />
                 </button>
                 {title && (
                     <div className='border-b border-default px-4 py-3 pr-10'>
