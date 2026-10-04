@@ -23,3 +23,7 @@ export function useMediaQuery(query: string): boolean {
 export function useIsMobile(breakpointPx = 768): boolean {
     return useMediaQuery(`(max-width: ${(breakpointPx - 1).toString()}px)`);
 }
+
+export function useIsCoarsePointer(): boolean {
+    return useMediaQuery('(pointer: coarse)');
+}
