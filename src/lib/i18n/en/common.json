@@ -3,6 +3,14 @@
         "name": "Fase0",
         "tagline": "Chat without limits"
     },
+    "swipeHint": {
+        "title": "Quick actions with swipe",
+        "description": "On your phone you can swipe to open the options without looking for the menu.",
+        "chatsLabel": "On chats: swipe to the left",
+        "sentLabel": "Your messages: swipe to the left",
+        "receivedLabel": "Received messages: swipe to the right",
+        "gotIt": "Got it"
+    },
     "actions": {
         "save": "Save",
         "cancel": "Cancel",

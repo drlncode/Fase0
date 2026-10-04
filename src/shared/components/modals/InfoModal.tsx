@@ -45,7 +45,7 @@ export function InfoModal({
                         {title}
                     </h2>
                 )}
-                <div className='min-w-0 pr-6'>
+                <div className='min-w-0'>
                     {content}
                 </div>
             </div>

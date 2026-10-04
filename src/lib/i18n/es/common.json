@@ -3,6 +3,14 @@
         "name": "Fase0",
         "tagline": "Chatea sin límites"
     },
+    "swipeHint": {
+        "title": "Acciones rápidas con swipe",
+        "description": "En tu móvil puedes deslizar para abrir las opciones sin buscar el menú.",
+        "chatsLabel": "En chats: desliza hacia la izquierda",
+        "sentLabel": "Tus mensajes: desliza hacia la izquierda",
+        "receivedLabel": "Mensajes recibidos: desliza hacia la derecha",
+        "gotIt": "Entendido"
+    },
     "actions": {
         "save": "Guardar",
         "cancel": "Cancelar",

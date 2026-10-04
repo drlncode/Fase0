@@ -9,6 +9,7 @@ import { MessagesContainerSkeleton } from '@messages/components/MessagesContaine
 import { groupMessagesByDate } from '@messages/utils/groupMessagesByDate';
 import { InfiniteLoader } from '@shared/components/InfiniteLoader';
 import { ChevronDownIcon } from '@/shared/components/ui/Icons';
+import { cn } from '@shared/utils/cn';
 
 const SCROLL_BOTTOM_THRESHOLD = 100;
 
@@ -148,7 +149,7 @@ export function MessagesContainer({ chatId }: { chatId: string }) {
                     />
                 )}
                 {dateGroups.map((group, groupIndex) => (
-                    <div key={group.dateKey} className={`flex flex-col gap-0.75${groupIndex === dateGroups.length - 1 ? 'pb-5' : ''}`}>
+                    <div key={group.dateKey} className={cn('flex flex-col gap-0.75', groupIndex === dateGroups.length - 1 && 'pb-5')}>
                         <DateSeparator label={group.label} />
                         {group.messages.map((message, index) => {
                             const side = message.senderId === currentUserId ? 'sent' : 'received';

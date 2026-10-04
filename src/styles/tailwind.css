@@ -220,6 +220,32 @@
         animation: sheet-enter 200ms ease-out forwards;
     }
 
+    .animate-swipe-hint-left {
+        animation: swipe-hint-left 1.8s ease-in-out infinite;
+    }
+
+    .animate-swipe-hint-right {
+        animation: swipe-hint-right 1.8s ease-in-out infinite;
+    }
+
+    @keyframes swipe-hint-left {
+        0%, 100% {
+            transform: translateX(0);
+        }
+        35%, 60% {
+            transform: translateX(-24px);
+        }
+    }
+
+    @keyframes swipe-hint-right {
+        0%, 100% {
+            transform: translateX(0);
+        }
+        35%, 60% {
+            transform: translateX(24px);
+        }
+    }
+
     @keyframes sheet-enter {
         from {
             transform: translateY(100%);
@@ -283,6 +309,18 @@
 
 body {
     color: var(--color-bg-surface);
+}
+
+/* Prevent iOS Safari auto-zoom on input focus (it kicks in below 16px).
+   max() keeps larger intentional sizes untouched. Scoped to coarse
+   pointers so desktop typography is unaffected. Unlayered on purpose
+   so it wins over text-xs/text-sm utilities. */
+@media (pointer: coarse) {
+    input:not([type='checkbox']):not([type='radio']):not([type='hidden']):not([type='file']),
+    textarea,
+    select {
+        font-size: max(16px, 1em);
+    }
 }
 
 input:-webkit-autofill {

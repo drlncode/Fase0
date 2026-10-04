@@ -1,11 +1,8 @@
-import { useState, useEffect, useRef } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useValidAuth } from '@auth/hooks/useValidAuth';
-import { useChatStore } from '@/features/chats/store/useChatStore';
-import { useUpdateMessage } from '@messages/hooks/useUpdateMessage';
-import { useCountdown } from '@shared/hooks/useCountdown';
+import { useEffect, useRef } from 'react';
+import { useMessageActions, isOptimisticMessage } from '@messages/hooks/useMessageActions';
+import { useHorizontalSwipe } from '@shared/hooks/useHorizontalSwipe';
+import { useIsCoarsePointer } from '@shared/hooks/useMediaQuery';
 import { useModal } from '@shared/hooks/useModal';
-import { useToast } from '@shared/hooks/useToast';
 import { cn } from '@shared/utils/cn';
 import { Countdown } from '@shared/components/Countdown';
 import { MessageContent } from '@messages/components/MessageContent';
@@ -14,17 +11,14 @@ import { MessageWrapper } from '@messages/components/MessageWrapper';
 import { MessageBubble } from '@messages/components/MessageBubble';
 import { MessageInfo } from '@/features/messages/components/MessageInfo';
 import { MessageDropdown } from '@messages/components/MessageDropdown';
+import { MessageActionsSheetContent } from '@messages/components/MessageActionsSheetContent';
 import { MessageDropdownItem } from '@messages/components/MessageDropdownItem';
 import { DropdownDivider } from '@/shared/components/Dropdown';
 import { isDeletedMessage } from '@messages/utils/isDeletedMessage';
 import { CornerDownLeftIcon, ClipboardIcon, ClipboardCheckIcon, PencilIcon, TrashIcon } from '@/shared/components/ui/Icons';
 import { readMarkerDebouncer } from '@messages/lib/readMarkerDebouncer';
 
-import type { StoreMessage, OptimisticMessage } from '@messages/types/message.types';
-
-function isOptimistic(message: StoreMessage): message is OptimisticMessage {
-    return message.status === 'SENDING';
-}
+import type { StoreMessage } from '@messages/types/message.types';
 
 interface MessageProps {
     message: StoreMessage;
@@ -33,24 +27,26 @@ interface MessageProps {
 }
 
 export function Message({ message, side, firstOfGroup }: MessageProps) {
-    const { t } = useTranslation('messages');
-    const { user: { _id: currentUserId } } = useValidAuth();
-    const isSender = currentUserId === message.senderId;
-    const [ copied, setCopied ] = useState(false);
-    const { status: { status: updateStatus }, update } = useUpdateMessage();
-    const { openConfirm } = useModal();
-    const { success } = useToast();
-    const isOptimisticMsg = isOptimistic(message);
+    const {
+        t,
+        copied,
+        updateStatus,
+        isSender,
+        isTimeRemainingForDelete,
+        isTimeRemainingForEdit,
+        handlers,
+    } = useMessageActions(message);
+    const { copy: handleCopy, edit: handleEdit, reply: handleReply, deleteForMe: handleDeleteForMe, deleteForEveryone: handleDeleteForEveryone } = handlers;
+    const isOptimisticMsg = isOptimisticMessage(message);
     const validToDelete = !isOptimisticMsg && !isDeletedMessage(message) && message.deletableUntil > Date.now();
-    const validToEdit = !isOptimisticMsg && !isDeletedMessage(message) && message.editInfo.editableUntil > Date.now();
-    const { isPending: isTimeRemainingForDelete } = useCountdown((() => {
-        if (validToDelete && !isOptimisticMsg) return message.deletableUntil;
-        return null;
-    })());
-    const { isPending: isTimeRemainingForEdit } = useCountdown((() => {
-        if (validToEdit && !isOptimisticMsg) return message.editInfo.editableUntil;
-        return null;
-    })());
+    const { openBottomSheet } = useModal();
+    const isTouch = useIsCoarsePointer();
+    const swipe = useHorizontalSwipe({
+        // Own messages swipe right-to-left, received ones left-to-right (towards the center).
+        allowed: side === 'sent' ? ['left'] : ['right'],
+        disabled: !isTouch,
+        onSwipe: () => openBottomSheet({ content: <MessageActionsSheetContent message={message} /> }),
+    });
 
     const messageRef = useRef<HTMLDivElement>(null);
     const markAsReadAttempted = useRef(false);
@@ -76,50 +72,21 @@ export function Message({ message, side, firstOfGroup }: MessageProps) {
         return () => observer.disconnect();
     }, [side, message.status, message._id, message.chatId]);
 
-    const handleCopy = () => {
-        if (isDeletedMessage(message) || isOptimisticMsg) return;
-        navigator.clipboard.writeText(message.content);
-        setCopied(true);
-        setTimeout(() => setCopied(false), 2000);
-    }
-
-    const handleEdit = () => {
-        if (isDeletedMessage(message) || isOptimisticMsg) return; 
-        
-        useChatStore.getState().setOnEditMessage({ chatId: message.chatId, message });
-    }
-
-    const handleReply = () => {
-        useChatStore.getState().setOnReplyMessage({ chatId: message.chatId, messageId: message._id });
-    }
-
-    const handleDeleteForMe = () => {
-        openConfirm({
-            title: t('dialogs.deleteForMe.title'),
-            message: t('dialogs.deleteForMe.message'),
-            confirmText: t('dialogs.deleteForMe.confirm'),
-            onConfirm: () => update(message.chatId, message._id, { deleted: true }),
-            onSuccess: () => success(t('toast.deletedForMe')),
-            awaitedAction: true,
-            danger: true
-        });
-    }
-
-    const handleDeleteForEveryone = () => {
-        openConfirm({
-            title: t('dialogs.deleteForEveryone.title'),
-            message: t('dialogs.deleteForEveryone.message'),
-            confirmText: t('dialogs.deleteForEveryone.confirm'),
-            onConfirm: () => update(message.chatId, message._id, { deletedDef: true }),
-            onSuccess: () => success(t('toast.deletedForEveryone')),
-            awaitedAction: true,
-            danger: true
-        });
-    }
-    
     return (
         <MessageWrapper className='group/message' side={side}>
-            <div ref={messageRef} className='relative w-fit max-w-[85%] min-w-0 sm:max-w-[80%]'>
+            <div
+                ref={messageRef}
+                className='relative w-fit max-w-[85%] min-w-0 touch-pan-y transition-transform duration-200 ease-out sm:max-w-[80%]'
+                style={{
+                    transform: swipe.offsetX ? `translateX(${swipe.offsetX}px)` : undefined,
+                    transition: swipe.isSwiping ? 'none' : undefined,
+                }}
+                onTouchStart={swipe.handlers.onTouchStart}
+                onTouchMove={swipe.handlers.onTouchMove}
+                onTouchEnd={swipe.handlers.onTouchEnd}
+                onTouchCancel={swipe.handlers.onTouchCancel}
+                onClickCapture={swipe.handlers.onClickCapture}
+            >
                 <span className={cn('absolute', {
                     'right-[98.5%] text-overlay': side === 'received',
                     'left-[98.5%] text-subtle': side === 'sent',
