@@ -311,6 +311,18 @@ body {
     color: var(--color-bg-surface);
 }
 
+/* Prevent iOS Safari auto-zoom on input focus (it kicks in below 16px).
+   max() keeps larger intentional sizes untouched. Scoped to coarse
+   pointers so desktop typography is unaffected. Unlayered on purpose
+   so it wins over text-xs/text-sm utilities. */
+@media (pointer: coarse) {
+    input:not([type='checkbox']):not([type='radio']):not([type='hidden']):not([type='file']),
+    textarea,
+    select {
+        font-size: max(16px, 1em);
+    }
+}
+
 input:-webkit-autofill {
     transition: background-color 9999s ease-in-out 0s;
     -webkit-text-fill-color: #a3a3a3;
