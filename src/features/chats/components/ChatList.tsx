@@ -2,7 +2,11 @@ import { useMatch } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { Avatar } from '@shared/components/Avatar';
 import { useAvatarUrl } from '@shared/hooks/useAvatarUrl';
+import { useHorizontalSwipe } from '@shared/hooks/useHorizontalSwipe';
+import { useIsCoarsePointer } from '@shared/hooks/useMediaQuery';
+import { useModal } from '@shared/hooks/useModal';
 import { ChatListDropdown } from '@chats/components/ChatListDropdown';
+import { ChatActionsSheetContent } from '@chats/components/ChatActionsSheetContent';
 import { ChatTime } from '@chats/components/ChatTime';
 import { ChatListLastMessage } from '@chats/components/ChatListLastMessage';
 
@@ -17,12 +21,30 @@ export function ChatList({ chat }: { chat: Chat }) {
     const isActive = match?.params?.chatId === chat._id;
     const hasUnreadMessages = chat.chatInfo.unreadMessages > 0;
     const totalBadges = [chat.chatInfo.pinned, chat.chatInfo.favorite, hasUnreadMessages].filter(Boolean).length as 0 | 1 | 2 | 3;
+    const { openBottomSheet } = useModal();
+    const isTouch = useIsCoarsePointer();
+    const swipe = useHorizontalSwipe({
+        allowed: ['left'],
+        disabled: !isTouch,
+        onSwipe: () => openBottomSheet({ content: <ChatActionsSheetContent chat={chat} /> }),
+    });
 
     return (
-        <div className={cn(
-            'group relative rounded-lg transition-all duration-150 ease-out hover:bg-subtle active:scale-[0.99]',
-            isActive && 'bg-subtle'
-        )}>
+        <div
+            className={cn(
+                'group relative touch-pan-y rounded-lg transition-all duration-150 ease-out hover:bg-subtle active:scale-[0.99]',
+                isActive && 'bg-subtle'
+            )}
+            style={{
+                transform: swipe.offsetX ? `translateX(${swipe.offsetX}px)` : undefined,
+                transition: swipe.isSwiping ? 'none' : undefined,
+            }}
+            onTouchStart={swipe.handlers.onTouchStart}
+            onTouchMove={swipe.handlers.onTouchMove}
+            onTouchEnd={swipe.handlers.onTouchEnd}
+            onTouchCancel={swipe.handlers.onTouchCancel}
+            onClickCapture={swipe.handlers.onClickCapture}
+        >
             <NavLink 
                 to={`/app/chat/${chat._id}`} 
                 className='flex flex-col p-2.5'
