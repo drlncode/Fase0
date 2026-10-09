@@ -161,7 +161,10 @@ export function AccountContent() {
 
     const isLoading = updateStatus.status === 'loading' || uploadStatus.status === 'loading' || deleteStatus.status === 'loading';
     const hasAvatarChanges = Boolean(pendingAvatarFile) || pendingAvatarDeletion;
-    const isSubmitDisabled = (!isDirty && !hasAvatarChanges) || isLoading || usernameStatus === 'checking' || (hasUsernameChanged && usernameStatus === 'taken');
+    // While the username differs from the current one, only an 'available'
+    // status unblocks the submit (idle/checking/taken/error all block it).
+    const isUsernameBlocking = hasUsernameChanged && usernameValue !== user.username && usernameStatus !== 'available';
+    const isSubmitDisabled = (!isDirty && !hasAvatarChanges) || isLoading || isUsernameBlocking;
 
     const onSubmit = async (data: AccountFormValues) => {
         setError(null);
