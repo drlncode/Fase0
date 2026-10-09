@@ -297,7 +297,7 @@ export function AccountContent() {
 
                 <SubmitButton
                     disabled={isSubmitDisabled}
-                    className='mt-1 border border-default bg-overlay font-medium text-primary hover:bg-subtle active:scale-[0.98]'
+                    className='mt-1 border border-default bg-overlay font-medium text-primary hover:bg-subtle active:scale-[0.98] disabled:border-default/50 disabled:bg-transparent disabled:opacity-40 disabled:hover:bg-transparent disabled:active:scale-100'
                 >
                     {isLoading ? <SpinLoader size={18} /> : t('actions.saveChanges')}
                 </SubmitButton>
