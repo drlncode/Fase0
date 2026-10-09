@@ -87,20 +87,22 @@ export function SettingsModalContent() {
             </section>
             </div>
 
-            <Divisor />
-            <button
-                type='button'
-                onClick={handleSignOutClick}
-                disabled={onLogout}
-                className={cn(
-                    'flex w-full cursor-pointer items-center justify-center gap-2 rounded-md px-4 py-2.5 text-sm font-medium text-danger transition-colors select-none',
-                    'hover:bg-red-800/20 hover:text-red-300 active:scale-[0.99]',
-                    'disabled:cursor-not-allowed disabled:opacity-50'
-                )}
-            >
-                <LogoutIcon size={18} />
-                {tApp('nav.signOut')}
-            </button>
+            <div className='flex flex-col gap-4 sm:hidden'>
+                <Divisor />
+                <button
+                    type='button'
+                    onClick={handleSignOutClick}
+                    disabled={onLogout}
+                    className={cn(
+                        'flex w-full cursor-pointer items-center justify-center gap-2 rounded-md px-4 py-2.5 text-sm font-medium text-danger transition-colors select-none',
+                        'hover:bg-red-800/20 hover:text-red-300 active:scale-[0.99]',
+                        'disabled:cursor-not-allowed disabled:opacity-50'
+                    )}
+                >
+                    <LogoutIcon size={18} />
+                    {tApp('nav.signOut')}
+                </button>
+            </div>
         </div>
     );
 }
