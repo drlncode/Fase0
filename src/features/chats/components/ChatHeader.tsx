@@ -13,14 +13,14 @@ export function ChatHeader({ participant }: { participant: UserPublicProfile }) 
     const avatarUrl = useAvatarUrl(participant.avatar, participant._id);
 
     return (
-        <header className='flex min-w-0 items-center gap-2 border-b border-b-border-default bg-overlay px-2 py-2 sm:gap-3 sm:px-4'>
+        <header className='flex min-w-0 items-center gap-2.5 border-b border-b-border-default bg-overlay px-1 py-2 sm:gap-3 sm:px-4'>
             <button
                 type='button'
                 onClick={() => navigate('/app')}
                 className='shrink-0 rounded-md p-2 pr-0 text-secondary transition-colors hover:bg-surface hover:text-primary md:hidden'
                 aria-label={t('header.backAriaLabel')}
             >
-                <LargeLeftArrowIcon size={28} />
+                <LargeLeftArrowIcon size={30} />
             </button>
             <Avatar
                 alt={t('list.avatarAlt', { name: participant.name.split(' ')[0] })}

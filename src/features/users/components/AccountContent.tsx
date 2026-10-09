@@ -38,8 +38,8 @@ export function AccountContent() {
         register,
         handleSubmit,
         watch,
-        setValue,
         reset,
+        trigger,
         formState: { errors, isDirty, dirtyFields }
     } = useForm<AccountFormValues>({
         mode: 'onSubmit',
@@ -79,6 +79,13 @@ export function AccountContent() {
             return;
         }
 
+        // Never check availability for the username the user already has.
+        if (usernameValue === user.username) {
+            usernameCheckSeqRef.current += 1;
+            setUsernameStatus('idle');
+            return;
+        }
+
         if (usernameValue.length < 4) {
             usernameCheckSeqRef.current += 1;
             setUsernameStatus('idle');
@@ -95,7 +102,7 @@ export function AccountContent() {
         return () => {
             clearDebounce();
         };
-    }, [usernameValue, hasUsernameChanged, usernameError, checkUsername]);
+    }, [usernameValue, hasUsernameChanged, usernameError, checkUsername, user.username]);
 
     useEffect(() => {
         return () => {
@@ -106,12 +113,15 @@ export function AccountContent() {
     }, [avatarPreviewUrl]);
 
     const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        // setValueAs (register options) already stored the sanitized value and
+        // computed dirtiness from it. Here we only mirror it visibly so
+        // disallowed characters never linger in the input, without touching
+        // form state (no spurious dirty, no extra renders).
         const sanitizedValue = e.target.value.replace(USERNAME_ALLOWED_REGEX, '').toLowerCase();
-
-        setValue('username', sanitizedValue, {
-            shouldValidate: true,
-            shouldDirty: true
-        });
+        if (e.target.value !== sanitizedValue) {
+            e.target.value = sanitizedValue;
+        }
+        trigger('username');
 
         if (sanitizedValue.length < 4) {
             clearDebounce();
@@ -158,7 +168,7 @@ export function AccountContent() {
 
         let updatedProfile: { name: string; username: string } | null = null;
 
-        if (dirtyFields.username && usernameStatus !== 'available') {
+        if (dirtyFields.username && data.username !== user.username && usernameStatus !== 'available') {
             setUsernameStatus('checking');
             const result = await checkUsernameAvailability(data.username);
             if (!result) {
@@ -261,6 +271,7 @@ export function AccountContent() {
                     placeholder={t('form.usernamePlaceholder')}
                     type='text'
                     registration={register('username', {
+                        setValueAs: (value: string) => value.replace(USERNAME_ALLOWED_REGEX, '').toLowerCase(),
                         minLength: {
                             value: 4,
                             message: t('form.usernameMinLength')
@@ -286,7 +297,7 @@ export function AccountContent() {
 
                 <SubmitButton
                     disabled={isSubmitDisabled}
-                    className='mt-1 border border-default bg-overlay font-medium text-primary hover:bg-subtle active:scale-[0.98]'
+                    className='mt-1 border border-default bg-overlay font-medium text-primary hover:bg-subtle active:scale-[0.98] disabled:border-default/50 disabled:bg-transparent disabled:opacity-40 disabled:hover:bg-transparent disabled:active:scale-100'
                 >
                     {isLoading ? <SpinLoader size={18} /> : t('actions.saveChanges')}
                 </SubmitButton>
