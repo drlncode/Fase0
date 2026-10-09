@@ -102,6 +102,7 @@ export function Message({ message, side, firstOfGroup }: MessageProps) {
                         status={message.status}
                     />
                 </MessageBubble>
+                {!isTouch && (
                 <MessageDropdown className='max-w-[calc(100vw-2rem)] min-w-42.5' side={side}>
                     { !isOptimisticMsg && !isDeletedMessage(message) && (
                         <>
@@ -162,6 +163,7 @@ export function Message({ message, side, firstOfGroup }: MessageProps) {
                         </>
                     )}
                 </MessageDropdown>
+                )}
             </div>
         </MessageWrapper>
     );
